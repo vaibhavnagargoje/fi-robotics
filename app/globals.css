@@ -1,1 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  /* Brand Colors from DESIGN.md */
+  --color-background: #131313;
+  --color-surface-bright: #3a3939;
+  --color-surface-container-low: #1c1b1b;
+  --color-surface-dim: #131313;
+  --color-surface-container-highest: #353534;
+  --color-on-secondary-fixed: #002116;
+  --color-surface: #131313;
+  --color-primary-container: #00d1ff;
+  --color-on-secondary: #003828;
+  --color-tertiary: #f9d7af;
+  --color-surface-container-lowest: #0e0e0e;
+  --color-on-primary-container: #00566a;
+  --color-tertiary-fixed: #ffddb6;
+  --color-interface-white: #FFFFFF;
+  --color-error: #ffb4ab;
+  --color-warning-amber: #9E4624;
+  --color-surface-tint: #4cd6ff;
+  --color-electric-blue: #00D1FF;
+  --color-obsidian-base: #0A0A0A;
+  --color-on-primary: #003543;
+  --color-on-error: #690005;
+  --color-on-surface-variant: #bbc9cf;
+  --color-on-background: #e5e2e1;
+  --color-surface-container-high: #2a2a2a;
+  --color-outline-variant: #3c494e;
+  --color-outline: #859399;
+  --color-on-tertiary: #412d11;
+  --color-inverse-primary: #00677f;
+  --color-on-primary-fixed-variant: #004e60;
+  --color-secondary-fixed: #36ffc4;
+  --color-error-container: #93000a;
+  --color-surface-variant: #353534;
+  --color-tertiary-fixed-dim: #e2c19b;
+  --color-on-tertiary-fixed-variant: #594325;
+  --color-inverse-surface: #e5e2e1;
+  --color-on-secondary-container: #007255;
+  --color-on-tertiary-container: #624a2c;
+  --color-on-secondary-fixed-variant: #00513c;
+  --color-on-error-container: #ffdad6;
+  --color-on-tertiary-fixed: #291801;
+  --color-surface-container: #201f1f;
+  --color-tertiary-container: #dcbb95;
+  --color-primary: #a4e6ff;
+  --color-secondary-container: #36ffc4;
+  --color-on-primary-fixed: #001f28;
+  --color-charcoal-surface: #1A1A1A;
+  --color-secondary-fixed-dim: #00e1ab;
+  --color-primary-fixed-dim: #4cd6ff;
+  --color-primary-fixed: #b7eaff;
+  --color-on-surface: #e5e2e1;
+  --color-inverse-on-surface: #313030;
+  --color-data-cyan: #00FFC2;
+  --color-secondary: #ffffff;
+
+  --spacing-gutter: 24px;
+  --spacing-max-width: 1440px;
+  --spacing-margin-desktop: 64px;
+  --spacing-margin-mobile: 16px;
+  --spacing-unit: 4px;
+
+  /* Font mapping for code.html */
+  --font-headline-xl: "Inter", sans-serif;
+  --font-body-md: "Inter", sans-serif;
+  --font-code-sm: "JetBrains Mono", monospace;
+  --font-headline-lg: "Inter", sans-serif;
+  --font-label-caps: "JetBrains Mono", monospace;
+  --font-headline-lg-mobile: "Inter", sans-serif;
+  --font-stat-lg: "JetBrains Mono", monospace;
+}
+
+/* Custom utilities mapped to the specific styles of code.html */
+@utility text-headline-xl { font-size: 48px; line-height: 56px; letter-spacing: -0.02em; font-weight: 700; }
+@utility text-body-md { font-size: 16px; line-height: 24px; font-weight: 400; }
+@utility text-code-sm { font-size: 14px; line-height: 20px; font-weight: 500; }
+@utility text-headline-lg { font-size: 32px; line-height: 40px; letter-spacing: -0.01em; font-weight: 600; }
+@utility text-label-caps { font-size: 12px; line-height: 16px; letter-spacing: 0.08em; font-weight: 700; }
+@utility text-headline-lg-mobile { font-size: 24px; line-height: 32px; letter-spacing: -0.01em; font-weight: 600; }
+@utility text-stat-lg { font-size: 24px; line-height: 32px; font-weight: 600; }
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.wireframe-grid {
+  background-color: var(--color-background);
+  background-image: 
+      linear-gradient(to right, rgba(133, 147, 153, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(133, 147, 153, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.light-leak-border {
+  position: relative;
+}
+
+.light-leak-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-data-cyan), transparent);
+  opacity: 0.5;
+}
+
+.light-leak-border::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--color-data-cyan), transparent);
+  opacity: 0.5;
+}
+
+.glow-warning {
+  box-shadow: 0 0 12px 0 rgba(158, 70, 36, 0.2);
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 10s linear infinite;
+}
