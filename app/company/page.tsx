@@ -122,7 +122,7 @@ export default function CompanyPage() {
       {/* Company Hero Section */}
       <section
         ref={heroRef}
-        className="relative min-h-screen w-full flex flex-col justify-center pb-24 pt-48 px-4 md:px-12 lg:px-24 overflow-hidden"
+        className="relative min-h-screen w-full flex flex-col justify-center pb-24 pt-32 px-4 md:px-12 lg:px-24 overflow-hidden"
       >
         <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-12 items-center">
           <motion.div
@@ -385,42 +385,42 @@ export default function CompanyPage() {
             <motion.div variants={sensorItemVariants} className="group cursor-pointer">
               <div className="relative h-64 w-full bg-white/80 rounded-2xl overflow-hidden mb-6 border border-black/10 shadow-[0_16px_40px_rgba(15,23,42,0.08)]">
                 <img
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDT5zzhVP49_qtWwLXmeLg85vwWZJwk4KWVfgkxTJm7c5h4O9LnUYXwWnAPz0DvJA0uAobCDbP62bejuzujFos9vSXkuxbsWT7dyMiHzPLGzhdsczEUh8cFCeMR8bVrJin0VgVzFLLQhuEDSAJ1OizmD-gcMSVR2uLCwHtfDPEiXfRxXTyaRBS8Kapjnkt45mPwLOI7Y04qby4UitBdsQm3PxfE4bkYMxhiW51CLHSnsMBF5RUXl_YvsLWx9c468OXjJG4kNYzeetw"
-                  alt="Egocentric Cameras"
+                  src="/head_mounted_camera.png"
+                  alt="Head-Mounted Cameras"
                   className="w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              <h3 className="text-xl font-medium tracking-tight mb-3 text-[#0f172a]">Egocentric Cameras</h3>
+              <h3 className="text-xl font-medium tracking-tight mb-3 text-[#0f172a]">Head-Mounted Cameras</h3>
               <p className="text-[#0f172a]/60 text-sm font-light leading-relaxed">
-                High-frame-rate, ultra-wide optical arrays capturing the operator's exact field of view for primary spatial mapping.
+                Operators wear head-mounted cameras synced with the sensor gloves, perfectly matching visual input with physical exertion.
               </p>
             </motion.div>
 
             <motion.div variants={sensorItemVariants} className="group cursor-pointer">
               <div className="relative h-64 w-full bg-white/80 rounded-2xl overflow-hidden mb-6 border border-black/10 shadow-[0_16px_40px_rgba(15,23,42,0.08)]">
                 <img
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAs6gAroJhO4QReJibm9Ivf23nwQu9EDTVfSGsSNEoDY3mQLR4uszwVQXKMInCbK1Y5H3JBtjbp3bsxgZNaZWeZkcLS218VQ2SuyayEsGJb-YwJw7b8Il4Qp8fVgqO14FwElKepHBCdIvWL7PXks39BnKjtKZT_ICXD4DzXgcdkaT5BaVAHA9jo5mAxiBJ28QFMxYIoFRAHdP_QxiiglHJD51r3grZZwTJeczbmvL-q7TbstNBpvuU2SfUnrIUrv47JbqnVZ-Y8oiI"
-                  alt="Kinematic Trackers"
+                  src="/custom_robotics_glove.png"
+                  alt="Custom 5-Finger Gloves"
                   className="w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              <h3 className="text-xl font-medium tracking-tight mb-3 text-[#0f172a]">Kinematic Trackers</h3>
+              <h3 className="text-xl font-medium tracking-tight mb-3 text-[#0f172a]">Custom 5-Finger Gloves</h3>
               <p className="text-[#0f172a]/60 text-sm font-light leading-relaxed">
-                Precision joint straps utilizing advanced IMUs to record millimeter-accurate skeletal articulation and velocity.
+                We designed and built custom gloves to capture ground-truth joint angles and contact forces directly at 5-DOF.
               </p>
             </motion.div>
 
             <motion.div variants={sensorItemVariants} className="group cursor-pointer">
               <div className="relative h-64 w-full bg-white/80 rounded-2xl overflow-hidden mb-6 border border-black/10 shadow-[0_16px_40px_rgba(15,23,42,0.08)]">
                 <img
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA95BbdYOKMcKijU3cnj8yHT2_VzG-KcUlcQKyKaeWxDD5SJOu9jUO5h9wriu5mTy5xSkb0NSzuLm3-Dlnyfj8i7nTUDkEQNi4RMDDrUMDtAYkrtLYSRumTL7Ib3iylyF3Qcwl597vcof7hbb2e_XgXeIlNOMlQHnjPh06s0DPohxZe4jyLssbelc_9JfG6tH8izLRUJPosvzphU9sowH1Mrqcqv4JQtX7C2awh6U1ZhgG0AasWacebHWBwKHiem63ebajA3WdtvA"
-                  alt="Tri-Axial Force Sensors"
+                  src="/human_demo_data.png"
+                  alt="Multi-modal Datasets"
                   className="w-full h-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              <h3 className="text-xl font-medium tracking-tight mb-3 text-[#0f172a]">Tri-Axial Force Sensors</h3>
+              <h3 className="text-xl font-medium tracking-tight mb-3 text-[#0f172a]">Multi-Modal Integration</h3>
               <p className="text-[#0f172a]/60 text-sm font-light leading-relaxed">
-                Tactile feedback arrays capturing granular resistance and grip pressure for nuanced physical interactions.
+                Vision, action, and force fused into one holistic dataset. Retargetable to lower DOF hardware like standard grippers.
               </p>
             </motion.div>
           </motion.div>
@@ -615,7 +615,7 @@ export default function CompanyPage() {
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { name: "Jia Zhao", role: "Chief Operations Officer", image: "/vibrant_2.png" },
+              { name: "Yash Sinha", role: "Founder", image: "/vibrant_2.png" },
               { name: "Marco Singh", role: "Head of Data Programs", image: "/teleop_concept.png" },
               { name: "Elena Rivera", role: "Director of QA Systems", image: "/synthetic_concept.png" },
             ].map((person, index) => (
@@ -638,39 +638,39 @@ export default function CompanyPage() {
       <footer className="bg-[#f0ebe3] py-20 px-8 border-t border-[#0f172a]/10 mt-auto">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
           <div className="md:col-span-1">
-            <div className="font-medium text-2xl tracking-tight mb-4 text-[#0f172a]">f(i)</div>
-            <p className="text-sm text-[#0f172a]/60 font-light">© 2026 Foundation Intelligence.</p>
+            <div className="font-medium text-2xl tracking-tight mb-4 text-[#0f172a]">IF</div>
+            <p className="text-sm text-[#0f172a]/80 font-light">© 2026 Intelligence Factory.</p>
           </div>
           <div className="flex flex-col gap-4">
-            <span className="text-xs font-medium tracking-widest text-[#0f172a]/40 uppercase mb-2">Company</span>
+            <span className="text-xs font-medium tracking-widest text-[#0f172a]/80 uppercase mb-2">Company</span>
             <Link href="/company" className="text-sm text-[#0f172a] hover:text-[#2b6d77] transition-colors font-light">
               About
             </Link>
-            <Link href="/team" className="text-sm text-[#0f172a]/60 hover:text-[#0f172a] transition-colors font-light">
+            <Link href="/team" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">
               Team
             </Link>
-            <Link href="/careers" className="text-sm text-[#0f172a]/60 hover:text-[#0f172a] transition-colors font-light">
+            <Link href="/careers" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">
               Careers
             </Link>
           </div>
           <div className="flex flex-col gap-4">
-            <span className="text-xs font-medium tracking-widest text-[#0f172a]/40 uppercase mb-2">Technology</span>
-            <a href="#" className="text-sm text-[#0f172a]/60 hover:text-[#0f172a] transition-colors font-light">
+            <span className="text-xs font-medium tracking-widest text-[#0f172a]/80 uppercase mb-2">Technology</span>
+            <a href="#" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">
               Models
             </a>
-            <a href="#" className="text-sm text-[#0f172a]/60 hover:text-[#0f172a] transition-colors font-light">
+            <a href="#" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">
               Research
             </a>
           </div>
           <div className="flex flex-col gap-4">
-            <span className="text-xs font-medium tracking-widest text-[#0f172a]/40 uppercase mb-2">Social</span>
-            <a href="#" className="text-sm text-[#0f172a]/60 hover:text-[#0f172a] transition-colors font-light">
+            <span className="text-xs font-medium tracking-widest text-[#0f172a]/80 uppercase mb-2">Social</span>
+            <a href="#" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">
               X / Twitter
             </a>
-            <Link href="/contact" className="text-sm text-[#0f172a]/60 hover:text-[#0f172a] transition-colors font-light">
+            <Link href="/contact" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">
               Contact
             </Link>
-            <a href="#" className="text-sm text-[#0f172a]/60 hover:text-[#0f172a] transition-colors font-light">
+            <a href="#" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">
               GitHub
             </a>
           </div>

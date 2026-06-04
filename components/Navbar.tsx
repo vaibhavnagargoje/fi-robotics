@@ -23,8 +23,8 @@ export default function Navbar() {
             : "max-w-6xl px-8 py-5"
         }`}
       >
-        <Link href="/" className="font-medium text-2xl tracking-tight text-[#0f172a]">
-          f(i)
+        <Link href="/" className="font-medium text-xl tracking-tight text-[#0f172a]">
+          Intelligence Factory
         </Link>
         <div className="hidden md:flex gap-12 text-sm font-medium tracking-wide text-[#0f172a]/65">
           <Link href="/" className="hover:text-[#0f172a] transition-colors">

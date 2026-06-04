@@ -57,9 +57,9 @@ export default function TeamPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="group"
+            className="group text-center"
           >
-            <div className="relative h-[60vh] w-full bg-[#eef6f5] rounded-3xl overflow-hidden mb-6 border border-black/10 shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
+            <div className="relative h-48 w-48 mx-auto bg-[#eef6f5] rounded-full overflow-hidden mb-6 border-4 border-white shadow-[0_16px_40px_rgba(15,23,42,0.08)]">
               {/* Note: Using standard img here to avoid next/image domain configuration issues for external Google LH3 URLs */}
               <img
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJeqjyKX95-pS5t4ZbNOGOZ1GnoG79fDYMTc5LhaZQIp5hgfm6FZGyW_bT7JcqpdRiGGoiDL_L13ArdAyg3ub-2lyeKOJfdg6FP65478y7MofB_nvxizETrY5JmToKo9xOcYb33tunlayVxZcTNqxaeHlp0I3_B-P3ytssGWdit9bSSxBxezFfKZi-xUHtG8uoB6WcnO6YMOVRyUa_jW_raXHOY6d5G-9M_uvCdNwKVz_UGzu8JVo418UgheZlTwybKv6QcIB88YQ"
@@ -82,9 +82,9 @@ export default function TeamPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="group"
+            className="group text-center"
           >
-            <div className="relative h-[60vh] w-full bg-[#fff5ea] rounded-3xl overflow-hidden mb-6 border border-black/10 shadow-[0_24px_60px_rgba(15,23,42,0.08)]">
+            <div className="relative h-48 w-48 mx-auto bg-[#fff5ea] rounded-full overflow-hidden mb-6 border-4 border-white shadow-[0_16px_40px_rgba(15,23,42,0.08)]">
               <img
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkTbD0JG_o8PWXndKcS87vs6tlST2sGq_x-3oTiJj-GzG6VUdIjJ75WIVYyLUfrm4AhL0l9bMSxjk8FjervcvFjxPYrmUUgTh1aNDoyEwhO-YXRSKZYpThoVSazjTv7CB-i0Dke91ywC5g8aX1ZBqrTr279AR_k4SrShyUfR9FssnPJb9Pn4dCGZkWwNSACRBjVUgWvnBQfFaP7qPvLnf0YlLb8O-a-i9WyYfN51FOqdkslCfAuD0_lgNchEyvfLS3jXXTy0hVIa4"
                 alt="Jalaj Shukla"
@@ -185,24 +185,24 @@ export default function TeamPage() {
       <footer className="bg-[#f0ebe3] py-24 px-8 border-t border-black/10 mt-auto">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
           <div className="md:col-span-1">
-            <div className="font-medium text-2xl tracking-tighter mb-4 text-[#0f172a]">f(i)</div>
-            <p className="text-sm text-[#0f172a]/50 font-light">© 2026 Foundation Intelligence.</p>
+            <div className="font-medium text-2xl tracking-tighter mb-4 text-[#0f172a]">IF</div>
+            <p className="text-sm text-[#0f172a]/80 font-light">© 2026 Intelligence Factory.</p>
           </div>
           <div className="flex flex-col gap-4">
-            <span className="text-xs font-medium tracking-widest text-[#0f172a]/40 uppercase mb-2">Company</span>
-            <Link href="/company" className="text-sm text-[#0f172a]/60 hover:text-[#0f172a] transition-colors font-light">About</Link>
-            <Link href="/team" className="text-sm text-[#0f172a]/60 hover:text-[#0f172a] transition-colors font-light">Team</Link>
-            <Link href="/careers" className="text-sm text-[#0f172a]/60 hover:text-[#0f172a] transition-colors font-light">Careers</Link>
+            <span className="text-xs font-medium tracking-widest text-[#0f172a]/80 uppercase mb-2">Company</span>
+            <Link href="/company" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">About</Link>
+            <Link href="/team" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">Team</Link>
+            <Link href="/careers" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">Careers</Link>
           </div>
           <div className="flex flex-col gap-4">
-            <span className="text-xs font-medium tracking-widest text-[#0f172a]/40 uppercase mb-2">Technology</span>
-            <a href="#" className="text-sm text-[#0f172a]/60 hover:text-[#0f172a] transition-colors font-light">Models</a>
+            <span className="text-xs font-medium tracking-widest text-[#0f172a]/80 uppercase mb-2">Technology</span>
+            <a href="#" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">Models</a>
           </div>
           <div className="flex flex-col gap-4">
-            <span className="text-xs font-medium tracking-widest text-[#0f172a]/40 uppercase mb-2">Social</span>
-            <a href="#" className="text-sm text-[#0f172a]/60 hover:text-[#0f172a] transition-colors font-light">X / Twitter</a>
-            <a href="#" className="text-sm text-[#0f172a]/60 hover:text-[#0f172a] transition-colors font-light">LinkedIn</a>
-            <Link href="/contact" className="text-sm text-[#0f172a]/60 hover:text-[#0f172a] transition-colors font-light">Contact</Link>
+            <span className="text-xs font-medium tracking-widest text-[#0f172a]/80 uppercase mb-2">Social</span>
+            <a href="#" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">X / Twitter</a>
+            <a href="#" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">LinkedIn</a>
+            <Link href="/contact" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">Contact</Link>
           </div>
         </div>
       </footer>
