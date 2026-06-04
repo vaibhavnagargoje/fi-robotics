@@ -5,6 +5,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Activity, Users, Database, Clock, ArrowRight, Sparkles, Globe2, ShieldCheck, Layers3 } from "lucide-react";
+import Footer from "@/components/Footer";
 
 export default function CompanyPage() {
   const heroRef = useRef<HTMLElement | null>(null);
@@ -147,50 +148,40 @@ export default function CompanyPage() {
             </div>
           </motion.div>
 
-          <motion.div style={{ y: heroOrbY }} className="relative">
-            <div className="relative mx-auto w-full max-w-md rounded-[32px] border border-black/10 bg-white/70 p-6 shadow-[0_24px_60px_rgba(15,23,42,0.16)] backdrop-blur-xl">
+          <motion.div style={{ y: heroOrbY }} className="relative mt-8 lg:mt-0">
+            <div className="relative mx-auto w-full max-w-md rounded-[32px] border border-black/10 bg-white/70 p-5 md:p-6 shadow-[0_24px_60px_rgba(15,23,42,0.16)] backdrop-blur-xl">
               <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.24em] text-[#0f172a]/60">
                 <span>Orbital Core</span>
                 <span className="text-[#00A6C7]">Live</span>
               </div>
-              <div className="relative mt-6 flex h-[280px] items-center justify-center overflow-hidden rounded-3xl bg-gradient-to-b from-white/70 to-transparent">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(0,209,255,0.18),_transparent_55%)]" />
-                <div className="relative h-64 w-64" style={{ perspective: "1200px" }}>
-                  <motion.div
-                    style={{
-                      rotateX: heroTiltX,
-                      rotateY: heroTiltY,
-                      rotateZ: heroSpin,
-                      transformStyle: "preserve-3d",
-                    }}
-                    className="absolute inset-0"
-                  >
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#00D1FF]/50 via-white to-[#00B88F]/45 shadow-[0_20px_60px_rgba(0,209,255,0.35)]" />
-                    <div
-                      className="absolute inset-5 rounded-full border border-[#0f172a]/10"
-                      style={{ transform: "translateZ(30px)" }}
-                    />
-                    <div
-                      className="absolute inset-10 rounded-full border border-[#00D1FF]/30"
-                      style={{ transform: "translateZ(60px)" }}
-                    />
-                    <div
-                      className="absolute inset-16 rounded-full border border-[#00B88F]/35"
-                      style={{ transform: "translateZ(90px)" }}
-                    />
-                    <div className="absolute inset-0" style={{ transform: "translateZ(110px)" }}>
-                      <motion.div
-                        animate={{ rotateZ: 360 }}
-                        transition={{ duration: 48, repeat: Infinity, ease: "linear" }}
-                        className="absolute inset-0 rounded-full border border-[#0f172a]/20 border-dashed"
-                      />
-                    </div>
-                  </motion.div>
-                </div>
-                <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-[10px] font-mono uppercase tracking-[0.3em] text-[#0f172a]/50">
+
+              {/* Orb visual — 2D concentric rings, no overflow-clip issues */}
+              <div className="relative mt-5 flex h-[240px] md:h-[280px] items-center justify-center rounded-3xl bg-gradient-to-b from-white/60 to-transparent">
+                <div className="absolute inset-0 rounded-3xl bg-[radial-gradient(circle_at_center,_rgba(0,209,255,0.18),_transparent_60%)]" />
+
+                {/* Outer slow-spinning dashed ring — rendered first (behind) */}
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 48, repeat: Infinity, ease: "linear" }}
+                  className="absolute w-[200px] h-[200px] md:w-[220px] md:h-[220px] rounded-full border border-dashed border-[#0f172a]/18"
+                />
+
+                {/* Static rings — innermost to outermost, all centered */}
+                <div className="absolute w-[160px] h-[160px] md:w-[180px] md:h-[180px] rounded-full border border-[#00B88F]/35" />
+                <div className="absolute w-[120px] h-[120px] md:w-[140px] md:h-[140px] rounded-full border border-[#00D1FF]/40" />
+                <div className="absolute w-[82px] h-[82px] md:w-[100px] md:h-[100px] rounded-full border border-[#0f172a]/12" />
+
+                {/* Core sphere — tilt + spin driven by scroll */}
+                <motion.div
+                  style={{ rotateX: heroTiltX, rotateY: heroTiltY, rotateZ: heroSpin }}
+                  className="relative w-[60px] h-[60px] md:w-[68px] md:h-[68px] rounded-full bg-gradient-to-tr from-[#00D1FF]/70 via-white to-[#00B88F]/60 shadow-[0_12px_40px_rgba(0,209,255,0.45)]"
+                />
+
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-[10px] font-mono uppercase tracking-[0.3em] text-[#0f172a]/50 whitespace-nowrap">
                   Signal Sync
                 </div>
               </div>
+
               <div className="mt-4 grid grid-cols-2 gap-3 text-xs text-[#0f172a]/60">
                 <div className="rounded-2xl border border-black/10 bg-white/70 px-3 py-3">
                   <div className="font-mono tracking-widest text-[#0f172a]/50">CALIBRATED</div>
@@ -600,82 +591,7 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      {/* Leadership */}
-      <section className="relative py-24 px-4 md:px-12 lg:px-24">
-        <div className="max-w-6xl mx-auto">
-          <motion.div {...fadeUp} className="max-w-2xl">
-            <span className="text-xs font-mono uppercase tracking-widest text-[#2b6d77]">Leadership</span>
-            <h2 className="mt-4 text-4xl md:text-5xl font-semibold tracking-tight text-[#0f172a]">
-              Operators, engineers, and mission builders.
-            </h2>
-            <p className="mt-4 text-lg text-[#0f172a]/60 font-light leading-relaxed">
-              A cross-functional team spanning autonomy research, enterprise operations, and workforce design.
-            </p>
-          </motion.div>
-
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { name: "Yash Sinha", role: "Founder", image: "/vibrant_2.png" },
-              { name: "Marco Singh", role: "Head of Data Programs", image: "/teleop_concept.png" },
-              { name: "Elena Rivera", role: "Director of QA Systems", image: "/synthetic_concept.png" },
-            ].map((person, index) => (
-              <motion.div
-                key={person.name}
-                {...cardReveal(index * 0.1)}
-                className="rounded-3xl border border-[#0f172a]/10 bg-white/80 p-6 shadow-[0_18px_40px_rgba(15,23,42,0.1)]"
-              >
-                <div className="relative h-56 w-full overflow-hidden rounded-2xl">
-                  <Image src={person.image} alt={person.name} fill className="object-cover" />
-                </div>
-                <h3 className="mt-5 text-xl font-semibold text-[#0f172a]">{person.name}</h3>
-                <p className="mt-2 text-[#0f172a]/60">{person.role}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <footer className="bg-[#f0ebe3] py-20 px-8 border-t border-[#0f172a]/10 mt-auto">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
-          <div className="md:col-span-1">
-            <div className="font-medium text-2xl tracking-tight mb-4 text-[#0f172a]">IF</div>
-            <p className="text-sm text-[#0f172a]/80 font-light">© 2026 Intelligence Factory.</p>
-          </div>
-          <div className="flex flex-col gap-4">
-            <span className="text-xs font-medium tracking-widest text-[#0f172a]/80 uppercase mb-2">Company</span>
-            <Link href="/company" className="text-sm text-[#0f172a] hover:text-[#2b6d77] transition-colors font-light">
-              About
-            </Link>
-            <Link href="/team" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">
-              Team
-            </Link>
-            <Link href="/careers" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">
-              Careers
-            </Link>
-          </div>
-          <div className="flex flex-col gap-4">
-            <span className="text-xs font-medium tracking-widest text-[#0f172a]/80 uppercase mb-2">Technology</span>
-            <a href="#" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">
-              Models
-            </a>
-            <a href="#" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">
-              Research
-            </a>
-          </div>
-          <div className="flex flex-col gap-4">
-            <span className="text-xs font-medium tracking-widest text-[#0f172a]/80 uppercase mb-2">Social</span>
-            <a href="#" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">
-              X / Twitter
-            </a>
-            <Link href="/contact" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">
-              Contact
-            </Link>
-            <a href="#" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">
-              GitHub
-            </a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

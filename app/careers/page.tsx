@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Plus } from 'lucide-react';
+import Footer from '@/components/Footer';
 
 export default function CareersPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -116,31 +117,7 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-[#f0ebe3] py-24 px-8 border-t border-black/10 mt-auto">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
-          <div className="md:col-span-1">
-            <div className="font-medium text-2xl tracking-tighter mb-4 text-[#0f172a]">IF</div>
-            <p className="text-sm text-[#0f172a]/80 font-light">© 2026 Intelligence Factory.</p>
-          </div>
-          <div className="flex flex-col gap-4">
-            <span className="text-xs font-medium tracking-widest text-[#0f172a]/80 uppercase mb-2">Company</span>
-            <Link href="/company" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">About</Link>
-            <Link href="/team" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">Team</Link>
-            <Link href="/careers" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">Careers</Link>
-          </div>
-          <div className="flex flex-col gap-4">
-            <span className="text-xs font-medium tracking-widest text-[#0f172a]/80 uppercase mb-2">Technology</span>
-            <a href="#" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">Models</a>
-          </div>
-          <div className="flex flex-col gap-4">
-            <span className="text-xs font-medium tracking-widest text-[#0f172a]/80 uppercase mb-2">Social</span>
-            <a href="#" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">X / Twitter</a>
-            <Link href="/contact" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">Contact</Link>
-            <a href="#" className="text-sm text-[#0f172a]/80 hover:text-[#0f172a] transition-colors font-light">GitHub</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
