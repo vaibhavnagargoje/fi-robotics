@@ -1,25 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
+  --font-display: "Orbitron", sans-serif;
 
   /* Dark Sci-Fi Token System */
-  --color-bg:              #080808;
-  --color-surface:         #111111;
-  --color-surface-alt:     #181818;
-  --color-border:          rgba(255,255,255,0.08);
-  --color-text-primary:    #f0f0f0;
-  --color-text-secondary:  #888888;
-  --color-text-muted:      #555555;
+  --color-bg:              #050508;
+  --color-surface:         #0a0a0f;
+  --color-surface-alt:     #111118;
+  --color-border:          rgba(255,255,255,0.06);
+  --color-text-primary:    #e8e8f0;
+  --color-text-secondary:  #888898;
+  --color-text-muted:      #555560;
   --color-accent-cyan:     #00D1FF;
   --color-accent-green:    #00B88F;
   --color-accent-orange:   #c26d3b;
+  --color-accent-purple:   #7B61FF;
 
   /* Legacy compat */
   --color-electric-blue:   #00D1FF;
-  --color-obsidian-base:   #080808;
+  --color-obsidian-base:   #050508;
 }
 
 /* ─── Base ─────────────────────────────────────────────── */
@@ -28,60 +30,127 @@ html {
 }
 
 body {
-  background-color: #080808;
-  color: #f0f0f0;
+  background-color: #050508;
+  color: #e8e8f0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* ─── Scrollbar ─────────────────────────────────────────── */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #080808; }
-::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: #555; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #050508; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00D1FF33, #00B88F33);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00D1FF66, #00B88F66);
+}
 
-/* ─── Dot Matrix Background Texture ────────────────────── */
+/* ─── Grid Background (replaces dot-bg) ────────────────── */
 .dot-bg {
-  background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
-  background-size: 24px 24px;
+  background-image:
+    linear-gradient(rgba(0,209,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,209,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
 /* ─── Glow Utilities ────────────────────────────────────── */
 .glow-cyan {
-  box-shadow: 0 0 60px rgba(0, 209, 255, 0.08), 0 0 120px rgba(0, 209, 255, 0.04);
+  box-shadow:
+    0 0 20px rgba(0, 209, 255, 0.15),
+    0 0 60px rgba(0, 209, 255, 0.08),
+    0 0 120px rgba(0, 209, 255, 0.04);
 }
 
 .glow-text {
-  text-shadow: 0 0 60px rgba(0, 209, 255, 0.25);
+  text-shadow:
+    0 0 40px rgba(0, 209, 255, 0.4),
+    0 0 80px rgba(0, 209, 255, 0.15),
+    0 0 120px rgba(0, 209, 255, 0.08);
 }
 
 .glow-border-cyan {
-  box-shadow: 0 0 0 1px rgba(0, 209, 255, 0.3), 0 0 20px rgba(0, 209, 255, 0.08);
+  box-shadow: 0 0 0 1px rgba(0, 209, 255, 0.3), 0 0 30px rgba(0, 209, 255, 0.1);
 }
 
-/* ─── Card Hover Glow ───────────────────────────────────── */
+/* ─── Glassmorphism ────────────────────────────────────── */
+.glass {
+  background: rgba(10, 10, 18, 0.6);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-strong {
+  background: rgba(10, 10, 18, 0.8);
+  backdrop-filter: blur(40px) saturate(1.6);
+  -webkit-backdrop-filter: blur(40px) saturate(1.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ─── Card Styles ──────────────────────────────────────── */
 .card-dark {
-  background: #111111;
-  border: 1px solid rgba(255,255,255,0.08);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background: #0a0a0f;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
 }
 .card-dark:hover {
-  border-color: rgba(255,255,255,0.2);
-  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+  border-color: rgba(0,209,255,0.2);
+  box-shadow:
+    0 0 30px rgba(0,209,255,0.06),
+    0 4px 20px rgba(0,0,0,0.4);
+  transform: translateY(-2px);
 }
 
-/* ─── Animations ────────────────────────────────────────── */
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+/* ─── Scan Line Effect ─────────────────────────────────── */
+.scan-line {
+  position: relative;
+  overflow: hidden;
 }
-.animate-spin-slow { animation: spin-slow 10s linear infinite; }
+.scan-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 209, 255, 0.04),
+    rgba(0, 209, 255, 0.08),
+    rgba(0, 209, 255, 0.04),
+    transparent
+  );
+  transition: none;
+  pointer-events: none;
+}
+.scan-line:hover::after {
+  animation: scan-sweep 0.8s ease-out forwards;
+}
 
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.5; }
-  50%       { opacity: 1; }
+/* ─── Animated Gradient Border ─────────────────────────── */
+.gradient-border {
+  position: relative;
 }
-.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #00D1FF,
+    #00B88F,
+    #00D1FF,
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: gradient-slide 3s linear infinite;
+  opacity: 0.6;
+}
 
 /* ─── Light leak border (top + left) ───────────────────── */
 .light-leak-border { position: relative; }
@@ -89,15 +158,66 @@ body {
   content: '';
   position: absolute; top: 0; left: 0;
   width: 100%; height: 1px;
-  background: linear-gradient(90deg, #00D1FF, transparent);
-  opacity: 0.3;
+  background: linear-gradient(90deg, #00D1FF, transparent 60%);
+  opacity: 0.4;
 }
 .light-leak-border::after {
   content: '';
   position: absolute; top: 0; left: 0;
   width: 1px; height: 100%;
-  background: linear-gradient(180deg, #00D1FF, transparent);
-  opacity: 0.3;
+  background: linear-gradient(180deg, #00D1FF, transparent 60%);
+  opacity: 0.4;
+}
+
+/* ─── Keyframe Animations ──────────────────────────────── */
+@keyframes scan-sweep {
+  0%   { left: -100%; }
+  100% { left: 100%; }
+}
+
+@keyframes gradient-slide {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.animate-spin-slow { animation: spin-slow 10s linear infinite; }
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; box-shadow: 0 0 20px rgba(0,209,255,0.1); }
+  50%      { opacity: 1;   box-shadow: 0 0 40px rgba(0,209,255,0.3); }
+}
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%      { transform: translateY(-8px) rotate(1deg); }
+  66%      { transform: translateY(4px) rotate(-1deg); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+@keyframes glow-breathe {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(0,209,255,0.2), 0 0 40px rgba(0,209,255,0.1);
+  }
+  50% {
+    text-shadow: 0 0 30px rgba(0,209,255,0.4), 0 0 60px rgba(0,209,255,0.2), 0 0 90px rgba(0,209,255,0.1);
+  }
+}
+.animate-glow-breathe { animation: glow-breathe 4s ease-in-out infinite; }
+
+@keyframes border-glow {
+  0%, 100% { border-color: rgba(0,209,255,0.15); }
+  50%      { border-color: rgba(0,209,255,0.35); }
+}
+.animate-border-glow { animation: border-glow 3s ease-in-out infinite; }
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
 /* ─── Typography Utilities ──────────────────────────────── */
@@ -105,3 +225,10 @@ body {
 @utility text-headline-lg  { font-size: 32px; line-height: 40px; letter-spacing: -0.01em; font-weight: 600; }
 @utility text-body-md      { font-size: 16px; line-height: 24px; font-weight: 400; }
 @utility text-label-caps   { font-size: 11px; line-height: 16px; letter-spacing: 0.15em; font-weight: 700; font-family: "JetBrains Mono", monospace; text-transform: uppercase; }
+@utility text-display      { font-family: "Orbitron", sans-serif; letter-spacing: 0.05em; }
+
+/* ─── Selection ────────────────────────────────────────── */
+::selection {
+  background: rgba(0, 209, 255, 0.3);
+  color: #fff;
+}

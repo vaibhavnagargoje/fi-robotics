@@ -1,28 +1,32 @@
 "use client";
 
-import { motion, AnimatePresence } from 'motion/react';
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { Plus } from 'lucide-react';
-import Footer from '@/components/Footer';
+import { motion, AnimatePresence } from "motion/react";
+import React, { useState } from "react";
+import Link from "next/link";
+import { Plus } from "lucide-react";
+import Footer from "@/components/Footer";
+import ParticleGrid from "@/components/ParticleGrid";
+import GlowCard from "@/components/GlowCard";
+import TextReveal from "@/components/TextReveal";
 
 export default function CareersPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const roles = [
-    { title: "Senior ML Engineer, Vision",  team: "Software",        location: "San Francisco, CA" },
-    { title: "Robotics Control Engineer",    team: "Hardware",        location: "San Francisco, CA" },
-    { title: "Data Platform Lead",           team: "Infrastructure",  location: "San Francisco, CA" },
-    { title: "Simulation Engineer",          team: "Software",        location: "San Francisco, CA" },
+    { title: "Senior ML Engineer, Vision",  team: "Software",        location: "San Francisco, CA", color: "0, 209, 255" },
+    { title: "Robotics Control Engineer",    team: "Hardware",        location: "San Francisco, CA", color: "0, 184, 143" },
+    { title: "Data Platform Lead",           team: "Infrastructure",  location: "San Francisco, CA", color: "194, 109, 59" },
+    { title: "Simulation Engineer",          team: "Software",        location: "San Francisco, CA", color: "123, 97, 255" },
   ];
 
   return (
-    <div className="bg-[#080808] text-[#f0f0f0] selection:bg-[#00D1FF] selection:text-black font-sans min-h-screen flex flex-col">
+    <div className="bg-[#050508] text-[#e8e8f0] selection:bg-[#00D1FF]/30 selection:text-white font-sans min-h-screen flex flex-col">
 
       {/* ── Hero ── */}
-      <section className="relative h-[55vh] w-full flex flex-col justify-center items-center overflow-hidden px-4 dot-bg border-b border-white/10">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#00D1FF]/5 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#080808] pointer-events-none" />
+      <section className="relative h-[55vh] w-full flex flex-col justify-center items-center overflow-hidden px-4 border-b border-white/[0.06]">
+        <ParticleGrid />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#00D1FF]/[0.04] rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#050508] pointer-events-none z-[1]" />
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -30,8 +34,16 @@ export default function CareersPage() {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="relative z-10 text-center flex flex-col items-center mt-20"
         >
-          <span className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#00D1FF] mb-6 block">Careers</span>
-          <h1 className="text-5xl md:text-8xl font-extrabold tracking-tighter mb-6 max-w-5xl leading-tight text-white">
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-[10px] tracking-[0.2em] uppercase text-[#00D1FF] mb-6 block"
+            style={{ fontFamily: "'Orbitron', sans-serif" }}
+          >
+            Careers
+          </motion.span>
+          <h1 className="text-5xl md:text-8xl font-extrabold tracking-tighter mb-6 max-w-5xl leading-tight text-white animate-glow-breathe">
             Build the foundation.
           </h1>
           <p className="text-lg md:text-xl text-gray-400 max-w-2xl font-light leading-relaxed">
@@ -46,10 +58,10 @@ export default function CareersPage() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12 border-b border-white/10 pb-4 flex justify-between items-end"
+          className="mb-12 border-b border-white/[0.06] pb-4 flex justify-between items-end"
         >
           <h2 className="text-3xl font-bold tracking-tight text-white">Open Roles</h2>
-          <span className="text-sm text-gray-600 font-mono">{roles.length} positions</span>
+          <span className="text-sm text-gray-600" style={{ fontFamily: "'Orbitron', sans-serif" }}>{roles.length} positions</span>
         </motion.div>
 
         <div className="flex flex-col">
@@ -62,7 +74,9 @@ export default function CareersPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: i * 0.1 }}
-                className="group flex flex-col py-8 border-b border-white/10 hover:border-white/25 transition-colors"
+                className={`group flex flex-col py-8 border-b transition-all duration-500 ${
+                  isOpen ? "border-[#00D1FF]/20" : "border-white/[0.06] hover:border-white/15"
+                }`}
               >
                 <div
                   className="flex flex-col md:flex-row justify-between md:items-center cursor-pointer"
@@ -72,13 +86,19 @@ export default function CareersPage() {
                     <h3 className="text-2xl font-bold tracking-tight text-white group-hover:text-[#00D1FF] transition-colors">
                       {role.title}
                     </h3>
-                    <div className="flex gap-4 text-xs font-mono tracking-widest uppercase text-gray-600">
-                      <span className="text-[#00D1FF]">{role.team}</span>
+                    <div className="flex gap-4 text-xs tracking-widest uppercase text-gray-600" style={{ fontFamily: "'Orbitron', sans-serif" }}>
+                      <span style={{ color: `rgb(${role.color})` }}>{role.team}</span>
                       <span>·</span>
                       <span>{role.location}</span>
                     </div>
                   </div>
-                  <div className={`w-10 h-10 border flex items-center justify-center transition-all ${isOpen ? 'bg-white text-black border-white rotate-45' : 'border-white/20 text-white group-hover:border-white/50'}`}>
+                  <div
+                    className={`w-10 h-10 border flex items-center justify-center transition-all duration-300 ${
+                      isOpen
+                        ? "bg-[#00D1FF] text-black border-[#00D1FF] rotate-45 shadow-[0_0_20px_rgba(0,209,255,0.3)]"
+                        : "border-white/[0.08] text-white group-hover:border-[#00D1FF]/30"
+                    }`}
+                  >
                     <Plus size={18} />
                   </div>
                 </div>
@@ -92,7 +112,7 @@ export default function CareersPage() {
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="pt-6 border-t border-white/10 text-gray-400 font-light leading-relaxed">
+                      <div className="pt-6 border-t border-white/[0.06] text-gray-400 font-light leading-relaxed">
                         <p className="mb-4">
                           We are seeking an experienced {role.title} to join our {role.team} team.
                           You will build scalable solutions and push the boundaries of physical intelligence.
@@ -102,8 +122,10 @@ export default function CareersPage() {
                           <li>Collaborate with cross-functional teams</li>
                           <li>Optimize performance and reliability</li>
                         </ul>
-                        <button className="bg-white text-black px-6 py-3 text-sm tracking-widest font-bold uppercase hover:bg-gray-200 transition-colors">
-                          Apply Now
+                        <button
+                          className="group/btn relative overflow-hidden bg-white text-black px-6 py-3 text-sm tracking-widest font-bold uppercase transition-all hover:shadow-[0_0_20px_rgba(0,209,255,0.2)]"
+                        >
+                          <span className="relative z-10">Apply Now</span>
                         </button>
                       </div>
                     </motion.div>
