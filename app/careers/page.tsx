@@ -2,7 +2,6 @@
 
 import { motion, AnimatePresence } from 'motion/react';
 import React, { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Plus } from 'lucide-react';
 import Footer from '@/components/Footer';
@@ -11,52 +10,46 @@ export default function CareersPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const roles = [
-    { title: "Senior ML Engineer, Vision", team: "Software", location: "San Francisco, CA" },
-    { title: "Robotics Control Engineer", team: "Hardware", location: "San Francisco, CA" },
-    { title: "Data Platform Lead", team: "Infrastructure", location: "San Francisco, CA" },
-    { title: "Simulation Engineer", team: "Software", location: "San Francisco, CA" },
+    { title: "Senior ML Engineer, Vision",  team: "Software",        location: "San Francisco, CA" },
+    { title: "Robotics Control Engineer",    team: "Hardware",        location: "San Francisco, CA" },
+    { title: "Data Platform Lead",           team: "Infrastructure",  location: "San Francisco, CA" },
+    { title: "Simulation Engineer",          team: "Software",        location: "San Francisco, CA" },
   ];
 
   return (
-    <div className="bg-[#f6f4ef] text-[#0f172a] selection:bg-[#0f172a] selection:text-[#f6f4ef] font-sans min-h-screen flex flex-col">
-      {/* Hero Section */}
-      <section className="relative h-[60vh] w-full flex flex-col justify-center items-center overflow-hidden px-4">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/careers_hero.png"
-            alt="Engineering Workspace"
-            fill
-            className="object-cover opacity-30"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#f6f4ef]/20 via-transparent to-[#f6f4ef]"></div>
-        </div>
+    <div className="bg-[#080808] text-[#f0f0f0] selection:bg-[#00D1FF] selection:text-black font-sans min-h-screen flex flex-col">
+
+      {/* ── Hero ── */}
+      <section className="relative h-[55vh] w-full flex flex-col justify-center items-center overflow-hidden px-4 dot-bg border-b border-white/10">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#00D1FF]/5 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#080808] pointer-events-none" />
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="relative z-10 text-center flex flex-col items-center mt-20"
         >
-          <h1 className="text-5xl md:text-8xl font-medium tracking-tighter mb-6 max-w-5xl leading-tight text-[#0f172a]">
+          <span className="text-[10px] font-mono tracking-[0.2em] uppercase text-[#00D1FF] mb-6 block">Careers</span>
+          <h1 className="text-5xl md:text-8xl font-extrabold tracking-tighter mb-6 max-w-5xl leading-tight text-white">
             Build the foundation.
           </h1>
-          <p className="text-lg md:text-xl text-[#0f172a]/70 max-w-2xl font-light leading-relaxed">
+          <p className="text-lg md:text-xl text-gray-400 max-w-2xl font-light leading-relaxed">
             We are looking for exceptional builders who want to solve the hardest problems in physical intelligence.
           </p>
         </motion.div>
       </section>
 
-      {/* Roles Section */}
-      <section className="py-24 px-4 md:px-12 lg:px-24 bg-[#f6f4ef] flex-grow max-w-5xl mx-auto w-full">
+      {/* ── Roles ── */}
+      <section className="py-24 px-4 md:px-12 lg:px-24 flex-grow max-w-5xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12 border-b border-black/10 pb-4 flex justify-between items-end"
+          className="mb-12 border-b border-white/10 pb-4 flex justify-between items-end"
         >
-          <h2 className="text-3xl font-medium tracking-tight">Open Roles</h2>
-          <span className="text-sm text-[#0f172a]/50">{roles.length} positions</span>
+          <h2 className="text-3xl font-bold tracking-tight text-white">Open Roles</h2>
+          <span className="text-sm text-gray-600 font-mono">{roles.length} positions</span>
         </motion.div>
 
         <div className="flex flex-col">
@@ -68,22 +61,24 @@ export default function CareersPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="group flex flex-col py-8 border-b border-black/10 hover:border-[#0f172a]/40 transition-colors"
+                transition={{ duration: 0.8, delay: i * 0.1 }}
+                className="group flex flex-col py-8 border-b border-white/10 hover:border-white/25 transition-colors"
               >
-                <div 
+                <div
                   className="flex flex-col md:flex-row justify-between md:items-center cursor-pointer"
                   onClick={() => setOpenIndex(isOpen ? null : i)}
                 >
                   <div className="flex flex-col gap-2 mb-4 md:mb-0">
-                    <h3 className="text-2xl font-medium tracking-tight group-hover:text-[#0f172a] transition-colors">{role.title}</h3>
-                    <div className="flex gap-4 text-sm font-mono tracking-widest uppercase text-[#0f172a]/50">
-                      <span className="text-[#00D1FF] group-hover:text-[#00A6C7] transition-colors">{role.team}</span>
-                      <span>&middot;</span>
+                    <h3 className="text-2xl font-bold tracking-tight text-white group-hover:text-[#00D1FF] transition-colors">
+                      {role.title}
+                    </h3>
+                    <div className="flex gap-4 text-xs font-mono tracking-widest uppercase text-gray-600">
+                      <span className="text-[#00D1FF]">{role.team}</span>
+                      <span>·</span>
                       <span>{role.location}</span>
                     </div>
                   </div>
-                  <div className={`w-10 h-10 rounded-full border border-black/20 flex items-center justify-center transition-all ${isOpen ? 'bg-[#0f172a] text-[#f6f4ef] rotate-45' : 'group-hover:bg-[#0f172a] group-hover:text-[#f6f4ef]'}`}>
+                  <div className={`w-10 h-10 border flex items-center justify-center transition-all ${isOpen ? 'bg-white text-black border-white rotate-45' : 'border-white/20 text-white group-hover:border-white/50'}`}>
                     <Plus size={18} />
                   </div>
                 </div>
@@ -97,14 +92,17 @@ export default function CareersPage() {
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="pt-6 border-t border-black/5 text-[#0f172a]/70 font-light leading-relaxed">
-                        <p className="mb-4">We are seeking an experienced {role.title} to join our {role.team} team. In this role, you will be responsible for building scalable solutions and pushing the boundaries of physical intelligence.</p>
-                        <ul className="list-disc pl-5 mb-8 space-y-2">
+                      <div className="pt-6 border-t border-white/10 text-gray-400 font-light leading-relaxed">
+                        <p className="mb-4">
+                          We are seeking an experienced {role.title} to join our {role.team} team.
+                          You will build scalable solutions and push the boundaries of physical intelligence.
+                        </p>
+                        <ul className="list-disc pl-5 mb-8 space-y-2 text-gray-500">
                           <li>Design and implement robust architecture</li>
                           <li>Collaborate with cross-functional teams</li>
                           <li>Optimize performance and reliability</li>
                         </ul>
-                        <button className="bg-[#0f172a] text-[#f6f4ef] px-6 py-3 rounded-full text-sm tracking-wide font-medium uppercase hover:bg-[#00D1FF] hover:text-[#0f172a] transition-colors">
+                        <button className="bg-white text-black px-6 py-3 text-sm tracking-widest font-bold uppercase hover:bg-gray-200 transition-colors">
                           Apply Now
                         </button>
                       </div>
