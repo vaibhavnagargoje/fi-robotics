@@ -5,17 +5,16 @@ import ScrollProgress from "../components/ScrollProgress";
 
 export const metadata: Metadata = {
   title: "Intelligence Factory — Human Intelligence for Robots",
-  description: "Building the foundation models to make physical autonomy work in unconstrained, diverse environments. Powered by massive-scale human demonstration data.",
+  description:
+    "We build the foundation models for physical autonomy — powered by massive-scale human demonstration data.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className="bg-[#050508] text-[#e8e8f0] antialiased">
+      <body className="bg-[#f7f6f3] text-[#0a0a0a] antialiased">
         <ScrollProgress />
         <Navbar />
         {children}
