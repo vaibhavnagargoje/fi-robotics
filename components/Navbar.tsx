@@ -53,10 +53,10 @@ export default function Navbar() {
             <Image
               src="/logo.svg"
               alt="f(i) — Intelligence Factory"
-              width={52}
-              height={26}
+              width={68}
+              height={34}
               priority
-              className="h-[26px] w-auto"
+              className="h-[34px] w-auto"
             />
           </Link>
 

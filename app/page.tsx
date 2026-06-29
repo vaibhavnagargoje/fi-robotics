@@ -180,7 +180,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════════
           2. PROBLEM STATEMENT
       ══════════════════════════════════════════════════════ */}
-      <section className="py-28 md:py-36 px-6 md:px-16" style={{ borderTop: "0.5px solid #e0ddd8" }}>
+      <section className="py-16 md:py-20 px-6 md:px-16" style={{ borderTop: "0.5px solid #e0ddd8" }}>
         <div className="max-w-2xl mx-auto text-center">
           <motion.h2
             {...fade(0)}
@@ -293,7 +293,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════════
           4. METRICS
       ══════════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-24 px-6 md:px-16" style={{ borderTop: "0.5px solid #e0ddd8", borderBottom: "0.5px solid #e0ddd8" }}>
+      <section className="py-14 md:py-18 px-6 md:px-16" style={{ borderTop: "0.5px solid #e0ddd8", borderBottom: "0.5px solid #e0ddd8" }}>
         <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-0">
           {[
             { value: "500,000+", label1: "hours of",      label2: "kinetic data",      isCounter: true },
@@ -324,7 +324,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════════
           5. HOW IT WORKS
       ══════════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 px-6 md:px-16">
+      <section className="py-14 md:py-20 px-6 md:px-16">
         <div className="max-w-5xl mx-auto">
           <p className="text-[11px] tracking-[0.1em] uppercase text-[#9c9a97] mb-6" style={{ fontFamily: "'DM Mono', monospace" }}>
             02 / Method
@@ -355,39 +355,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════
-          6. TIMELINE
-      ══════════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 px-6 md:px-16" style={{ borderTop: "0.5px solid #e0ddd8" }}>
-        <div className="max-w-6xl mx-auto">
-          <p className="text-[11px] tracking-[0.1em] uppercase text-[#9c9a97] mb-12" style={{ fontFamily: "'DM Mono', monospace" }}>
-            03 / Trajectory
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-0">
-            {timeline.map((t, i) => (
-              <motion.div
-                key={t.year}
-                {...fade(i * 0.1)}
-                className="flex flex-col gap-4 py-8 md:py-0 md:px-8 md:border-r md:first:pl-0 md:last:border-r-0"
-                style={{ borderRightColor: "#e0ddd8", borderRightWidth: "0.5px", borderBottomColor: "#e0ddd8" }}
-              >
-                <span className="text-[2.5rem] md:text-[2.8rem] font-light leading-none text-[#c8c5c0] tracking-tight" style={{ fontFamily: "'DM Mono', monospace" }}>
-                  {t.year}
-                </span>
-                <div className="flex flex-col gap-2">
-                  <span className="text-[13px] font-semibold text-[#0a0a0a]">{t.title}</span>
-                  <p className="text-[13px] text-[#6b6b6b] leading-[1.7]">{t.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ══════════════════════════════════════════════════════
-          7. DEPLOYMENT
-      ══════════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 px-6 md:px-16" style={{ borderTop: "0.5px solid #e0ddd8" }}>
+      <section className="py-14 md:py-20 px-6 md:px-16" style={{ borderTop: "0.5px solid #e0ddd8" }}>
         <div className="max-w-6xl mx-auto">
           <p className="text-[11px] tracking-[0.1em] uppercase text-[#9c9a97] mb-10" style={{ fontFamily: "'DM Mono', monospace" }}>
             04 / Deployment

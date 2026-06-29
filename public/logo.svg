@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" fill="none">
-  <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle"
+  <text x="50%" y="58%" dominant-baseline="middle" text-anchor="middle"
     font-family="'Lato', 'Helvetica Neue', Arial, sans-serif"
     font-style="italic"
     font-weight="300"
-    font-size="72"
+    font-size="80"
     fill="black"
-    letter-spacing="-2">f(i)</text>
+    letter-spacing="-3">f(i)</text>
 </svg>
