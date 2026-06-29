@@ -85,28 +85,9 @@ export default function TeamPage() {
   return (
     <div className="bg-[#f7f6f3] text-[#0a0a0a]">
 
-      {/* ── Page header ── */}
-      <section className="px-6 md:px-16 pt-36 pb-16" style={{ borderBottom: "0.5px solid #e0ddd8" }}>
-        <motion.div
-          initial={reduced ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="max-w-3xl"
-        >
-          <h1
-            className="text-[clamp(2.5rem,6vw,5rem)] leading-[1.05] tracking-[-0.01em] text-[#0a0a0a] mb-5"
-            style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontStyle: "italic" }}
-          >
-            The people behind the data.
-          </h1>
-          <p className="text-[16px] text-[#6b6b6b] font-light leading-relaxed">
-            A team of roboticists, data scientists, and operators.
-          </p>
-        </motion.div>
-      </section>
-
-      {/* ── Ambient video strip ── */}
-      <div className="w-full overflow-hidden" style={{ borderBottom: "0.5px solid #e0ddd8" }}>
+      {/* ── Hero — fullscreen video background ── */}
+      <section className="relative h-screen flex flex-col justify-end overflow-hidden">
+        {/* Video fills the full section */}
         <video
           ref={videoRef}
           src="/src-videos/Img 1941.mp4"
@@ -114,10 +95,40 @@ export default function TeamPage() {
           muted
           loop
           playsInline
-          className="w-full object-cover bg-[#e8e6e0]"
-          style={{ aspectRatio: "21/6", maxHeight: "280px" }}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: "center center" }}
         />
-      </div>
+
+        {/* Gradient overlay — clear at top, warm at bottom so text pops */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(247,246,243,0.15) 0%, rgba(247,246,243,0.5) 40%, rgba(247,246,243,0.92) 100%)",
+          }}
+        />
+
+        {/* Text anchored to bottom of hero */}
+        <motion.div
+          initial={reduced ? false : { opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative z-10 px-6 md:px-16 pb-14"
+        >
+          <h1
+            className="text-[clamp(3rem,8vw,6.5rem)] leading-[0.95] tracking-[-0.02em] text-[#0a0a0a] mb-4"
+            style={{ fontFamily: "'DM Serif Display', Georgia, serif", fontStyle: "italic" }}
+          >
+            The people behind<br />the data.
+          </h1>
+          <p
+            className="text-[12px] tracking-[0.06em] text-[#6b6b6b] max-w-sm"
+            style={{ fontFamily: "'DM Mono', monospace" }}
+          >
+            A team of roboticists, data scientists, and operators.
+          </p>
+        </motion.div>
+      </section>
 
       {/* ── Founders — portrait format ── */}
       <section className="px-6 md:px-16 py-20">
