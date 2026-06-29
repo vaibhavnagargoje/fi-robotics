@@ -40,12 +40,12 @@ const timeline = [
 ];
 
 const videoGrid = [
-  { slot: "grid-1", label: "Teleoperator session",   src: "/src-videos/Autonomous_2x.mp4" },
-  { slot: "grid-2", label: "Glove sensor capture",   src: "/src-videos/Finger tip recording.mp4" },
-  { slot: "grid-3", label: "Multi-environment task", src: "/src-videos/Initial_Grocery_Demo.mp4" },
-  { slot: "grid-4", label: "Data collection floor",  src: "/src-videos/Autonomous 2x (1).mp4" },
-  { slot: "grid-5", label: "Edge case targeting",    src: "/src-videos/IMG_1930.mp4" },
-  { slot: "grid-6", label: "Operator onboarding",    src: "/src-videos/Cleaning_demo.mp4" },
+  { slot: "grid-1", label: "Teleoperator session",   src: "/src-videos/Autonomous 2X.mp4" },
+  { slot: "grid-2", label: "Glove sensor capture",   src: "/src-videos/Finger Tip Recording.mp4" },
+  { slot: "grid-3", label: "Multi-environment task", src: "/src-videos/Initial Grocery Demo.mp4" },
+  { slot: "grid-4", label: "Data collection floor",  src: "/src-videos/Autonomous 2X (1).mp4" },
+  { slot: "grid-5", label: "Edge case targeting",    src: "/src-videos/Img 1930.mp4" },
+  { slot: "grid-6", label: "Operator onboarding",    src: "/src-videos/Cleaning Demo.mp4" },
 ];
 
 /* ═══════════════════════════════════════════════════════════
@@ -118,7 +118,7 @@ export default function Home() {
         {/* Background video */}
         <video
           ref={heroVideoRef}
-          src="/src-videos/four2 (online-video-cutter.com) (1).mp4"
+          src="/src-videos/Four2 (Online-Video-Cutter.Com) (1).mp4"
           preload="none"
           muted
           loop

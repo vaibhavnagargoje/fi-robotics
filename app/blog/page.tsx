@@ -59,7 +59,7 @@ export default function BlogPage() {
         {/* Video fills the full section */}
         <video
           ref={(el) => { videoRefs.current[0] = el; }}
-          src="/src-videos/Cleaning_demo.mp4"
+          src="/src-videos/Cleaning Demo.mp4"
           preload="none"
           muted
           loop

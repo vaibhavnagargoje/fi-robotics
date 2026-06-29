@@ -109,7 +109,7 @@ export default function TeamPage() {
       <div className="w-full overflow-hidden" style={{ borderBottom: "0.5px solid #e0ddd8" }}>
         <video
           ref={videoRef}
-          src="/src-videos/IMG_1941.MOV"
+          src="/src-videos/Img 1941.mp4"
           preload="none"
           muted
           loop
