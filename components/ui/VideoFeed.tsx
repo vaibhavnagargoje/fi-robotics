@@ -1,6 +1,7 @@
 interface VideoFeedProps {
   src: string;
   label: string;
+  showLabel?: boolean;
   className?: string;
   /** overlay opacity 0-100, default 60 */
   opacity?: number;
@@ -12,6 +13,7 @@ interface VideoFeedProps {
 export default function VideoFeed({
   src,
   label,
+  showLabel = true,
   className = "",
   opacity = 60,
   grayscale = false,
@@ -27,10 +29,12 @@ export default function VideoFeed({
         className={`w-full h-full object-cover ${grayscale ? "grayscale" : ""}`}
         style={{ opacity: opacity / 100 }}
       />
-      <div className="absolute top-2 left-2 z-10 flex items-center gap-1.5 bg-black px-2 py-0.5 border border-white">
-        <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-        <span className="font-mono text-[8px] text-white tracking-[0.1em]">{label}</span>
-      </div>
+      {showLabel && (
+        <div className="absolute top-2 left-2 z-10 flex items-center gap-1.5 bg-black px-2 py-0.5 border border-white">
+          <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+          <span className="font-mono text-[8px] text-white tracking-widest">{label}</span>
+        </div>
+      )}
     </div>
   );
 }

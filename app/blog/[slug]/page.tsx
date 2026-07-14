@@ -52,7 +52,8 @@ export default async function BlogPostPage({ params }: Props) {
   });
 
   return (
-    <article className="page-enter max-w-2xl mx-auto px-6 md:px-8 py-12 md:py-20 text-[#f1f5ec]">
+    <div className="page-enter flex-1 bg-[#090c0a]">
+      <article className="max-w-2xl mx-auto px-6 md:px-8 py-12 md:py-20 text-[#f1f5ec]">
       {/* Back link */}
       <Link
         href="/blog"
@@ -81,9 +82,10 @@ export default async function BlogPostPage({ params }: Props) {
       </header>
 
       {/* Body */}
-      <div className="border-t border-white/15 pt-8">
-        {blocks}
-      </div>
-    </article>
+        <div className="border-t border-white/15 pt-8">
+          {blocks}
+        </div>
+      </article>
+    </div>
   );
 }

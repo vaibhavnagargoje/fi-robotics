@@ -1,3 +1,4 @@
+import Link from "next/link";
 import VideoFeed from "@/components/ui/VideoFeed";
 
 export default function HeroSection() {
@@ -18,19 +19,13 @@ export default function HeroSection() {
           collection of human demonstration data on Earth.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-3">
-          <a
-            href="#"
+        <div>
+          <Link
+            href="/blog"
             className="border border-[#d6ff72] bg-[#d6ff72] text-[#090c0a] hover:bg-transparent hover:text-[#d6ff72] px-6 py-2.5 font-sans text-sm font-medium inline-flex items-center gap-2 transition-colors duration-150"
           >
-            Get Started
-          </a>
-          <a
-            href="#"
-            className="border border-white/30 text-[#f1f5ec] hover:border-[#d6ff72] hover:text-[#d6ff72] px-6 py-2.5 font-sans text-sm font-medium inline-flex items-center gap-2 transition-colors duration-150"
-          >
             View Research
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -40,6 +35,7 @@ export default function HeroSection() {
           <VideoFeed
             src="/src-videos/Intelligence Factory Launch Video V3 (1).mp4"
             label="Live Feed"
+            showLabel={false}
             className="w-full h-full"
             opacity={65}
             grayscale

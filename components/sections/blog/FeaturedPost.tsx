@@ -23,7 +23,6 @@ export default function FeaturedPost() {
           <p className="font-sans text-xs uppercase tracking-wide text-[#aab3a7]">
             Intelligence Factory Journal
           </p>
-          <p className="font-sans text-xs text-[#aab3a7]">Vol. 01 / 2026</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-end">

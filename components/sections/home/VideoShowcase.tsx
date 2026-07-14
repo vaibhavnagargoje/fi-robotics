@@ -35,6 +35,7 @@ export default function VideoShowcase() {
                 <VideoFeed
                   src={recording.src}
                   label={recording.label}
+                  showLabel={false}
                   className="w-full h-full transition-transform duration-500 group-hover:scale-[1.015]"
                   opacity={72}
                 />
