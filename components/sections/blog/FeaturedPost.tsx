@@ -41,7 +41,7 @@ export default function FeaturedPost() {
         className="group grid grid-cols-1 lg:grid-cols-12 border-b border-white/15"
       >
         <div className="lg:col-span-3 px-8 md:px-14 py-8 md:py-10 border-b lg:border-b-0 lg:border-r border-white/15 bg-[#162218]">
-          <p className="font-sans text-xs uppercase tracking-wide text-[#d6ff72] mb-8">Lead story</p>
+          <p className="font-sans text-xs uppercase tracking-wide text-[#8bb8d8] mb-8">Lead story</p>
           <div className="font-sans text-xs text-[#b7c1b5] leading-relaxed">
             <p className="mb-1">{post.tag}</p>
             <p>{post.date}</p>
@@ -52,7 +52,7 @@ export default function FeaturedPost() {
         <div className="lg:col-span-9 px-8 md:px-14 py-10 md:py-14 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
           <div className="max-w-3xl">
             <p className="font-sans text-xs uppercase tracking-wide text-[#aab3a7] mb-4">Research / The diversity problem</p>
-            <h2 className="font-sans font-semibold text-2xl md:text-3xl lg:text-4xl text-[#f1f5ec] leading-[1.1] tracking-tight mb-5 group-hover:text-[#d6ff72] transition-colors">
+            <h2 className="font-sans font-semibold text-2xl md:text-3xl lg:text-4xl text-[#f1f5ec] leading-[1.1] tracking-tight mb-5 group-hover:text-[#8bb8d8] transition-colors">
               {post.title}
             </h2>
             <p className="font-sans text-sm md:text-base text-[#aab3a7] leading-relaxed max-w-2xl">
@@ -60,7 +60,7 @@ export default function FeaturedPost() {
             </p>
           </div>
 
-          <span className="font-sans text-sm font-medium text-[#f1f5ec] shrink-0 border-b border-[#d6ff72] pb-1 group-hover:text-[#d6ff72] transition-colors">
+          <span className="font-sans text-sm font-medium text-[#f1f5ec] shrink-0 border-b border-[#8bb8d8] pb-1 group-hover:text-[#8bb8d8] transition-colors">
             Read analysis
           </span>
         </div>

@@ -18,7 +18,7 @@ export default function SiteFooter() {
           <Link
             key={label}
             href={href}
-            className="font-sans text-sm text-[#aab3a7] hover:text-[#d6ff72] transition-colors"
+            className="font-sans text-sm text-[#aab3a7] hover:text-[#8bb8d8] transition-colors"
           >
             {label}
           </Link>

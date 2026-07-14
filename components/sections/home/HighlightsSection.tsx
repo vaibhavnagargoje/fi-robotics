@@ -15,25 +15,25 @@ function getExcerpt(body: string, maxChars: number) {
 
 export default function HighlightsSection() {
   const [featured, ...remaining] = posts;
-  const latest = remaining.slice(0, 1);
+  const latest = remaining.slice(0, 3);
 
   return (
-    <section className="bg-[#101610] border-b border-white/15">
+    <section className="bg-[#101214] border-b border-white/15 text-[#f1f5ec]">
       <div className="px-8 md:px-14 py-6 border-b border-white/15 flex items-center justify-between gap-4">
         <p className="font-sans text-xs text-[#aab3a7] uppercase tracking-wide">
           Field Signals
         </p>
         <Link
           href="/blog"
-          className="font-sans text-xs text-[#aab3a7] hover:text-[#d6ff72] transition-colors"
+          className="font-sans text-xs text-[#aab3a7] hover:text-[#8bb8d8] transition-colors"
         >
-          Open journal
+          Open research index
         </Link>
       </div>
 
       <div className="px-8 md:px-14 py-12 md:py-14 border-b border-white/15">
         <div className="max-w-3xl">
-          <p className="font-sans text-xs uppercase tracking-wide text-[#aab3a7] mb-4">
+          <p className="font-sans text-xs uppercase tracking-wide text-[#8bb8d8] mb-4">
             What matters now
           </p>
           <h2 className="font-sans font-semibold text-2xl md:text-3xl text-[#f1f5ec] leading-tight max-w-2xl mb-5">
@@ -60,7 +60,8 @@ export default function HighlightsSection() {
           </div>
 
           <div className="flex-1">
-            <h3 className="font-sans font-semibold text-xl md:text-2xl text-[#f1f5ec] leading-snug mb-3 group-hover:text-[#d6ff72] transition-colors">
+            <p className="font-sans text-xs uppercase tracking-wide text-[#8bb8d8] mb-2">{featured.tag}</p>
+            <h3 className="font-sans font-semibold text-xl md:text-2xl text-[#f1f5ec] leading-snug mb-3 group-hover:text-[#8bb8d8] transition-colors">
               {featured.title}
             </h3>
             <p className="font-sans text-sm text-[#aab3a7] leading-relaxed max-w-3xl">
@@ -83,7 +84,8 @@ export default function HighlightsSection() {
               </div>
 
               <div className="flex-1">
-                <h4 className="font-sans font-medium text-base md:text-lg text-[#f1f5ec] leading-snug mb-2 group-hover:text-[#d6ff72] transition-colors">
+                <p className="font-sans text-xs uppercase tracking-wide text-[#8bb8d8] mb-2">{post.tag}</p>
+                <h4 className="font-sans font-medium text-base md:text-lg text-[#f1f5ec] leading-snug mb-2 group-hover:text-[#8bb8d8] transition-colors">
                   {post.title}
                 </h4>
                 <p className="font-sans text-sm text-[#aab3a7] leading-relaxed max-w-2xl">
@@ -98,7 +100,7 @@ export default function HighlightsSection() {
       <div className="px-8 md:px-14 py-6 border-t border-white/15">
         <Link
           href="/blog"
-          className="font-sans text-sm font-medium text-[#f1f5ec] hover:text-[#d6ff72] transition-colors inline-flex items-center gap-1"
+          className="font-sans text-sm font-medium text-[#f1f5ec] hover:text-[#8bb8d8] transition-colors inline-flex items-center gap-1"
         >
           See all briefings →
         </Link>

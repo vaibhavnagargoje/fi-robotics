@@ -94,13 +94,13 @@ export default function TeamPage() {
           <div className="flex flex-wrap gap-3">
             <a
               href="#"
-              className="border border-[#d6ff72] bg-[#d6ff72] text-[#090c0a] hover:bg-transparent hover:text-[#d6ff72] px-6 py-2.5 font-sans text-sm font-medium transition-colors"
+              className="border border-[#8bb8d8] bg-[#8bb8d8] text-[#090c0a] hover:bg-transparent hover:text-[#8bb8d8] px-6 py-2.5 font-sans text-sm font-medium transition-colors"
             >
               Contact Us
             </a>
             <a
               href="#"
-              className="border border-white/30 text-[#f1f5ec] hover:border-[#d6ff72] hover:text-[#d6ff72] px-6 py-2.5 font-sans text-sm font-medium transition-colors"
+              className="border border-white/30 text-[#f1f5ec] hover:border-[#8bb8d8] hover:text-[#8bb8d8] px-6 py-2.5 font-sans text-sm font-medium transition-colors"
             >
               View Careers
             </a>

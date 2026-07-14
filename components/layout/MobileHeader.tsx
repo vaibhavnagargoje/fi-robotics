@@ -28,7 +28,7 @@ export default function MobileHeader() {
             className={`font-sans text-sm transition-colors ${
               pathname === href
                 ? "font-semibold text-[#f1f5ec]"
-                : "font-normal text-[#aab3a7] hover:text-[#d6ff72]"
+                : "font-normal text-[#aab3a7] hover:text-[#8bb8d8]"
             }`}
           >
             {label}

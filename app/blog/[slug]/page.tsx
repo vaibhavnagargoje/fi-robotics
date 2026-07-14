@@ -57,7 +57,7 @@ export default async function BlogPostPage({ params }: Props) {
       {/* Back link */}
       <Link
         href="/blog"
-        className="text-xs text-[#aab3a7] hover:text-[#d6ff72] transition-colors mb-10 inline-block"
+        className="text-xs text-[#aab3a7] hover:text-[#8bb8d8] transition-colors mb-10 inline-block"
       >
         ← Blog
       </Link>

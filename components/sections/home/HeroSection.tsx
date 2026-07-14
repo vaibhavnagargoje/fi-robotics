@@ -14,7 +14,7 @@ export default function HeroSection() {
           Human Intelligence <br />for Robots.
         </h1>
 
-        <p className="font-sans text-lg font-normal leading-relaxed text-[#aab3a7] max-w-xl mb-8 pl-4 border-l-2 border-[#d6ff72]">
+        <p className="font-sans text-lg font-normal leading-relaxed text-[#aab3a7] max-w-xl mb-8 pl-4 border-l-2 border-[#8bb8d8]">
           We build foundation models for physical autonomy — powered by the largest
           collection of human demonstration data on Earth.
         </p>
@@ -22,7 +22,7 @@ export default function HeroSection() {
         <div>
           <Link
             href="/blog"
-            className="border border-[#d6ff72] bg-[#d6ff72] text-[#090c0a] hover:bg-transparent hover:text-[#d6ff72] px-6 py-2.5 font-sans text-sm font-medium inline-flex items-center gap-2 transition-colors duration-150"
+            className="border border-[#8bb8d8] bg-[#8bb8d8] text-[#090c0a] hover:bg-transparent hover:text-[#8bb8d8] px-6 py-2.5 font-sans text-sm font-medium inline-flex items-center gap-2 transition-colors duration-150"
           >
             View Research
           </Link>
@@ -30,7 +30,7 @@ export default function HeroSection() {
       </div>
 
       {/* Hero Video */}
-      <div className="lg:col-span-5 h-85 border-2 border-[#d6ff72] relative bg-black p-2 shadow-[6px_6px_0px_0px_rgba(214,255,114,0.7)]">
+      <div className="lg:col-span-5 h-85 border-2 border-[#8bb8d8] relative bg-black p-2 shadow-[6px_6px_0px_0px_rgba(139,184,216,0.45)]">
         <div className="w-full h-full border-2 border-white">
           <VideoFeed
             src="/src-videos/Intelligence Factory Launch Video V3 (1).mp4"

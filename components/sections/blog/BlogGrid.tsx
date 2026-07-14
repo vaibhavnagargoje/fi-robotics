@@ -35,7 +35,7 @@ export default function BlogGrid() {
             </p>
 
             <div className="md:col-span-3 flex md:flex-col items-center md:items-start gap-2 md:gap-1 font-sans text-xs text-[#aab3a7]">
-              <span className="uppercase tracking-wide text-[#d6ff72]">{post.tag}</span>
+              <span className="uppercase tracking-wide text-[#8bb8d8]">{post.tag}</span>
               <span className="md:hidden">·</span>
               <span>{post.date}</span>
               <span className="md:hidden">·</span>
@@ -43,7 +43,7 @@ export default function BlogGrid() {
             </div>
 
             <div className="md:col-span-7">
-              <h2 className="font-sans font-medium text-lg md:text-xl text-[#f1f5ec] leading-snug mb-3 group-hover:text-[#d6ff72] transition-colors">
+              <h2 className="font-sans font-medium text-lg md:text-xl text-[#f1f5ec] leading-snug mb-3 group-hover:text-[#8bb8d8] transition-colors">
                 {post.title}
               </h2>
               <p className="font-sans text-sm text-[#aab3a7] leading-relaxed max-w-2xl">
@@ -52,7 +52,7 @@ export default function BlogGrid() {
             </div>
 
             <div className="md:col-span-1 hidden md:flex justify-end items-start">
-              <span className="font-sans text-lg leading-none text-[#768275] group-hover:text-[#d6ff72] group-hover:translate-x-1 transition-all">
+              <span className="font-sans text-lg leading-none text-[#768275] group-hover:text-[#8bb8d8] group-hover:translate-x-1 transition-all">
                 →
               </span>
             </div>

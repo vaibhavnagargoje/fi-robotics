@@ -24,7 +24,7 @@ export default function Sidebar() {
       <div>
         <Link
           href="/"
-          className="block font-sans font-black text-[56px] leading-none tracking-tighter text-[#f1f5ec] mb-12 hover:text-[#d6ff72] transition-colors"
+          className="block font-sans font-black text-[56px] leading-none tracking-tighter text-[#f1f5ec] mb-12 hover:text-[#8bb8d8] transition-colors"
         >
           f(i)
         </Link>
@@ -40,7 +40,7 @@ export default function Sidebar() {
                   className={`block py-1.5 font-sans text-sm transition-colors duration-150 ${
                     isActive
                       ? "font-semibold text-[#f1f5ec]"
-                      : "font-normal text-[#aab3a7] hover:text-[#d6ff72]"
+                      : "font-normal text-[#aab3a7] hover:text-[#8bb8d8]"
                   }`}
                 >
                   {label}
@@ -60,7 +60,7 @@ export default function Sidebar() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-sans text-xs text-[#aab3a7] hover:text-[#d6ff72] transition-colors"
+                className="font-sans text-xs text-[#aab3a7] hover:text-[#8bb8d8] transition-colors"
               >
                 {label}
               </a>
