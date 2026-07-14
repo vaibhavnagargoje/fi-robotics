@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Intelligence Factory - Human Intelligence for Robots</title>
+    
+    <!-- Tailwind CSS with Forms and Container Queries -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- Premium Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,400;500;600&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#000000",
+                        "on-primary": "#ffffff",
+                        "background": "#ffffff",
+                        "on-background": "#000000",
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0",
+                        "lg": "0",
+                        "xl": "0",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "grid-unit": "8px",
+                        "margin-desktop": "64px",
+                        "max-width": "1440px",
+                        "margin-mobile": "24px",
+                        "gutter": "2px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["JetBrains Mono", "monospace"],
+                        "headline-lg": ["\"Source Serif 4\"", "serif"],
+                        "display-lg": ["\"Source Serif 4\"", "serif"],
+                        "body-md": ["Hanken Grotesk", "sans-serif"],
+                        "label-sm": ["JetBrains Mono", "monospace"],
+                        "body-lg": ["Hanken Grotesk", "sans-serif"],
+                        "headline-md": ["\"Source Serif 4\"", "serif"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["11px", { "lineHeight": "1.2", "letterSpacing": "0.2em", "fontWeight": "700" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "display-lg": ["72px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-sm": ["11px", { "lineHeight": "1.4", "fontWeight": "600", "letterSpacing": "0.1em" }],
+                        "body-lg": ["20px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #ffffff; color: #000000; }
+        .grid-bg {
+            background-size: 16px 16px;
+            background-image: 
+                linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+        }
+        .grid-bg-dark {
+            background-size: 16px 16px;
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.07) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.07) 1px, transparent 1px);
+        }
+        
+        /* Hide scrollbar */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .box-border-technical {
+            border: 2px solid #000000;
+        }
+
+        .tab-content {
+            animation: tabFadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes tabFadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col md:flex-row selection:bg-black selection:text-white">
+
+    <!-- DESKTOP SIDEBAR NAVIGATION -->
+    <nav class="hidden md:flex flex-col h-screen w-[280px] left-0 top-0 border-r-2 border-black bg-white fixed z-40 p-8 justify-between">
+        <div>
+            <div class="mb-10">
+                <h1 class="font-display-lg text-display-lg text-black tracking-tighter" id="brandLink">f(i)</h1>
+                <p class="font-label-caps text-label-caps text-black mt-2" id="docRefLabel">SYS.TERM // HOME</p>
+            </div>
+            
+            <!-- Sidebar Navigation Links -->
+            <div class="flex flex-col space-y-3">
+                <a class="nav-link-desktop text-black font-bold border-b-2 border-black pb-1 flex items-center justify-between group" href="#" data-target="section-home">
+                    <span class="font-label-caps text-label-caps">[ HOME ]</span>
+                    <span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_right_alt</span>
+                </a>
+                <a class="nav-link-desktop text-black hover:bg-black hover:text-white transition-colors duration-150 flex items-center justify-between group p-1" href="#" data-target="section-blog">
+                    <span class="font-label-caps text-label-caps">BLOG</span>
+                    <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">article</span>
+                </a>
+                <a class="nav-link-desktop text-black hover:bg-black hover:text-white transition-colors duration-150 flex items-center justify-between group p-1" href="#" data-target="section-team">
+                    <span class="font-label-caps text-label-caps">TEAM</span>
+                    <span class="material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity">groups</span>
+                </a>
+            </div>
+        </div>
+        
+        <div>
+            <div class="flex flex-col space-y-2 mb-6 border-t-2 border-black pt-4">
+                <a class="text-black hover:underline flex items-center space-x-2" href="#">
+                    <span class="material-symbols-outlined text-sm">terminal</span>
+                    <span class="font-label-sm text-label-sm">YT_STREAM</span>
+                </a>
+                <a class="text-black hover:underline flex items-center space-x-2" href="#">
+                    <span class="material-symbols-outlined text-sm">share</span>
+                    <span class="font-label-sm text-label-sm">LINK_NET</span>
+                </a>
+            </div>
+            <button class="block w-full border-2 border-black text-black hover:bg-black hover:text-white transition-colors duration-150 py-3 text-center font-label-caps text-label-caps">
+                INITIATE
+            </button>
+            <p class="font-label-sm text-label-sm text-black mt-6">STATUS: ONLINE<br/>LATENCY: 12ms</p>
+        </div>
+    </nav>
+
+    <!-- MOBILE NAVIGATION HEADER -->
+    <header class="md:hidden flex items-center justify-between px-6 h-14 bg-white border-b-2 border-black sticky top-0 z-50 w-full flex-shrink-0">
+        <div class="font-display-lg text-2xl font-bold tracking-tighter" id="brandLinkMobile">f(i)</div>
+        <nav class="flex gap-4">
+            <a class="nav-link-mobile font-label-sm text-xs font-bold text-black border-b-2 border-black pb-0.5" href="#" data-target="section-home">Home</a>
+            <a class="nav-link-mobile font-label-sm text-xs font-bold text-outline text-slate-500 pb-0.5" href="#" data-target="section-blog">Blog</a>
+            <a class="nav-link-mobile font-label-sm text-xs font-bold text-outline text-slate-500 pb-0.5" href="#" data-target="section-team">Team</a>
+        </nav>
+    </header>
+
+    <!-- MAIN TEMPLATE CONTENT WORKSPACE -->
+    <main class="w-full md:w-[calc(100%-280px)] md:ml-[280px] min-h-screen flex flex-col">
+        
+        <!-- SECTION 1: HOME PAGE -->
+        <div id="section-home" class="tab-content flex-grow">
+            <!-- Hero Block -->
+            <section class="p-6 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border-b-2 border-black bg-white grid-bg">
+                <div class="lg:col-span-7">
+                    <p class="font-label-caps text-label-caps text-black mb-3 flex items-center">
+                        <span class="w-2 h-2 bg-black rounded-full animate-pulse mr-2"></span> CORE.AUTONOMY.SYS
+                    </p>
+                    <h1 class="font-display-lg text-[42px] lg:text-[56px] text-black mb-6 leading-tight">Human Intelligence <br/>for Robots.</h1>
+                    <p class="font-body-lg text-body-lg text-black max-w-xl mb-8 border-l-4 border-black pl-4">
+                        We build foundation models for physical autonomy — powered by the largest collection of human demonstration data on Earth.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a class="border-2 border-black bg-black text-white hover:bg-transparent hover:text-black px-6 py-3 font-label-caps text-label-caps inline-flex items-center justify-between transition-colors" href="#">
+                            EXECUTE QUERY <span class="material-symbols-outlined ml-2 text-sm">arrow_right_alt</span>
+                        </a>
+                        <a class="border-2 border-black bg-transparent text-black hover:bg-black hover:text-white px-6 py-3 font-label-caps text-label-caps inline-flex items-center justify-between transition-colors" href="#">
+                            VIEW NODES <span class="material-symbols-outlined ml-2 text-sm">terminal</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Hero Video Block -->
+                <div class="lg:col-span-5 h-[340px] border-2 border-black relative bg-black p-2 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
+                    <div class="w-full h-full border-2 border-white relative overflow-hidden flex items-center justify-center">
+                        <video src="../videos/Intelligence Factory Launch Video V3 (1).mp4" autoplay loop muted playsinline class="w-full h-full object-cover grayscale opacity-60"></video>
+                        <div class="absolute top-2 left-2 z-10 flex items-center space-x-2 bg-black px-2 py-0.5 border border-white">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                            <span class="font-label-caps text-[9px] text-white">LIVE_FEED_01</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Problem Block -->
+            <section class="bg-black text-white border-b-2 border-black grid grid-cols-1 lg:grid-cols-12 grid-bg-dark">
+                <div class="lg:col-span-4 p-6 md:p-10 border-b-2 lg:border-b-0 lg:border-r-2 border-white flex flex-col justify-between">
+                    <div>
+                        <h2 class="font-headline-md text-3xl text-white font-medium">"Robotics breaks on diversity."</h2>
+                        <p class="font-label-caps text-label-caps text-white mt-6 opacity-60">ERR_CODE: 409_CONFLICT</p>
+                    </div>
+                    
+                    <!-- Loop Video Problem context -->
+                    <div class="w-full h-[140px] border-2 border-white relative overflow-hidden mt-6 bg-black">
+                        <video src="../videos/Autonomous 2X.mp4" autoplay loop muted playsinline class="w-full h-full object-cover opacity-60"></video>
+                        <div class="absolute top-1 left-1 z-10 bg-black px-1.5 py-0.5 border border-white font-label-caps text-[8px]">
+                            SYS_MON: AUTONOMOUS_2X
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-8 p-6 md:p-10 flex flex-col justify-center">
+                    <p class="font-body-lg text-lg text-white mb-4">
+                        Current robotic solutions are trained on narrow datasets in controlled environments. They fail the moment any variable changes — the object, the lighting, the surface, the grip angle.
+                    </p>
+                    <p class="font-body-lg text-lg text-white">
+                        The bottleneck is not hardware. It is data — specifically, diverse, high-fidelity, multi-modal human demonstration data that reflects how the real world actually behaves.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Data Bento Grid Module -->
+            <section class="bg-white">
+                <div class="border-b-2 border-black p-6 md:py-8 bg-white flex justify-between items-center">
+                    <p class="font-label-caps text-label-caps text-black">MODULE 01 // DATA FACTORY</p>
+                    <p class="font-label-sm text-black text-xs flex items-center"><span class="w-1.5 h-1.5 bg-black rounded-full animate-ping mr-2"></span> DATA STREAM: ACTIVE</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 border-b-2 border-black">
+                    <div class="border-b-2 md:border-b-0 md:border-r-2 border-black p-6 flex flex-col justify-between min-h-[220px]">
+                        <p class="font-label-caps text-label-caps text-black">METRIC: SCALE</p>
+                        <div>
+                            <h3 class="font-display-lg text-4xl lg:text-5xl font-bold text-black">10M+</h3>
+                            <p class="font-label-sm text-black uppercase tracking-wider text-[10px] mt-1 border-t border-black pt-1">hours of kinetic data</p>
+                        </div>
+                    </div>
+                    <div class="border-b-2 md:border-b-0 md:border-r-2 border-black p-6 flex flex-col justify-between min-h-[220px]">
+                        <p class="font-label-caps text-label-caps text-black">METRIC: WORKFORCE</p>
+                        <div>
+                            <h3 class="font-display-lg text-4xl lg:text-5xl font-bold text-black">5k</h3>
+                            <p class="font-label-sm text-black uppercase tracking-wider text-[10px] mt-1 border-t border-black pt-1">teleoperation operators</p>
+                        </div>
+                    </div>
+                    <div class="p-6 flex flex-col justify-between min-h-[220px]">
+                        <p class="font-label-caps text-label-caps text-black">METRIC: EFFICIENCY</p>
+                        <div>
+                            <h3 class="font-display-lg text-4xl lg:text-5xl font-bold text-black">1/10×</h3>
+                            <p class="font-label-sm text-black uppercase tracking-wider text-[10px] mt-1 border-t border-black pt-1">cost vs US standard</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Video Grid Area -->
+                <div class="p-4 grid grid-cols-1 lg:grid-cols-2 gap-4 border-b-2 border-black bg-black">
+                    <div class="aspect-video border-2 border-white relative overflow-hidden bg-black flex items-center justify-center">
+                        <video src="../videos/Finger Tip Recording.mp4" autoplay loop muted playsinline class="w-full h-full object-cover opacity-60"></video>
+                        <div class="absolute top-2 left-2 z-10 flex items-center space-x-2 bg-black px-2 py-0.5 border border-white">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                            <span class="font-label-caps text-[9px] text-white">STREAM_0A: GLOVE_SENSOR</span>
+                        </div>
+                    </div>
+                    <div class="aspect-video border-2 border-white relative overflow-hidden bg-black flex items-center justify-center">
+                        <video src="../videos/Cleaning Demo.mp4" autoplay loop muted playsinline class="w-full h-full object-cover opacity-60"></video>
+                        <div class="absolute top-2 left-2 z-10 flex items-center space-x-2 bg-black px-2 py-0.5 border border-white">
+                            <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                            <span class="font-label-caps text-[9px] text-white">STREAM_0B: ENV_TASK</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-4 bg-white flex justify-between items-center border-b-2 border-black font-label-caps text-[10px]">
+                    <span class="text-black">All footage 1× speed. Fully unscripted.</span>
+                    <span class="text-black">FPS: 60 | RES: 4K</span>
+                </div>
+            </section>
+
+            <!-- Methodology Section -->
+            <section class="bg-black text-white">
+                <div class="border-b-2 border-white p-6 md:py-8 flex justify-between items-center">
+                    <p class="font-label-caps text-label-caps text-white">MODULE 02 // METHODOLOGY</p>
+                    <p class="font-label-caps text-white">SYS_SEQ: ACTIVE</p>
+                </div>
+                <div class="p-6 md:p-10 border-b-2 border-white grid-bg-dark">
+                    <h2 class="font-headline-lg text-3xl lg:text-4xl text-white max-w-2xl font-medium">From human hand to robot model.</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-12">
+                    <!-- Steps Selectable sidebar -->
+                    <div class="md:col-span-5 border-b-2 md:border-b-0 md:border-r-2 border-white">
+                        <ul class="flex flex-col" id="sequenceSteps">
+                            <li class="border-b-2 border-white p-5 cursor-pointer transition-all duration-150 bg-white text-black" data-seq="01">
+                                <div class="flex items-start">
+                                    <span class="font-label-caps text-[10px] font-bold mr-3 mt-0.5">SEQ.01</span>
+                                    <div>
+                                        <h4 class="font-label-caps text-xs font-bold mb-1">Data Factory</h4>
+                                        <p class="text-xs opacity-80 leading-relaxed">Teleoperators perform real manipulation tasks across diverse environments.</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="border-b-2 border-white p-5 cursor-pointer transition-all duration-150 text-white hover:bg-white/5" data-seq="02">
+                                <div class="flex items-start">
+                                    <span class="font-label-caps text-[10px] font-bold mr-3 mt-0.5">SEQ.02</span>
+                                    <div>
+                                        <h4 class="font-label-caps text-xs font-bold mb-1">5-Finger Gloves</h4>
+                                        <p class="text-xs opacity-60 leading-relaxed">Custom hardware captures ground-truth joint angles and contact forces at 5-DOF.</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="border-b-2 border-white p-5 cursor-pointer transition-all duration-150 text-white hover:bg-white/5" data-seq="03">
+                                <div class="flex items-start">
+                                    <span class="font-label-caps text-[10px] font-bold mr-3 mt-0.5">SEQ.03</span>
+                                    <div>
+                                        <h4 class="font-label-caps text-xs font-bold mb-1">Head-Mounted Optics</h4>
+                                        <p class="text-xs opacity-60 leading-relaxed">Cameras sync with the gloves — visual input matched precisely to physical exertion.</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="border-b-2 border-white p-5 cursor-pointer transition-all duration-150 text-white hover:bg-white/5" data-seq="04">
+                                <div class="flex items-start">
+                                    <span class="font-label-caps text-[10px] font-bold mr-3 mt-0.5">SEQ.04</span>
+                                    <div>
+                                        <h4 class="font-label-caps text-xs font-bold mb-1">Multi-Modal Fusion</h4>
+                                        <p class="text-xs opacity-60 leading-relaxed">Vision, action, and force data fused into a single holistic training dataset.</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="p-5 cursor-pointer transition-all duration-150 text-white hover:bg-white/5" data-seq="05">
+                                <div class="flex items-start">
+                                    <span class="font-label-caps text-[10px] font-bold mr-3 mt-0.5">SEQ.05</span>
+                                    <div>
+                                        <h4 class="font-label-caps text-xs font-bold mb-1">Task Selection Matrix</h4>
+                                        <p class="text-xs opacity-60 leading-relaxed">Algorithms systematically target edge cases where training data is sparse.</p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Diagram Interactive Visual feed monitor -->
+                    <div class="md:col-span-7 bg-black flex items-center justify-center p-6 min-h-[380px] relative overflow-hidden">
+                        <!-- Looping video of active segment -->
+                        <video id="sequenceVideo" src="../videos/Initial Grocery Demo.mp4" autoplay loop muted playsinline class="w-full h-full object-cover grayscale opacity-30 absolute inset-0"></video>
+                        <div class="absolute inset-0 bg-black/30 z-0"></div>
+                        
+                        <div class="relative z-10 bg-black border-2 border-white p-6 w-full max-w-sm shadow-[6px_6px_0px_0px_rgba(255,255,255,1)]">
+                            <h4 class="font-label-caps text-xs text-white mb-3 border-b border-white pb-2 flex justify-between">
+                                <span id="seqMonitorTitle">DATA FACTORY FEED</span> 
+                                <span id="seqMonitorStep">[SEQ.01]</span>
+                            </h4>
+                            <p class="text-xs text-white mb-5 opacity-90 leading-relaxed" id="seqMonitorDesc">
+                                Teleoperators perform real manipulation tasks across diverse environments.
+                            </p>
+                            
+                            <!-- Mini abstract data block -->
+                            <div class="h-20 w-full bg-black border border-white grid grid-cols-5 gap-1 p-1">
+                                <div class="bg-white/10 h-full animate-pulse border border-white/20"></div>
+                                <div class="bg-white/30 h-full animate-pulse delay-75 border border-white/20"></div>
+                                <div class="bg-white/50 h-full animate-pulse delay-150 border border-white/20"></div>
+                                <div class="bg-white/70 h-full animate-pulse delay-200 border border-white/20"></div>
+                                <div class="bg-white h-full animate-pulse delay-300 border border-white/20"></div>
+                            </div>
+                            <div class="mt-3 flex justify-between font-label-caps text-[8px]">
+                                <span>MONITOR: OK</span>
+                                <span>SYNC_LAYER: ACTIVE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- SECTION 2: BLOG PAGE -->
+        <div id="section-blog" class="tab-content flex-grow hidden">
+            <!-- Featured Blog Block -->
+            <section class="p-6 md:p-12 border-b-2 border-black bg-white grid-bg">
+                <div class="flex justify-between items-start mb-6">
+                    <p class="font-label-caps text-label-caps text-black bg-slate-100 px-2 py-0.5 border border-black text-xs">FEATURED_POST</p>
+                    <span class="material-symbols-outlined text-black">bookmark_manager</span>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-5">
+                        <span class="font-label-caps text-[10px] text-slate-500 font-bold">JUNE 28, 2026 • 12 MIN READ</span>
+                        <h2 class="font-headline-md text-3xl text-black font-semibold mt-2 mb-4 leading-tight">
+                            Scale-Invariant Learning for Five-Finger Manipulation
+                        </h2>
+                        <p class="font-body-md text-sm text-slate-700 leading-relaxed mb-6">
+                            Training robotic systems to achieve human-level dexterity requires tactile and visual alignment. In this post, we discuss our latest research in transferring multi-modal demonstration datasets directly to physical hand models without simulated domains.
+                        </p>
+                        <a class="border-2 border-black bg-black text-white hover:bg-transparent hover:text-black px-6 py-3 font-label-caps text-label-caps inline-flex items-center transition-colors" href="#">
+                            READ_RESEARCH <span class="material-symbols-outlined ml-2 text-sm">arrow_right_alt</span>
+                        </a>
+                    </div>
+                    
+                    <!-- Cover Video -->
+                    <div class="lg:col-span-7 h-[300px] border-2 border-black bg-black p-2 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] relative overflow-hidden">
+                        <video src="../videos/Four2 (Online-Video-Cutter.Com) (1).mp4" autoplay loop muted playsinline class="w-full h-full object-cover opacity-60"></video>
+                        <div class="absolute top-2 left-2 z-10 bg-black px-2 py-0.5 border border-white font-label-caps text-[8px]">
+                            VIDEO_SAMPLE: DEXTEROUS_MANIP_FOUR2
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Blog Post Grid -->
+            <section class="p-6 md:p-10 bg-slate-50 flex-grow grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Blog post card 1 -->
+                <div class="border-2 border-black bg-white p-5 flex flex-col justify-between min-h-[260px]">
+                    <div>
+                        <span class="font-label-caps text-[9px] text-slate-500">MAY 14, 2026 • 8 MIN READ</span>
+                        <h3 class="font-headline-md text-lg text-black font-semibold mt-2 mb-3 hover:underline cursor-pointer">
+                            The Teleoperation Bottleneck: Why Simulation Alone Fails
+                        </h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Exploring how physical domain shifts break reinforcement models trained purely inside virtual simulator environments.
+                        </p>
+                    </div>
+                    <div class="border-t border-black/10 pt-3 mt-6 flex justify-between items-center text-[10px] font-label-caps">
+                        <span class="text-slate-600">#SIMULATION</span>
+                        <span class="material-symbols-outlined text-[16px]">arrow_right_alt</span>
+                    </div>
+                </div>
+
+                <!-- Blog post card 2 -->
+                <div class="border-2 border-black bg-white p-5 flex flex-col justify-between min-h-[260px]">
+                    <div>
+                        <span class="font-label-caps text-[9px] text-slate-500">APRIL 29, 2026 • 15 MIN READ</span>
+                        <h3 class="font-headline-md text-lg text-black font-semibold mt-2 mb-3 hover:underline cursor-pointer">
+                            Designing Custom Haptics for Zero-Shot Grasp Transfer
+                        </h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            A deep dive into custom glove actuators, recording contact sensors at 5-DOF, and aligning grip profiles dynamically.
+                        </p>
+                    </div>
+                    <div class="border-t border-black/10 pt-3 mt-6 flex justify-between items-center text-[10px] font-label-caps">
+                        <span class="text-slate-600">#HARDWARE</span>
+                        <span class="material-symbols-outlined text-[16px]">arrow_right_alt</span>
+                    </div>
+                </div>
+
+                <!-- Blog post card 3 -->
+                <div class="border-2 border-black bg-white p-5 flex flex-col justify-between min-h-[260px]">
+                    <div>
+                        <span class="font-label-caps text-[9px] text-slate-500">MARCH 12, 2026 • 10 MIN READ</span>
+                        <h3 class="font-headline-md text-lg text-black font-semibold mt-2 mb-3 hover:underline cursor-pointer">
+                            Real-time Edge Inference on Low-Power Manipulators
+                        </h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Optimization profiles for deploying unified transformer layers directly onto local robotic limbs without server latency.
+                        </p>
+                    </div>
+                    <div class="border-t border-black/10 pt-3 mt-6 flex justify-between items-center text-[10px] font-label-caps">
+                        <span class="text-slate-600">#INFERENCE</span>
+                        <span class="material-symbols-outlined text-[16px]">arrow_right_alt</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- SECTION 3: TEAM PAGE -->
+        <div id="section-team" class="tab-content flex-grow hidden">
+            <!-- Roster Roster Header -->
+            <section class="p-6 md:p-12 border-b-2 border-black bg-white grid-bg">
+                <div class="flex justify-between items-center mb-4">
+                    <p class="font-label-caps text-label-caps text-black bg-slate-100 px-2 py-0.5 border border-black text-xs">ROSTER_SCHEMATIC</p>
+                    <span class="material-symbols-outlined text-black">groups</span>
+                </div>
+                <h2 class="font-headline-md text-3xl lg:text-4xl text-black font-semibold leading-tight">Our Robotics Core Team</h2>
+                <p class="font-body-md text-sm text-slate-600 mt-2 max-w-xl">
+                    A team of researchers, hardware architects, and telemetry operations coordinators scaling physical human datasets.
+                </p>
+            </section>
+
+            <!-- Roster Team grid -->
+            <section class="p-6 md:p-10 bg-slate-50 flex-grow grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Member 1 -->
+                <div class="border-2 border-black bg-white p-4 flex flex-col justify-between shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                    <div>
+                        <div class="w-full h-[180px] bg-black border border-black overflow-hidden mb-3 relative">
+                            <video src="../videos/Img 1930.mp4" autoplay loop muted playsinline class="w-full h-full object-cover opacity-60"></video>
+                        </div>
+                        <h4 class="font-headline-md text-lg text-black font-semibold leading-none">Dr. Elena Vance</h4>
+                        <span class="font-label-caps text-[9px] text-slate-500 font-bold uppercase mt-1 inline-block">Lead AI Scientist</span>
+                    </div>
+                    <div class="border-t border-black/10 pt-3 mt-4 text-[9px] font-label-caps text-slate-500 flex justify-between">
+                        <span>ID: Vance_E</span>
+                        <span>STATUS: ACTIVE</span>
+                    </div>
+                </div>
+
+                <!-- Member 2 -->
+                <div class="border-2 border-black bg-white p-4 flex flex-col justify-between shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                    <div>
+                        <div class="w-full h-[180px] bg-black border border-black overflow-hidden mb-3 relative">
+                            <video src="../videos/Img 1941.mp4" autoplay loop muted playsinline class="w-full h-full object-cover opacity-60"></video>
+                        </div>
+                        <h4 class="font-headline-md text-lg text-black font-semibold leading-none">Marcus Thorne</h4>
+                        <span class="font-label-caps text-[9px] text-slate-500 font-bold uppercase mt-1 inline-block">Hardware Architect</span>
+                    </div>
+                    <div class="border-t border-black/10 pt-3 mt-4 text-[9px] font-label-caps text-slate-500 flex justify-between">
+                        <span>ID: Thorne_M</span>
+                        <span>STATUS: SF_NODE</span>
+                    </div>
+                </div>
+
+                <!-- Member 3 -->
+                <div class="border-2 border-black bg-white p-4 flex flex-col justify-between shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                    <div>
+                        <div class="w-full h-[180px] bg-black border border-black overflow-hidden mb-3 relative">
+                            <video src="../videos/Finger Tip Recording.mp4" autoplay loop muted playsinline class="w-full h-full object-cover opacity-60"></video>
+                        </div>
+                        <h4 class="font-headline-md text-lg text-black font-semibold leading-none">Kenji Sato</h4>
+                        <span class="font-label-caps text-[9px] text-slate-500 font-bold uppercase mt-1 inline-block">Glove Calibration Lead</span>
+                    </div>
+                    <div class="border-t border-black/10 pt-3 mt-4 text-[9px] font-label-caps text-slate-500 flex justify-between">
+                        <span>ID: Sato_K</span>
+                        <span>STATUS: FIELD_ACT</span>
+                    </div>
+                </div>
+
+                <!-- Member 4 -->
+                <div class="border-2 border-black bg-white p-4 flex flex-col justify-between shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                    <div>
+                        <div class="w-full h-[180px] bg-black border border-black overflow-hidden mb-3 relative">
+                            <video src="../videos/Cleaning Demo.mp4" autoplay loop muted playsinline class="w-full h-full object-cover opacity-60"></video>
+                        </div>
+                        <h4 class="font-headline-md text-lg text-black font-semibold leading-none">Sarah Chen</h4>
+                        <span class="font-label-caps text-[9px] text-slate-500 font-bold uppercase mt-1 inline-block">Operations Coordinator</span>
+                    </div>
+                    <div class="border-t border-black/10 pt-3 mt-4 text-[9px] font-label-caps text-slate-500 flex justify-between">
+                        <span>ID: Chen_S</span>
+                        <span>STATUS: ACTIVE</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="w-full border-t-4 border-black bg-black text-white p-6 flex-shrink-0">
+            <div class="max-w-max-width mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <p class="font-label-caps text-label-caps mb-2">f(i) Intelligence Factory // TERM.END</p>
+                    <p class="font-body-md text-body-md mb-6">Human Intelligence for Robots.</p>
+                    <p class="font-label-sm text-label-sm opacity-50">© 2026 Intelligence Factory. All rights reserved.</p>
+                </div>
+                <div>
+                    <p class="font-label-caps text-label-caps mb-4 border-b border-white pb-1 inline-block">DIRECTORY</p>
+                    <ul class="space-y-2">
+                        <li><a class="font-label-sm text-xs hover:underline transition-colors" href="#">Team</a></li>
+                        <li><a class="font-label-sm text-xs hover:underline transition-colors" href="#">Logs</a></li>
+                        <li><a class="font-label-sm text-xs hover:underline transition-colors" href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="font-label-caps text-label-caps mb-4 border-b border-white pb-1 inline-block">SYSTEM</p>
+                    <ul class="space-y-2">
+                        <li><a class="font-label-sm text-xs hover:underline transition-colors" href="#">Privacy Protocol</a></li>
+                        <li><a class="font-label-sm text-xs hover:underline transition-colors" href="#">Terms of Auth</a></li>
+                        <li><a class="font-label-sm text-xs hover:underline transition-colors" href="#">Security Cert</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Tab & Step Selection Scripts -->
+    <script>
+        // TAB SWITCHING SCRIPT
+        const navLinksDesktop = document.querySelectorAll('.nav-link-desktop');
+        const navLinksMobile = document.querySelectorAll('.nav-link-mobile');
+        const sections = document.querySelectorAll('.tab-content');
+        const docRefLabel = document.getElementById('docRefLabel');
+
+        const docRefs = {
+            'section-home': 'SYS.TERM // HOME',
+            'section-blog': 'SYS.TERM // BLOG',
+            'section-team': 'SYS.TERM // TEAM'
+        };
+
+        function switchTab(targetId) {
+            // Update Desktop Sidebar active states
+            navLinksDesktop.forEach(link => {
+                const isTarget = link.getAttribute('data-target') === targetId;
+                if (isTarget) {
+                    link.className = "nav-link-desktop text-black font-bold border-b-2 border-black pb-1 flex items-center justify-between group";
+                    const icon = link.querySelector('.material-symbols-outlined');
+                    if (icon) icon.className = "material-symbols-outlined text-sm transition-transform group-hover:translate-x-1";
+                } else {
+                    link.className = "nav-link-desktop text-black hover:bg-black hover:text-white transition-colors duration-150 flex items-center justify-between group p-1";
+                    const icon = link.querySelector('.material-symbols-outlined');
+                    if (icon) icon.className = "material-symbols-outlined text-sm opacity-0 group-hover:opacity-100 transition-opacity";
+                }
+            });
+
+            // Update Mobile Header active states
+            navLinksMobile.forEach(link => {
+                const isTarget = link.getAttribute('data-target') === targetId;
+                if (isTarget) {
+                    link.className = "nav-link-mobile font-label-sm text-xs font-bold text-black border-b-2 border-black pb-0.5";
+                } else {
+                    link.className = "nav-link-mobile font-label-sm text-xs font-bold text-outline text-slate-500 pb-0.5";
+                }
+            });
+
+            // Toggle active content divs
+            sections.forEach(sec => {
+                if (sec.id === targetId) {
+                    sec.classList.remove('hidden');
+                } else {
+                    sec.classList.add('hidden');
+                }
+            });
+
+            // Update header doc indicator
+            if (docRefLabel && docRefs[targetId]) {
+                docRefLabel.innerText = docRefs[targetId];
+            }
+        }
+
+        // Set up desktop click handlers
+        navLinksDesktop.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchTab(link.getAttribute('data-target'));
+            });
+        });
+
+        // Set up mobile click handlers
+        navLinksMobile.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                switchTab(link.getAttribute('data-target'));
+            });
+        });
+
+        // Brand Logo click resets back to Home tab
+        const resetHome = (e) => {
+            e.preventDefault();
+            switchTab('section-home');
+        };
+        document.getElementById('brandLink').addEventListener('click', resetHome);
+        document.getElementById('brandLinkMobile').addEventListener('click', resetHome);
+
+
+        // INTERACTIVE SEQUENCE STEPS SCRIPT
+        const stepsContainer = document.getElementById('sequenceSteps');
+        const stepItems = stepsContainer.querySelectorAll('li');
+        const seqVideo = document.getElementById('sequenceVideo');
+        const seqMonitorTitle = document.getElementById('seqMonitorTitle');
+        const seqMonitorStep = document.getElementById('seqMonitorStep');
+        const seqMonitorDesc = document.getElementById('seqMonitorDesc');
+
+        const stepData = {
+            '01': {
+                title: 'DATA FACTORY FEED',
+                step: '[SEQ.01]',
+                desc: 'Teleoperators perform real manipulation tasks across diverse environments.',
+                video: '../videos/Initial Grocery Demo.mp4'
+            },
+            '02': {
+                title: 'GLOVE_SENSOR FEED',
+                step: '[SEQ.02]',
+                desc: 'Ground-truth joint angles and contact forces mapped in real-time, translating human intuition into digital tensors.',
+                video: '../videos/Finger Tip Recording.mp4'
+            },
+            '03': {
+                title: 'OPTICS SYNC FEED',
+                step: '[SEQ.03]',
+                desc: 'Cameras sync with the gloves — visual input matched precisely to physical exertion.',
+                video: '../videos/Cleaning Demo.mp4'
+            },
+            '04': {
+                title: 'HOLISTIC DATA FEED',
+                step: '[SEQ.04]',
+                desc: 'Vision, action, and force data fused into a single holistic training dataset.',
+                video: '../videos/Autonomous 2X (1).mp4'
+            },
+            '05': {
+                title: 'SCHEMATIC EDGE FEED',
+                step: '[SEQ.05]',
+                desc: 'Algorithms systematically target edge cases where training data is sparse.',
+                video: '../videos/Four2 (Online-Video-Cutter.Com) (1).mp4'
+            }
+        };
+
+        stepItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const seq = item.getAttribute('data-seq');
+                
+                // Toggle active list styles
+                stepItems.forEach(si => {
+                    si.className = "border-b-2 border-white p-5 cursor-pointer transition-all duration-150 text-white hover:bg-white/5";
+                    const heading = si.querySelector('h4');
+                    if (heading) heading.classList.remove('underline');
+                });
+                
+                item.className = "border-b-2 border-white p-5 cursor-pointer transition-all duration-150 bg-white text-black";
+                const heading = item.querySelector('h4');
+                if (heading) heading.classList.add('underline');
+
+                // Update active monitoring card details
+                const data = stepData[seq];
+                if (data) {
+                    seqVideo.src = data.video;
+                    seqMonitorTitle.innerText = data.title;
+                    seqMonitorStep.innerText = data.step;
+                    seqMonitorDesc.innerText = data.desc;
+                    seqVideo.load();
+                    seqVideo.play();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

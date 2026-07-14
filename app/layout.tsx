@@ -1,23 +1,40 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "../components/Navbar";
-import ScrollProgress from "../components/ScrollProgress";
+import Sidebar      from "@/components/layout/Sidebar";
+import MobileHeader from "@/components/layout/MobileHeader";
+import SiteFooter   from "@/components/layout/SiteFooter";
 
 export const metadata: Metadata = {
-  title: "Intelligence Factory — Human Intelligence for Robots",
+  title: {
+    default: "Intelligence Factory — Human Intelligence for Robots",
+    template: "%s | Intelligence Factory",
+  },
   description:
-    "We build the foundation models for physical autonomy — powered by massive-scale human demonstration data.",
+    "We build foundation models for physical autonomy — powered by the largest collection of human demonstration data on Earth.",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body className="bg-[#f7f6f3] text-[#0a0a0a] antialiased">
-        <ScrollProgress />
-        <Navbar />
-        {children}
+    <html lang="en" className="dark" data-scroll-behavior="smooth">
+      <body className="antialiased bg-[#090c0a] text-[#f1f5ec] min-h-screen flex flex-col md:flex-row">
+        {/* ─ Desktop sidebar (fixed, 280px) ─ */}
+        <Sidebar />
+
+        {/* ─ Right-hand content column ─ */}
+        <div className="w-full md:w-[calc(100%-260px)] md:ml-[260px] min-h-screen flex flex-col">
+          {/* Mobile-only sticky header */}
+          <MobileHeader />
+
+          {/* Page content */}
+          <main className="flex-1 flex flex-col">
+            {children}
+          </main>
+
+          {/* Footer on every page */}
+          <SiteFooter />
+        </div>
       </body>
     </html>
   );
