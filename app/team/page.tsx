@@ -26,28 +26,25 @@ export default function TeamPage() {
   return (
     <div className="page-enter flex flex-col">
 
-      {/* ── Hero: full-width image with overlaid text ── */}
-      <section className="relative w-full h-[70vh] min-h-120 max-h-170 bg-black overflow-hidden">
+      {/* ── Hero image ── */}
+      <section className="relative w-full h-[62vh] min-h-105 max-h-155 bg-black overflow-hidden">
         <Image
           src="/join_lab.png"
           alt="Intelligence Factory team in the robotics lab"
           fill
-          className="object-cover opacity-60"
+          className="object-cover"
           priority
+          sizes="(max-width: 768px) 100vw, calc(100vw - 260px)"
         />
-        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
-
-        <div className="absolute inset-0 flex flex-col justify-end px-8 md:px-14 pb-12 md:pb-16 z-10">
-          <p className="font-sans text-xs text-white/50 mb-4 tracking-wide uppercase">About the team</p>
-          <h1 className="font-sans font-bold text-3xl md:text-4xl lg:text-5xl text-white leading-tight max-w-2xl">
-            Built by people obsessed with physical intelligence.
-          </h1>
-        </div>
       </section>
 
       {/* ── Mission statement ── */}
       <section className="px-8 md:px-14 py-14 md:py-20 border-b border-white/15 bg-[#101610]">
         <div className="max-w-3xl">
+          <p className="font-sans text-xs text-[#aab3a7] mb-4 tracking-wide uppercase">About the team</p>
+          <h1 className="font-sans font-semibold text-3xl md:text-4xl lg:text-5xl text-[#f1f5ec] leading-tight max-w-3xl mb-10">
+            Built by people obsessed with physical intelligence.
+          </h1>
           <p className="font-sans text-base md:text-lg text-[#c4ccc0] leading-relaxed mb-6">
             Intelligence Factory is a frontier research and data company building the infrastructure
             for general-purpose robotic autonomy. We combine large-scale human demonstration
@@ -81,26 +78,6 @@ export default function TeamPage() {
               <p className="font-sans text-sm text-[#aab3a7] leading-relaxed">{v.text}</p>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* ── Visual: side-by-side images ── */}
-      <section className="grid grid-cols-1 md:grid-cols-2 border-b border-white/15">
-        <div className="relative h-80 md:h-100 bg-black overflow-hidden border-b md:border-b-0 md:border-r border-white/15">
-          <Image
-            src="/about_hero.png"
-            alt="Intelligence Factory headquarters"
-            fill
-            className="object-cover opacity-75"
-          />
-        </div>
-        <div className="relative h-80 md:h-100 bg-black overflow-hidden">
-          <Image
-            src="/data_factory_hero.png"
-            alt="Data infrastructure at scale"
-            fill
-            className="object-cover opacity-75"
-          />
         </div>
       </section>
 
