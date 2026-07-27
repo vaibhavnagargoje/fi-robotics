@@ -7,7 +7,6 @@ function getExcerpt(body: string, maxChars: number) {
       .split("\n\n")
       .find((line) => line.trim() && !line.trim().startsWith("#"))
       ?.trim() ?? "";
-
   return paragraph.length > maxChars
     ? `${paragraph.slice(0, maxChars)}…`
     : paragraph;
@@ -15,53 +14,54 @@ function getExcerpt(body: string, maxChars: number) {
 
 export default function FeaturedPost() {
   const post = posts[0];
+  if (!post) return null;
 
   return (
-    <section className="border-b border-white/15 bg-[#090c0a]">
-      <div className="grid-bg px-8 md:px-14 pt-12 md:pt-16 pb-10 md:pb-12 border-b border-white/15">
-        <div className="flex items-center justify-between gap-4 mb-8">
-          <p className="font-sans text-xs uppercase tracking-wide text-[#aab3a7]">
-            Intelligence Factory Journal
-          </p>
-        </div>
+    <section className="bg-[#090c0a] px-8 md:px-14 pt-12 md:pt-16 pb-8">
+      {/* Page header */}
+      <p className="font-mono text-[10px] tracking-[0.2em] text-[#aab3a7] uppercase mb-8">
+        Publications
+      </p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-end">
-          <h1 className="lg:col-span-8 font-sans font-semibold text-4xl md:text-5xl lg:text-6xl text-[#f1f5ec] leading-[1.03] tracking-tight">
-            Ideas for robots that work in the real world.
-          </h1>
-          <p className="lg:col-span-4 font-sans text-sm md:text-base text-[#aab3a7] leading-relaxed max-w-sm">
-            Research notes, field observations, and engineering decisions from the work of
-            building physical intelligence.
-          </p>
-        </div>
-      </div>
-
+      {/* Featured card */}
       <Link
         href={`/blog/${post.slug}`}
-        className="group grid grid-cols-1 lg:grid-cols-12 border-b border-white/15"
+        className="group block border border-white/12 bg-[#0d100d] p-8 md:p-10 hover:border-white/25 transition-all duration-200"
       >
-        <div className="lg:col-span-3 px-8 md:px-14 py-8 md:py-10 border-b lg:border-b-0 lg:border-r border-white/15 bg-[#162218]">
-          <p className="font-sans text-xs uppercase tracking-wide text-[#8bb8d8] mb-8">Lead story</p>
-          <div className="font-sans text-xs text-[#b7c1b5] leading-relaxed">
-            <p className="mb-1">{post.tag}</p>
-            <p>{post.date}</p>
-            <p>{post.readMin} min read</p>
-          </div>
-        </div>
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+          <div className="flex-1 min-w-0">
+            {/* Tag */}
+            <p className="font-mono text-[10px] tracking-[0.18em] text-[#8bb8d8] uppercase mb-4">
+              {post.tag}
+            </p>
 
-        <div className="lg:col-span-9 px-8 md:px-14 py-10 md:py-14 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-          <div className="max-w-3xl">
-            <p className="font-sans text-xs uppercase tracking-wide text-[#aab3a7] mb-4">Research / The diversity problem</p>
-            <h2 className="font-sans font-semibold text-2xl md:text-3xl lg:text-4xl text-[#f1f5ec] leading-[1.1] tracking-tight mb-5 group-hover:text-[#8bb8d8] transition-colors">
+            {/* Title */}
+            <h2 className="font-sans font-semibold text-2xl md:text-3xl text-[#f1f5ec] leading-tight tracking-tight mb-4 group-hover:text-[#8bb8d8] transition-colors">
               {post.title}
             </h2>
-            <p className="font-sans text-sm md:text-base text-[#aab3a7] leading-relaxed max-w-2xl">
-              {getExcerpt(post.body, 260)}
+
+            {/* Excerpt */}
+            <p className="font-sans text-sm md:text-base text-[#aab3a7] leading-relaxed max-w-2xl mb-8">
+              {getExcerpt(post.body, 220)}
             </p>
+
+            {/* Meta row */}
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="font-sans text-xs text-[#8bb8d8] bg-[#8bb8d8]/10 border border-[#8bb8d8]/20 px-3 py-1 rounded-full">
+                {post.readMin} min read
+              </span>
+              <span className="font-sans text-xs text-[#aab3a7]">
+                {post.date}
+              </span>
+              <span className="font-sans text-xs text-[#768275]">
+                · By {post.author}
+              </span>
+            </div>
           </div>
 
-          <span className="font-sans text-sm font-medium text-[#f1f5ec] shrink-0 border-b border-[#8bb8d8] pb-1 group-hover:text-[#8bb8d8] transition-colors">
-            Read analysis
+          {/* Arrow */}
+          <span className="font-sans text-xl text-[#aab3a7]/40 group-hover:text-[#8bb8d8] group-hover:translate-x-1 transition-all shrink-0 hidden md:block self-center">
+            →
           </span>
         </div>
       </Link>

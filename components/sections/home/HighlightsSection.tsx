@@ -74,7 +74,7 @@ export default function HighlightsSection() {
             href="/blog"
             className="font-sans text-sm font-medium text-[#f1f5ec] hover:text-[#8bb8d8] transition-colors inline-flex items-center gap-1"
           >
-            See all briefings →
+            See all Posts →
           </Link>
         </div>
       </section>

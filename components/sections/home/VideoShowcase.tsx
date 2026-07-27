@@ -2,13 +2,13 @@ import VideoFeed from "@/components/ui/VideoFeed";
 
 const recordings = [
   {
-    src: "/src-videos/recording-treats.mp4",
+    src: "/src-videos/optimized/Recording-Treats.mp4",
     label: "Live Feed 02",
     // title: "Variation is the curriculum.",
     // detail: "Everyday work captured across the conditions robots must handle.",
   },
   {
-    src: "/src-videos/cable_plugging_initial_runs.mp4",
+    src: "/src-videos/optimized/cable_plugging_initial_runs.mp4",
     label: "Live Feed 03",
     // title: "Cable plugging — initial runs.",
     // detail: "Contact-rich tasks recorded from first attempts, preserving the full diversity of real behaviour.",
