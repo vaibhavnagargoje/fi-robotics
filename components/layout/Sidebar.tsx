@@ -24,9 +24,16 @@ export default function Sidebar() {
       <div>
         <Link
           href="/"
-          className="block font-sans font-black text-[56px] leading-none tracking-tighter text-[#f1f5ec] mb-12 hover:text-[#8bb8d8] transition-colors"
+          className="flex items-center gap-2.5 mb-12 group"
         >
-          f(i)
+          {/* Italic serif symbol */}
+          <span className="font-serif italic text-3xl text-[#f1f5ec] leading-none group-hover:text-[#8bb8d8] transition-colors">
+            f(i)
+          </span>
+          {/* Spaced-out label */}
+          <span className="font-mono text-[9px] tracking-[0.22em] uppercase text-[#aab3a7] leading-tight group-hover:text-[#8bb8d8] transition-colors">
+            INTELLIGENCE<br />FACTORY
+          </span>
         </Link>
 
         {/* Nav */}

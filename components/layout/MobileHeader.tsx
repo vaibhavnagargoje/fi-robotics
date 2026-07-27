@@ -16,9 +16,14 @@ export default function MobileHeader() {
     <header className="md:hidden flex items-center justify-between px-6 h-14 bg-[#101610] border-b border-white/15 sticky top-0 z-50 w-full">
       <Link
         href="/"
-        className="font-sans font-black text-2xl tracking-tighter text-[#f1f5ec]"
+        className="flex items-center gap-2 group"
       >
-        f(i)
+        <span className="font-serif italic text-xl text-[#f1f5ec] leading-none group-hover:text-[#8bb8d8] transition-colors">
+          f(i)
+        </span>
+        <span className="font-mono text-[8px] tracking-[0.18em] uppercase text-[#aab3a7] leading-tight group-hover:text-[#8bb8d8] transition-colors">
+          INTELLIGENCE<br />FACTORY
+        </span>
       </Link>
       <nav className="flex gap-5">
         {navItems.map(({ href, label }) => (

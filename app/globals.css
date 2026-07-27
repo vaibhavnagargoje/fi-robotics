@@ -1,7 +1,7 @@
 /* ── Intelligence Factory — Global Design System ── */
 
-/* Fonts: Inter (body/headings) + JetBrains Mono (labels/code) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+/* Fonts: Inter (body/headings) + JetBrains Mono (labels/code) + Playfair Display (serif logo) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 @import "tailwindcss";
 
@@ -9,6 +9,7 @@
 @theme {
   --font-sans:  "Inter", -apple-system, BlinkMacSystemFont, ui-sans-serif, system-ui, sans-serif;
   --font-mono:  "JetBrains Mono", ui-monospace, "Cascadia Code", monospace;
+  --font-serif: "Playfair Display", "Georgia", ui-serif, serif;
 
   --color-black:      #000000;
   --color-white:      #ffffff;
