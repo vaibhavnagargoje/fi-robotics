@@ -17,7 +17,7 @@ export default function BlogGrid() {
   if (remaining.length === 0) return null;
 
   return (
-    <section className="bg-[#090c0a] px-8 md:px-14 pb-10">
+    <section className="bg-[#090c0a] px-3 md:px-14 pb-6 md:pb-10">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-3">
         {remaining.map((post) => (
           <Link

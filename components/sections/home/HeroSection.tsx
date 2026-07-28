@@ -2,7 +2,7 @@ import VideoFeed from "@/components/ui/VideoFeed";
 
 export default function HeroSection() {
   return (
-    <section className="p-6 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border-b border-white/15 bg-[#090c0a] grid-bg">
+    <section className="p-3 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-8 items-center border-b border-white/15 bg-[#090c0a] grid-bg">
       {/* Copy */}
       <div className="lg:col-span-6">
         <p className="font-mono text-[10px] tracking-[0.15em] text-[#aab3a7] mb-5 uppercase">

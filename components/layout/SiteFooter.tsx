@@ -1,10 +1,8 @@
 import Link from "next/link";
 
 const links = [
-  { label: "Team",             href: "/team"    },
-  { label: "Blog",             href: "/blog"    },
-  { label: "Privacy Policy",   href: "#"        },
-  { label: "Terms of Service", href: "#"        },
+  { label: "Team",  href: "/team" },
+  { label: "Blog",  href: "/blog" },
 ];
 
 export default function SiteFooter() {

@@ -17,7 +17,7 @@ export default function FeaturedPost() {
   if (!post) return null;
 
   return (
-    <section className="bg-[#090c0a] px-8 md:px-14 pt-10 md:pt-12 pb-6">
+    <section className="bg-[#090c0a] px-3 md:px-14 pt-6 md:pt-12 pb-4 md:pb-6">
       {/* Page header */}
       <p className="font-mono text-[10px] tracking-[0.2em] text-[#aab3a7] uppercase mb-6">
         Publications
@@ -26,7 +26,7 @@ export default function FeaturedPost() {
       {/* Featured card */}
       <Link
         href={`/blog/${post.slug}`}
-        className="group block border border-white/12 bg-[#0d100d] p-5 md:p-6 hover:border-white/25 transition-all duration-200"
+        className="group block border border-white/12 bg-[#0d100d] p-4 md:p-6 hover:border-white/25 transition-all duration-200"
       >
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div className="flex-1 min-w-0">

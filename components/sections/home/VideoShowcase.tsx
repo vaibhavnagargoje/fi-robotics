@@ -16,15 +16,25 @@ const recordings = [
 export default function VideoShowcase() {
   return (
     <section className="bg-[#050705] border-b border-white/15 text-white">
-      {/* flex row: horizontal vid ~68%, vertical vid ~32%, same height */}
-      <div className="p-4 flex flex-col lg:flex-row gap-4">
+      <div className="p-2 lg:p-4 flex flex-col lg:flex-row gap-2 lg:gap-4">
         {recordings.map((recording) => (
           <article
             key={recording.label}
             className="group"
             style={{ flex: recording.wide ? "0 0 68%" : "1 1 0%" }}
           >
-            <div className="h-[420px] xl:h-[520px] border-2 border-white bg-black p-2 shadow-[5px_5px_0px_0px_rgba(255,255,255,0.22)]">
+            {/*
+              Mobile: horizontal vid → aspect-video, vertical vid → aspect-[3/4]
+              Desktop: both share a fixed height via h-[420px] xl:h-[520px]
+            */}
+            <div
+              className={`
+                ${recording.wide ? "aspect-video" : "aspect-[3/4]"}
+                lg:aspect-auto lg:h-[420px] xl:h-[520px]
+                border-2 border-white bg-black p-1.5 lg:p-2
+                shadow-[3px_3px_0px_0px_rgba(255,255,255,0.22)] lg:shadow-[5px_5px_0px_0px_rgba(255,255,255,0.22)]
+              `}
+            >
               <div className="w-full h-full border-2 border-white/70">
                 <VideoFeed
                   src={recording.src}

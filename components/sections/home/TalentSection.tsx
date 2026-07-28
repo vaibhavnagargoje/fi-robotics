@@ -1,20 +1,26 @@
+/*
+ * Each logo has a different aspect ratio and visual weight.
+ * Heights are tuned per-logo so they all *appear* the same visual size.
+ *   - Wide/text-heavy logos (ETH, NVIDIA, Ansys) → smaller height
+ *   - Compact/icon logos (Harvard, Penn crest, F1) → larger height
+ */
 const logos = [
-  { src: "/logos/eth.svg", alt: "ETH Zürich", height: 30 },
-  { src: "/logos/penn.png", alt: "University of Pennsylvania", height: 36 },
-  { src: "/logos/harvard.png", alt: "Harvard University", height: 32 },
-  { src: "/logos/nvidia.svg", alt: "NVIDIA", height: 30 },
-  { src: "/logos/f1.png", alt: "Formula 1", height: 34 },
-  { src: "/logos/ansys.png", alt: "Ansys", height: 26 },
+  { src: "/logos/eth.svg",     alt: "ETH Zürich",                  h: 20 },
+  { src: "/logos/penn.png",    alt: "University of Pennsylvania",  h: 38 },
+  { src: "/logos/harvard.png", alt: "Harvard University",          h: 36 },
+  { src: "/logos/nvidia.svg",  alt: "NVIDIA",                      h: 26 },
+  { src: "/logos/f1.png",      alt: "Formula 1",                   h: 32 },
+  { src: "/logos/ansys.png",   alt: "Ansys",                       h: 24 },
 ];
 
 export default function TalentSection() {
   return (
-    <section className="bg-[#090c0a] border-b border-white/15 px-8 md:px-14 py-12">
-      <p className="font-mono text-[10px] tracking-[0.22em] text-[#aab3a7] uppercase mb-10">
+    <section className="bg-[#090c0a] border-b border-white/15 px-3 md:px-14 py-8 md:py-12">
+      <p className="font-mono text-[10px] tracking-[0.22em] text-[#aab3a7] uppercase mb-8 md:mb-10">
         Built by talent from
       </p>
 
-      <div className="flex flex-wrap items-center gap-x-10 gap-y-7">
+      <div className="flex flex-wrap items-center gap-x-10 md:gap-x-12 gap-y-6">
         {logos.map((logo) => (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -22,7 +28,7 @@ export default function TalentSection() {
             src={logo.src}
             alt={logo.alt}
             title={logo.alt}
-            style={{ height: logo.height, width: "auto" }}
+            style={{ height: logo.h, width: "auto" }}
             className="object-contain grayscale invert opacity-60 hover:opacity-100 transition-opacity duration-200"
           />
         ))}
@@ -30,3 +36,5 @@ export default function TalentSection() {
     </section>
   );
 }
+
+
