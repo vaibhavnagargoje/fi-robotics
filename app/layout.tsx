@@ -11,6 +11,11 @@ export const metadata: Metadata = {
   },
   description:
     "We build foundation models for physical autonomy — powered by the largest collection of human demonstration data on Earth.",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
