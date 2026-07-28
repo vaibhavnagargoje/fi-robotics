@@ -10,9 +10,7 @@ const navItems = [
 ];
 
 const socialLinks = [
-  { href: "#", label: "YouTube"  },
-  { href: "#", label: "LinkedIn" },
-  { href: "#", label: "X / Twitter" },
+  { href: "https://www.linkedin.com/company/intelligence-factory/", label: "LinkedIn" },
 ];
 
 export default function Sidebar() {
