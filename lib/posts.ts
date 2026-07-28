@@ -1,5 +1,11 @@
-// FILE: lib/posts.ts
-// PURPOSE: Shared post data — used by blog index and article pages
+﻿// FILE: lib/posts.ts
+// PURPOSE: Shared post data â€” used by blog index and article pages
+
+export interface Reference {
+  id: number;
+  text: string;
+  url?: string;
+}
 
 export interface Post {
   slug: string;
@@ -9,9 +15,51 @@ export interface Post {
   date: string;
   author: string;
   body: string;
+  references?: Reference[];
 }
 
-export const posts: Post[] = [
+/** Parse a reference line like: `1. M. Kalil. "Title..." [Available online](https://...)` */
+function parseReferenceLine(line: string): Reference | null {
+  const m = line.match(/^(\d+)\.\s+(.*)/);
+  if (!m) return null;
+  const id = parseInt(m[1], 10);
+  let text = m[2];
+  let url: string | undefined;
+
+  // Extract markdown link if present
+  const linkMatch = text.match(/\[([^\]]+)\]\(([^)]+)\)/);
+  if (linkMatch) {
+    url = linkMatch[2];
+    // Clean up the text â€” keep the link label inline
+    text = text.replace(/\[([^\]]+)\]\(([^)]+)\)/, "$1");
+  }
+
+  return { id, text: text.trim(), url };
+}
+
+/** Split raw body into content (without references section) + parsed references array */
+function parsePost(rawBody: string): { body: string; references: Reference[] } {
+  const refHeadingIndex = rawBody.indexOf("## References");
+  if (refHeadingIndex === -1) {
+    return { body: rawBody, references: [] };
+  }
+
+  const body = rawBody.slice(0, refHeadingIndex).trim();
+  const refSection = rawBody.slice(refHeadingIndex);
+  const lines = refSection.split("\n").slice(1); // skip the "## References" heading
+
+  const references: Reference[] = [];
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+    const ref = parseReferenceLine(trimmed);
+    if (ref) references.push(ref);
+  }
+
+  return { body, references };
+}
+
+const rawPosts: Omit<Post, "references">[] = [
   {
     slug: "whitepaper",
     tag: "Whitepaper",
@@ -22,13 +70,13 @@ export const posts: Post[] = [
     body: `
 Robotics hardware has made remarkable progress. China ships production-ready humanoids for under $20k [1], and US manufacturers are catching up. Since transformers entered the field, robot intelligence has improved.
 
-Yet generalized robotics remains elusive. Models demonstrate impressive capabilities in controlled settings but struggle with the reliability required for deployment. Long-horizon tasks requiring sophisticated environmental interaction — the kind humans perform routinely — remain a significant challenge.
+Yet generalized robotics remains elusive. Models demonstrate impressive capabilities in controlled settings but struggle with the reliability required for deployment. Long-horizon tasks requiring sophisticated environmental interaction â€” the kind humans perform routinely â€” remain a significant challenge.
 
 As model research accelerates, data remains the biggest bottleneck for robot intelligence. Several efforts are underway to collect different types of data: teleoperation, egocentric video, and others. Identifying the type of data needed to train robot models and how to scale it is a challenge.
 
-Solving the data problem still leaves a second question: what you do with the data. Most people believe robotics and LLMs are similarly aligned, and that the data and model layers should remain separate. But they miss some important points. Robotics also has a deployment layer. And its errors carry physical implications, unlike hallucinations — a robotics model cannot work at a 60% success rate.
+Solving the data problem still leaves a second question: what you do with the data. Most people believe robotics and LLMs are similarly aligned, and that the data and model layers should remain separate. But they miss some important points. Robotics also has a deployment layer. And its errors carry physical implications, unlike hallucinations â€” a robotics model cannot work at a 60% success rate.
 
-The parallel should be drawn to autonomous driving rather than LLMs, as that is the only precedent of a robotics problem being solved, even in a limited action space. Every successful player — Waymo, Tesla, Zoox — owns the entire pipeline: data collection, model training, and deployment.
+The parallel should be drawn to autonomous driving rather than LLMs, as that is the only precedent of a robotics problem being solved, even in a limited action space. Every successful player â€” Waymo, Tesla, Zoox â€” owns the entire pipeline: data collection, model training, and deployment.
 
 ## 2. The Case for Human Data
 
@@ -52,7 +100,7 @@ Humans have an evolutionary understanding of the physical world. With data colle
 
 Even with this established, the open question is still: what type of modalities to collect? Most players in the space are focused on collecting egocentric videos. When humans in real life perform any manipulation task, they use their vision to analyze the scene, proprioception or action to approach the object they want to manipulate, and sense of touch to perform this manipulation accurately.
 
-These three modalities — vision, action, and touch — are the most comprehensive superset of data that can be collected from humans to train robot models.
+These three modalities â€” vision, action, and touch â€” are the most comprehensive superset of data that can be collected from humans to train robot models.
 
 Tactile feedback specifically is extremely underused in the industry and necessary for general-purpose manipulation models. Adding tactile inference to models has been shown to increase success rates by roughly 16 percentage points, from 55.75% to 71% [6].
 
@@ -165,6 +213,12 @@ We have built out our data infrastructure in India (data factory, ops team, engi
     `.trim(),
   },
 ];
+
+/** Get parsed posts with separated body and references */
+export const posts: Post[] = rawPosts.map((raw) => {
+  const { body, references } = parsePost(raw.body);
+  return { ...raw, body, references };
+});
 
 export function getPostBySlug(slug: string): Post | undefined {
   return posts.find((p) => p.slug === slug);
