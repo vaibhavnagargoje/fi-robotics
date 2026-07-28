@@ -6,7 +6,7 @@ export default function HeroSection() {
       {/* Copy */}
       <div className="lg:col-span-6">
         <p className="font-mono text-[10px] tracking-[0.15em] text-[#aab3a7] mb-5 uppercase">
-          INTELLIGENCE FACTORY
+          
         </p>
 
         <h1 className="font-serif italic text-[clamp(40px,6vw,80px)] text-[#f1f5ec] leading-[1.05] tracking-tight">
