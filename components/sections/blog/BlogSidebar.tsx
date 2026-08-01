@@ -89,9 +89,8 @@ export default function BlogSidebar() {
 
         {/* Collapsible panel */}
         <div
-          className={`overflow-hidden transition-all duration-300 ease-in-out bg-[#0d100d] border-b border-white/8 ${
-            open ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-          }`}
+          className={`overflow-hidden transition-all duration-300 ease-in-out bg-[#0d100d] border-b border-white/8 ${open ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+            }`}
         >
           <div className="px-4 py-4">
             {filterContent}
@@ -100,15 +99,17 @@ export default function BlogSidebar() {
       </div>
 
       {/* ── Desktop: original sidebar ── */}
-      <div className="hidden lg:block sticky top-0 px-5 py-10">
-        <p className="font-mono text-[9px] tracking-[0.25em] text-[#768275] uppercase mb-5">
-          Filter
-        </p>
+      <div className="hidden lg:flex lg:flex-col lg:justify-between lg:sticky lg:top-0 lg:h-screen px-5 py-10">
+        <div>
+          <p className="font-mono text-[9px] tracking-[0.25em] text-[#768275] uppercase mb-5">
+            Filter
+          </p>
 
-        {filterContent}
+          {filterContent}
+        </div>
 
         {/* Back to Index link */}
-        <div className="mt-8 pt-5 border-t border-white/8">
+        <div className="pt-5 border-t border-white/8">
           <a
             href="/"
             className="group font-mono text-[10px] text-[#768275] hover:text-[#8bb8d8] transition-colors inline-flex items-center gap-1.5"

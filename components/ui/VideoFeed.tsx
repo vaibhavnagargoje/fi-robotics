@@ -1,3 +1,5 @@
+import { RefObject } from "react";
+
 interface VideoFeedProps {
   src: string;
   label: string;
@@ -7,6 +9,8 @@ interface VideoFeedProps {
   opacity?: number;
   /** whether to apply grayscale */
   grayscale?: boolean;
+  /** optional external ref to the video element */
+  videoRef?: RefObject<HTMLVideoElement | null>;
 }
 
 /** Reusable looping video with a live-feed label overlay */
@@ -15,12 +19,14 @@ export default function VideoFeed({
   label,
   showLabel = true,
   className = "",
-  opacity = 60,
+  opacity = 100,
   grayscale = false,
+  videoRef,
 }: VideoFeedProps) {
   return (
     <div className={`relative overflow-hidden bg-black ${className}`}>
       <video
+        ref={videoRef}
         src={src}
         autoPlay
         loop
