@@ -9,8 +9,8 @@ export default function VideoShowcase() {
           <VideoFeed src="/src-videos/optimized/Recording-Treats.mp4" label="Feed 01" showLabel={false} className="w-full h-full" />
         </div>
 
-        {/* 2nd — vertical 9:16 */}
-        <div className="sm:flex-shrink-0 sm:w-[140px] lg:w-[180px] aspect-[9/16] sm:aspect-auto bg-[#111] border border-white/10 overflow-hidden">
+        {/* 2nd — vertical 9:13 on mobile */}
+        <div className="sm:flex-shrink-0 sm:w-[140px] lg:w-[180px] aspect-[9/13] sm:aspect-auto bg-[#111] border border-white/10 overflow-hidden">
           <VideoFeed src="/src-videos/cable_plugging_initial_runs.mp4" label="Feed 02" showLabel={false} className="w-full h-full" />
         </div>
 
