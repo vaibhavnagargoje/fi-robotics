@@ -318,14 +318,9 @@ export default function FlywheelSection() {
         {/* Footer info */}
         <div className="mt-12 flex flex-col md:flex-row md:items-start gap-4 border-t border-white/10 pt-6">
           <div className="flex items-center gap-2">
-            <span className="size-1.5 rounded-full bg-[#8bb8d8]" />
-            <span className="font-mono text-[10px] tracking-[0.18em] text-[#8bb8d8] uppercase font-semibold">
-              Compounding Advantage
-            </span>
+          
           </div>
-          <p className="max-w-3xl text-sm leading-relaxed text-[#aab3a7]">
-            Every manipulation session generates rich tactile and kinesthetic trajectories. As fleet hours grow, policies become dramatically more resilient to lighting variations, clutter, and novel object geometries.
-          </p>
+         
         </div>
       </div>
     </section>
