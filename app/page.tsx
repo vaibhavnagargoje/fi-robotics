@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import HeroSection        from "@/components/sections/home/HeroSection";
 import ProblemSection     from "@/components/sections/home/ProblemSection";
-import VideoShowcase      from "@/components/sections/home/VideoShowcase";
+import FlywheelSection    from "@/components/sections/home/FlywheelSection";
+import IndustriesSection  from "@/components/sections/home/IndustriesSection";
 import HighlightsSection  from "@/components/sections/home/HighlightsSection";
 
 export const metadata: Metadata = {
@@ -15,7 +16,8 @@ export default function HomePage() {
     <div className="page-enter flex flex-col">
       <HeroSection />
       <ProblemSection />
-      <VideoShowcase />
+      <FlywheelSection />
+      <IndustriesSection />
       <HighlightsSection />
     </div>
   );
