@@ -136,70 +136,170 @@ export default async function BlogPostPage({ params }: Props) {
   const headings = extractHeadings(post.body);
   const references = post.references ?? [];
 
-  const blocks = post.body.split("\n\n").map((block, i) => {
+  /**
+   * Helper to find all reference objects cited within a raw text string
+   */
+  const getCitationsInText = (rawText: string): Reference[] => {
+    const ids = Array.from(rawText.matchAll(/\[(\d+)\]/g), (m) => parseInt(m[1], 10));
+    if (ids.length === 0) return [];
+    return references.filter((r) => ids.includes(r.id));
+  };
+
+  /**
+   * Render clean, simple reference note in the margin (matching original aesthetic)
+   */
+  const renderSidenotes = (cites: Reference[]) => {
+    if (cites.length === 0) return null;
+    return (
+      <div className="space-y-4 pt-1">
+        {cites.map((ref) => (
+          <div key={ref.id} className="flex gap-2">
+            <span className="shrink-0 flex items-center justify-center w-[18px] h-[18px] rounded-full bg-[#8bb8d8]/10 text-[#8bb8d8] text-[9px] font-mono font-bold mt-[2px]">
+              {ref.id}
+            </span>
+            <div className="text-[11px] leading-relaxed text-[#aab3a7]/80 hover:text-[#c4ccc0] transition-colors">
+              {ref.url ? (
+                <a
+                  href={ref.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#8bb8d8] transition-colors"
+                >
+                  {ref.text}
+                </a>
+              ) : (
+                ref.text
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  const rawBlocks = post.body.split("\n\n");
+
+  const renderedRows = rawBlocks.map((block, i) => {
     const t = block.trim();
     if (!t) return null;
 
+    // Headings
     if (t.startsWith("### ")) {
       const text = t.replace(/^###\s*/, "");
       return (
-        <h3
+        <div
           key={i}
-          id={slugify(text)}
-          className="font-sans font-semibold text-base md:text-lg text-[#8bb8d8] mt-8 mb-3 scroll-mt-24"
+          className="lg:grid lg:grid-cols-[1fr_240px] xl:grid-cols-[1fr_260px] items-start"
         >
-          {text}
-        </h3>
+          <div className="lg:pr-6 xl:lg:pr-8">
+            <h3
+              id={slugify(text)}
+              className="font-sans font-semibold text-base md:text-lg text-[#8bb8d8] mt-6 mb-2 scroll-mt-24"
+            >
+              {text}
+            </h3>
+          </div>
+          <div className="hidden lg:block lg:pl-6 xl:lg:pl-8" />
+        </div>
       );
     }
+
     if (t.startsWith("## ")) {
       const text = t.replace(/^##\s*/, "");
       return (
-        <h2
+        <div
           key={i}
-          id={slugify(text)}
-          className="font-sans font-bold text-xl md:text-2xl text-[#f1f5ec] mt-12 mb-4 border-b border-white/10 pb-2 scroll-mt-24"
+          className="lg:grid lg:grid-cols-[1fr_240px] xl:grid-cols-[1fr_260px] items-start"
         >
-          {text}
-        </h2>
+          <div className="lg:pr-6 xl:lg:pr-8">
+            <h2
+              id={slugify(text)}
+              className="font-sans font-bold text-xl md:text-2xl text-[#f1f5ec] mt-10 mb-4 border-b border-white/10 pb-2 scroll-mt-24"
+            >
+              {text}
+            </h2>
+          </div>
+          <div className="hidden lg:block lg:pl-6 xl:lg:pl-8" />
+        </div>
       );
     }
+
+    // Unordered List
     if (t.startsWith("- ")) {
+      const listItems = t.split("\n");
+      const listCitations = getCitationsInText(t);
+
       return (
-        <ul
+        <div
           key={i}
-          className="list-disc pl-5 my-4 space-y-2 text-sm md:text-base text-[#c4ccc0] leading-relaxed"
+          className="lg:grid lg:grid-cols-[1fr_240px] xl:grid-cols-[1fr_260px] items-start mb-5"
         >
-          {t.split("\n").map((li, j) => (
-            <li key={j}>{renderFormattedText(li.replace(/^-\s*/, ""), references)}</li>
-          ))}
-        </ul>
+          <div className="lg:pr-6 xl:lg:pr-8">
+            <ul className="list-disc pl-5 space-y-2 text-sm md:text-base text-[#c4ccc0] leading-relaxed">
+              {listItems.map((li, j) => (
+                <li key={j}>{renderFormattedText(li.replace(/^-\s*/, ""), references)}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="hidden lg:block lg:pl-6 xl:lg:pl-8">
+            {renderSidenotes(listCitations)}
+          </div>
+        </div>
       );
     }
+
+    // Ordered List
     if (t.match(/^[0-9]+\.\s/)) {
+      const listItems = t.split("\n");
+      const listCitations = getCitationsInText(t);
+
       return (
-        <ol
+        <div
           key={i}
-          className="list-decimal pl-5 my-4 space-y-3 text-sm text-[#c4ccc0] leading-relaxed"
+          className="lg:grid lg:grid-cols-[1fr_240px] xl:grid-cols-[1fr_260px] items-start mb-5"
         >
-          {t.split("\n").map((li, j) => (
-            <li key={j} className="pl-1">
-              {renderFormattedText(li.replace(/^[0-9]+\.\s*/, ""), references)}
-            </li>
-          ))}
-        </ol>
+          <div className="lg:pr-6 xl:lg:pr-8">
+            <ol className="list-decimal pl-5 space-y-3 text-sm text-[#c4ccc0] leading-relaxed">
+              {listItems.map((li, j) => (
+                <li key={j} className="pl-1">
+                  {renderFormattedText(li.replace(/^[0-9]+\.\s*/, ""), references)}
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="hidden lg:block lg:pl-6 xl:lg:pl-8">
+            {renderSidenotes(listCitations)}
+          </div>
+        </div>
       );
     }
+
+    // Paragraph
+    const citations = getCitationsInText(t);
+
     return (
-      <p key={i} className="text-sm md:text-base text-[#c4ccc0] leading-[1.8] mb-5">
-        {renderFormattedText(t, references)}
-      </p>
+      <div
+        key={i}
+        className="lg:grid lg:grid-cols-[1fr_240px] xl:grid-cols-[1fr_260px] items-start mb-5"
+      >
+        <div className="lg:pr-6 xl:lg:pr-8">
+          <p className="text-sm md:text-base text-[#c4ccc0] leading-[1.8] font-sans">
+            {renderFormattedText(t, references)}
+          </p>
+        </div>
+
+        <div className="hidden lg:block lg:pl-6 xl:lg:pl-8">
+          {renderSidenotes(citations)}
+        </div>
+      </div>
     );
   });
 
   return (
     <>
-      <div className="page-enter flex-1 bg-[#090c0a] w-full">
+      <div className="page-enter flex-1 bg-[#090c0a] w-full min-h-screen">
         {/* Reading progress bar */}
         <ReadingProgress />
 
@@ -212,7 +312,7 @@ export default async function BlogPostPage({ params }: Props) {
             ← Back to Publications
           </Link>
 
-          {/* Header — full width */}
+          {/* Header */}
           <header className="mb-8 md:mb-12 border-b border-white/15 pb-8 max-w-4xl">
             <div className="flex items-center gap-2 text-xs font-mono text-[#8bb8d8] uppercase tracking-wider mb-4 flex-wrap">
               <span>{post.tag}</span>
@@ -231,58 +331,25 @@ export default async function BlogPostPage({ params }: Props) {
             </p>
           </header>
 
-          {/* ── 3-column layout: TOC | Content (Expanded) | References (Narrowed + Vertical Line) ── */}
-          <div
-            className={`lg:grid lg:gap-8 xl:gap-10 items-start ${
-              references.length > 0
-                ? "lg:grid-cols-[160px_1fr_220px] xl:grid-cols-[170px_1fr_240px]"
-                : "lg:grid-cols-[160px_1fr]"
-            }`}
-          >
+          {/* ── Main Layout: TOC + (Content & Parallel References Column) ── */}
+          <div className="lg:grid lg:grid-cols-[160px_1fr] xl:grid-cols-[170px_1fr] lg:gap-8 xl:gap-10 items-start">
             {/* Column 1: Table of Contents */}
             <TableOfContents headings={headings} />
 
-            {/* Column 2: Article content — expanded reading width */}
-            <article id="article-content" className="min-w-0 space-y-2 max-w-3xl xl:max-w-4xl">
-              {blocks}
-            </article>
+            {/* Column 2: Article content + Parallel References */}
+            <article id="article-content" className="min-w-0 relative">
+              {/* Single Continuous Solid Straight Vertical Line */}
+              <div
+                className="hidden lg:block absolute top-0 bottom-0 right-[240px] xl:right-[260px] w-px bg-white/15 pointer-events-none"
+                aria-hidden="true"
+              />
 
-            {/* Column 3: References sidebar with vertical divider line */}
-            {references.length > 0 && (
-              <>
-                {/* Desktop: sticky sidebar with clean vertical divider */}
-                <aside className="hidden lg:block border-l border-white/10 pl-6 xl:pl-8 sticky top-10 self-start max-h-[calc(100vh-4rem)] overflow-y-auto">
-                  <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-[#8bb8d8] mb-4 font-semibold">
-                    References
-                  </p>
-                  <ol className="space-y-4">
-                    {references.map((ref) => (
-                      <li key={ref.id} className="group">
-                        <div className="flex gap-2">
-                          <span className="shrink-0 flex items-center justify-center w-[18px] h-[18px] rounded-full bg-[#8bb8d8]/10 text-[#8bb8d8] text-[9px] font-mono font-bold mt-[2px]">
-                            {ref.id}
-                          </span>
-                          <div className="text-[11px] leading-relaxed text-[#aab3a7]/80 group-hover:text-[#c4ccc0] transition-colors">
-                            {ref.url ? (
-                              <a
-                                href={ref.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="hover:text-[#8bb8d8] transition-colors"
-                              >
-                                {ref.text}
-                              </a>
-                            ) : (
-                              ref.text
-                            )}
-                          </div>
-                        </div>
-                      </li>
-                    ))}
-                  </ol>
-                </aside>
+              <div className="space-y-0">
+                {renderedRows}
+              </div>
 
-                {/* Mobile: references below content */}
+              {/* Mobile: references below content */}
+              {references.length > 0 && (
                 <div className="lg:hidden mt-16 pt-8 border-t border-white/10">
                   <h2 className="font-sans font-bold text-lg text-[#f1f5ec] mb-6">
                     References
@@ -311,8 +378,8 @@ export default async function BlogPostPage({ params }: Props) {
                     ))}
                   </ol>
                 </div>
-              </>
-            )}
+              )}
+            </article>
           </div>
         </div>
       </div>
