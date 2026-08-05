@@ -1,7 +1,7 @@
 /* ── Intelligence Factory — Global Design System ── */
 
-/* Fonts: Inter (body/headings) + JetBrains Mono (labels/code) + Playfair Display (serif logo) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400;1,700&display=swap');
+/* Fonts: Inter (body/headings) + JetBrains Mono (labels/code) + Playfair Display (serif logo) + Space Grotesk (tech subtexts) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 @import "tailwindcss";
 
@@ -10,6 +10,7 @@
   --font-sans:  "Inter", -apple-system, BlinkMacSystemFont, ui-sans-serif, system-ui, sans-serif;
   --font-mono:  "JetBrains Mono", ui-monospace, "Cascadia Code", monospace;
   --font-serif: "Playfair Display", "Georgia", ui-serif, serif;
+  --font-tech:  "Space Grotesk", "Plus Jakarta Sans", -apple-system, sans-serif;
 
   --color-black:      #000000;
   --color-white:      #ffffff;
@@ -78,6 +79,12 @@ body {
 }
 .page-enter {
   animation: pageFadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* ── Typography Utilities ───────────────────────────────── */
+.font-tech {
+  font-family: var(--font-tech), "Space Grotesk", "Plus Jakarta Sans", sans-serif;
+  letter-spacing: -0.01em;
 }
 
 /* ── Material Symbols ───────────────────────────────────── */

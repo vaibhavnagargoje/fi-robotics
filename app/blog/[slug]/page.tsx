@@ -203,17 +203,17 @@ export default async function BlogPostPage({ params }: Props) {
         {/* Reading progress bar */}
         <ReadingProgress />
 
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-20 text-[#f1f5ec]">
+        <div className="w-full px-3 md:px-14 py-6 md:py-12 text-[#f1f5ec]">
           {/* Back link */}
           <Link
             href="/blog"
-            className="text-xs font-mono uppercase tracking-wider text-[#aab3a7] hover:text-[#8bb8d8] transition-colors mb-8 md:mb-10 inline-block"
+            className="text-xs font-mono uppercase tracking-wider text-[#aab3a7] hover:text-[#8bb8d8] transition-colors mb-6 md:mb-8 inline-block"
           >
             ← Back to Publications
           </Link>
 
           {/* Header — full width */}
-          <header className="mb-10 md:mb-12 border-b border-white/15 pb-8 max-w-3xl">
+          <header className="mb-8 md:mb-12 border-b border-white/15 pb-8 max-w-4xl">
             <div className="flex items-center gap-2 text-xs font-mono text-[#8bb8d8] uppercase tracking-wider mb-4 flex-wrap">
               <span>{post.tag}</span>
               <span>·</span>
@@ -231,28 +231,28 @@ export default async function BlogPostPage({ params }: Props) {
             </p>
           </header>
 
-          {/* ── 3-column layout: TOC | Content | Divider + References ── */}
-          <div className="lg:grid lg:grid-cols-[180px_1fr_1px_260px] lg:gap-8 xl:grid-cols-[200px_1fr_1px_300px] xl:gap-10">
+          {/* ── 3-column layout: TOC | Content (Expanded) | References (Narrowed + Vertical Line) ── */}
+          <div
+            className={`lg:grid lg:gap-8 xl:gap-10 items-start ${
+              references.length > 0
+                ? "lg:grid-cols-[160px_1fr_220px] xl:grid-cols-[170px_1fr_240px]"
+                : "lg:grid-cols-[160px_1fr]"
+            }`}
+          >
             {/* Column 1: Table of Contents */}
             <TableOfContents headings={headings} />
 
-            {/* Column 2: Article content */}
-            <article id="article-content" className="min-w-0 space-y-2 max-w-full">
+            {/* Column 2: Article content — expanded reading width */}
+            <article id="article-content" className="min-w-0 space-y-2 max-w-3xl xl:max-w-4xl">
               {blocks}
             </article>
 
-            {/* Column 3: Vertical divider */}
-            <div
-              className="hidden lg:block bg-white/8 self-stretch"
-              aria-hidden="true"
-            />
-
-            {/* Column 4: References sidebar */}
+            {/* Column 3: References sidebar with vertical divider line */}
             {references.length > 0 && (
               <>
-                {/* Desktop: sticky sidebar */}
-                <aside className="hidden lg:block sticky top-10 self-start max-h-[calc(100vh-4rem)] overflow-y-auto">
-                  <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-[#aab3a7]/60 mb-4">
+                {/* Desktop: sticky sidebar with clean vertical divider */}
+                <aside className="hidden lg:block border-l border-white/10 pl-6 xl:pl-8 sticky top-10 self-start max-h-[calc(100vh-4rem)] overflow-y-auto">
+                  <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-[#8bb8d8] mb-4 font-semibold">
                     References
                   </p>
                   <ol className="space-y-4">

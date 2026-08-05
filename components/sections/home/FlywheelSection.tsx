@@ -152,7 +152,7 @@ export default function FlywheelSection() {
               Human data becomes dependable robotic action.
             </h2>
           </div>
-          <p className="max-w-md font-sans text-sm leading-relaxed text-[#aab3a7] md:justify-self-end">
+          <p className="max-w-md font-tech text-sm leading-relaxed text-[#aab3a7] md:justify-self-end tracking-wide">
             Every deployment makes the system more capable: demonstrations train the model, the model powers robots, and production data returns to the factory.
           </p>
         </div>
@@ -315,13 +315,6 @@ export default function FlywheelSection() {
           ))}
         </div>
 
-        {/* Footer info */}
-        <div className="mt-12 flex flex-col md:flex-row md:items-start gap-4 border-t border-white/10 pt-6">
-          <div className="flex items-center gap-2">
-          
-          </div>
-         
-        </div>
       </div>
     </section>
   );
