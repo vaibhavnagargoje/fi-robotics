@@ -79,7 +79,7 @@ function renderFormattedText(text: string, references?: Reference[]): ReactNode[
           href={match[2]}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#8bb8d8] underline underline-offset-4 hover:text-white transition-colors"
+          className="text-[#1d6ea8] underline underline-offset-4 hover:text-[#0f1712] transition-colors"
         >
           {match[1]} ↗
         </a>
@@ -93,13 +93,13 @@ function renderFormattedText(text: string, references?: Reference[]): ReactNode[
           key={`ref-${keyIdx++}`}
           className="inline-flex items-center justify-center ml-[2px] -mt-1 cursor-default group relative"
         >
-          <span className="inline-flex items-center justify-center w-[18px] h-[18px] rounded-full bg-[#8bb8d8]/15 text-[#8bb8d8] text-[9px] font-mono font-bold leading-none hover:bg-[#8bb8d8]/30 transition-colors">
+          <span className="inline-flex items-center justify-center w-[18px] h-[18px] rounded-full bg-[#1d6ea8]/10 text-[#1d6ea8] text-[9px] font-mono font-bold leading-none hover:bg-[#1d6ea8]/20 transition-colors">
             {refId}
           </span>
           {/* Desktop Tooltip on hover (hidden on mobile to prevent overflow) */}
           {ref && (
-            <span className="hidden md:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 rounded-lg bg-[#1a1f1b] border border-white/10 text-[10px] text-[#c4ccc0] leading-relaxed w-64 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 shadow-xl z-50 whitespace-normal">
-              <span className="font-semibold text-[#8bb8d8] block mb-1">
+            <span className="hidden md:block absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 rounded-lg bg-white border border-black/10 text-[10px] text-[#526054] leading-relaxed w-64 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 shadow-xl z-50 whitespace-normal">
+              <span className="font-semibold text-[#1d6ea8] block mb-1">
                 [{refId}]
               </span>
               {ref.text}
@@ -110,7 +110,7 @@ function renderFormattedText(text: string, references?: Reference[]): ReactNode[
     } else if (match[4]) {
       // Bold text
       parts.push(
-        <strong key={`bold-${keyIdx++}`} className="text-[#f1f5ec] font-semibold">
+        <strong key={`bold-${keyIdx++}`} className="text-[#0f1712] font-semibold">
           {match[4]}
         </strong>
       );
@@ -154,16 +154,16 @@ export default async function BlogPostPage({ params }: Props) {
       <div className="space-y-4 pt-1">
         {cites.map((ref) => (
           <div key={ref.id} className="flex gap-2">
-            <span className="shrink-0 flex items-center justify-center w-[18px] h-[18px] rounded-full bg-[#8bb8d8]/10 text-[#8bb8d8] text-[9px] font-mono font-bold mt-[2px]">
+            <span className="shrink-0 flex items-center justify-center w-[18px] h-[18px] rounded-full bg-[#1d6ea8]/10 text-[#1d6ea8] text-[9px] font-mono font-bold mt-[2px]">
               {ref.id}
             </span>
-            <div className="text-[11px] leading-relaxed text-[#aab3a7]/80 hover:text-[#c4ccc0] transition-colors">
+            <div className="text-[11px] leading-relaxed text-[#526054] hover:text-[#0f1712] transition-colors">
               {ref.url ? (
                 <a
                   href={ref.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#8bb8d8] transition-colors"
+                  className="hover:text-[#1d6ea8] transition-colors"
                 >
                   {ref.text}
                 </a>
@@ -194,7 +194,7 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="lg:pr-6 xl:lg:pr-8">
             <h3
               id={slugify(text)}
-              className="font-sans font-semibold text-base md:text-lg text-[#8bb8d8] mt-6 mb-2 scroll-mt-24"
+              className="font-sans font-semibold text-base md:text-lg text-[#1d6ea8] mt-6 mb-2 scroll-mt-24"
             >
               {text}
             </h3>
@@ -214,7 +214,7 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="lg:pr-6 xl:lg:pr-8">
             <h2
               id={slugify(text)}
-              className="font-sans font-bold text-xl md:text-2xl text-[#f1f5ec] mt-10 mb-4 border-b border-white/10 pb-2 scroll-mt-24"
+              className="font-sans font-bold text-xl md:text-2xl text-[#0f1712] mt-10 mb-4 border-b border-black/10 pb-2 scroll-mt-24"
             >
               {text}
             </h2>
@@ -235,7 +235,7 @@ export default async function BlogPostPage({ params }: Props) {
           className="lg:grid lg:grid-cols-[1fr_240px] xl:grid-cols-[1fr_260px] items-start mb-5"
         >
           <div className="lg:pr-6 xl:lg:pr-8">
-            <ul className="list-disc pl-5 space-y-2 text-sm md:text-base text-[#c4ccc0] leading-relaxed">
+            <ul className="list-disc pl-5 space-y-2 text-sm md:text-base text-[#2d3a30] leading-relaxed">
               {listItems.map((li, j) => (
                 <li key={j}>{renderFormattedText(li.replace(/^-\s*/, ""), references)}</li>
               ))}
@@ -260,7 +260,7 @@ export default async function BlogPostPage({ params }: Props) {
           className="lg:grid lg:grid-cols-[1fr_240px] xl:grid-cols-[1fr_260px] items-start mb-5"
         >
           <div className="lg:pr-6 xl:lg:pr-8">
-            <ol className="list-decimal pl-5 space-y-3 text-sm text-[#c4ccc0] leading-relaxed">
+            <ol className="list-decimal pl-5 space-y-3 text-sm text-[#2d3a30] leading-relaxed">
               {listItems.map((li, j) => (
                 <li key={j} className="pl-1">
                   {renderFormattedText(li.replace(/^[0-9]+\.\s*/, ""), references)}
@@ -285,7 +285,7 @@ export default async function BlogPostPage({ params }: Props) {
         className="lg:grid lg:grid-cols-[1fr_240px] xl:grid-cols-[1fr_260px] items-start mb-5"
       >
         <div className="lg:pr-6 xl:lg:pr-8">
-          <p className="text-sm md:text-base text-[#c4ccc0] leading-[1.8] font-sans">
+          <p className="text-sm md:text-base text-[#2d3a30] leading-[1.8] font-sans">
             {renderFormattedText(t, references)}
           </p>
         </div>
@@ -299,22 +299,22 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <>
-      <div className="page-enter flex-1 bg-[#090c0a] w-full min-h-screen">
+      <div className="page-enter flex-1 bg-[#fbfcf8] w-full min-h-screen">
         {/* Reading progress bar */}
         <ReadingProgress />
 
-        <div className="w-full px-3 md:px-14 py-6 md:py-12 text-[#f1f5ec]">
+        <div className="w-full px-3 md:px-14 py-6 md:py-12 text-[#0f1712]">
           {/* Back link */}
           <Link
             href="/blog"
-            className="text-xs font-mono uppercase tracking-wider text-[#aab3a7] hover:text-[#8bb8d8] transition-colors mb-6 md:mb-8 inline-block"
+            className="text-xs font-mono uppercase tracking-wider text-[#526054] hover:text-[#1d6ea8] transition-colors mb-6 md:mb-8 inline-block"
           >
             ← Back to Publications
           </Link>
 
           {/* Header */}
-          <header className="mb-8 md:mb-12 border-b border-white/15 pb-8 max-w-4xl">
-            <div className="flex items-center gap-2 text-xs font-mono text-[#8bb8d8] uppercase tracking-wider mb-4 flex-wrap">
+          <header className="mb-8 md:mb-12 border-b border-black/10 pb-8 max-w-4xl">
+            <div className="flex items-center gap-2 text-xs font-mono text-[#1d6ea8] uppercase tracking-wider mb-4 flex-wrap">
               <span>{post.tag}</span>
               <span>·</span>
               <span>{post.date}</span>
@@ -322,11 +322,11 @@ export default async function BlogPostPage({ params }: Props) {
               <span>{post.readMin} min read</span>
             </div>
 
-            <h1 className="font-serif italic text-3xl md:text-5xl text-[#f1f5ec] leading-tight tracking-tight mb-4">
+            <h1 className="font-serif italic text-3xl md:text-5xl text-[#0f1712] leading-tight tracking-tight mb-4">
               {post.title}
             </h1>
 
-            <p className="text-xs font-mono text-[#aab3a7]">
+            <p className="text-xs font-mono text-[#526054]">
               Authors: {post.author}
             </p>
           </header>
@@ -340,7 +340,7 @@ export default async function BlogPostPage({ params }: Props) {
             <article id="article-content" className="min-w-0 relative">
               {/* Single Continuous Solid Straight Vertical Line */}
               <div
-                className="hidden lg:block absolute top-0 bottom-0 right-[240px] xl:right-[260px] w-px bg-white/15 pointer-events-none"
+                className="hidden lg:block absolute top-0 bottom-0 right-[240px] xl:right-[260px] w-px bg-black/10 pointer-events-none"
                 aria-hidden="true"
               />
 
@@ -350,23 +350,23 @@ export default async function BlogPostPage({ params }: Props) {
 
               {/* Mobile: references below content */}
               {references.length > 0 && (
-                <div className="lg:hidden mt-16 pt-8 border-t border-white/10">
-                  <h2 className="font-sans font-bold text-lg text-[#f1f5ec] mb-6">
+                <div className="lg:hidden mt-16 pt-8 border-t border-black/10">
+                  <h2 className="font-sans font-bold text-lg text-[#0f1712] mb-6">
                     References
                   </h2>
                   <ol className="space-y-3">
                     {references.map((ref) => (
                       <li key={ref.id} className="flex gap-2">
-                        <span className="shrink-0 flex items-center justify-center w-[18px] h-[18px] rounded-full bg-[#8bb8d8]/10 text-[#8bb8d8] text-[9px] font-mono font-bold mt-[2px]">
+                        <span className="shrink-0 flex items-center justify-center w-[18px] h-[18px] rounded-full bg-[#1d6ea8]/10 text-[#1d6ea8] text-[9px] font-mono font-bold mt-[2px]">
                           {ref.id}
                         </span>
-                        <div className="text-xs leading-relaxed text-[#aab3a7] break-words">
+                        <div className="text-xs leading-relaxed text-[#526054] break-words">
                           {ref.url ? (
                             <a
                               href={ref.url}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="hover:text-[#8bb8d8] transition-colors underline underline-offset-2"
+                              className="hover:text-[#1d6ea8] transition-colors underline underline-offset-2"
                             >
                               {ref.text}
                             </a>

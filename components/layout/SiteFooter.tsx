@@ -11,8 +11,8 @@ const socialLinks = [
 
 export default function SiteFooter() {
   return (
-    <footer className="md:hidden w-full border-t border-white/15 bg-[#101610] px-6 py-8 flex flex-col gap-6">
-      <p className="font-sans text-sm text-[#aab3a7]">
+    <footer className="md:hidden w-full border-t border-black/10 bg-white px-6 py-8 flex flex-col gap-6">
+      <p className="font-sans text-sm text-[#526054]">
         © 2026 Intelligence Factory, Inc. All rights reserved.
       </p>
       <nav className="flex flex-wrap gap-x-6 gap-y-2">
@@ -20,7 +20,7 @@ export default function SiteFooter() {
           <Link
             key={label}
             href={href}
-            className="font-sans text-sm text-[#aab3a7] hover:text-[#8bb8d8] transition-colors"
+            className="font-sans text-sm text-[#526054] hover:text-[#1d6ea8] transition-colors"
           >
             {label}
           </Link>
@@ -31,7 +31,7 @@ export default function SiteFooter() {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-sans text-sm text-[#aab3a7] hover:text-[#8bb8d8] transition-colors"
+            className="font-sans text-sm text-[#526054] hover:text-[#1d6ea8] transition-colors"
           >
             {label}
           </a>

@@ -11,12 +11,12 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   return (
-    <div className="page-enter bg-[#090c0a] min-h-screen flex flex-col">
+    <div className="page-enter bg-[#fbfcf8] min-h-screen flex flex-col">
       {/* ── Top Header Bar (Matching Team & Home page header aesthetic) ── */}
-      <div className="border-b border-white/15 bg-[#050705] px-3 md:px-14 py-2.5 flex items-center justify-between">
+      <div className="border-b border-black/10 bg-[#f3f6f1] px-3 md:px-14 py-2.5 flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <span className="size-1.5 bg-[#8bb8d8] animate-pulse" />
-          <span className="font-mono text-[10px] md:text-xs tracking-wider text-[#f1f5ec] uppercase font-medium">
+          <span className="size-1.5 bg-[#1d6ea8] animate-pulse" />
+          <span className="font-mono text-[10px] md:text-xs tracking-wider text-[#0f1712] uppercase font-medium">
             Publications // Research & Field Notes
           </span>
         </div>
@@ -35,7 +35,7 @@ export default function BlogPage() {
         </div>
 
         {/* Right: Sidebar — desktop only */}
-        <aside className="hidden lg:block border-l border-white/15 bg-[#050705]/50">
+        <aside className="hidden lg:block border-l border-black/10 bg-[#f3f6f1]/40">
           <BlogSidebar />
         </aside>
       </div>

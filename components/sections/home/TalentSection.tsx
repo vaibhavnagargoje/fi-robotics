@@ -15,8 +15,8 @@ const logos = [
 
 export default function TalentSection() {
   return (
-    <section className="bg-[#090c0a] border-b border-white/15 px-3 md:px-14 py-8 md:py-12">
-      <p className="font-mono text-[10px] tracking-[0.22em] text-[#aab3a7] uppercase mb-8 md:mb-10">
+    <section className="bg-[#fbfcf8] border-b border-black/10 px-3 md:px-14 py-8 md:py-12">
+      <p className="font-mono text-[10px] tracking-[0.22em] text-[#526054] uppercase mb-8 md:mb-10">
         Built by talent from
       </p>
 
@@ -29,7 +29,7 @@ export default function TalentSection() {
             alt={logo.alt}
             title={logo.alt}
             style={{ height: logo.h, width: "auto" }}
-            className="object-contain grayscale invert opacity-60 hover:opacity-100 transition-opacity duration-200"
+            className="object-contain grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-200"
           />
         ))}
       </div>

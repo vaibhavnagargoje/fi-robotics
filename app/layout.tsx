@@ -22,14 +22,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="dark" data-scroll-behavior="smooth">
+    <html lang="en" className="light" data-scroll-behavior="smooth">
       <head>
         <link
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased bg-[#090c0a] text-[#f1f5ec] min-h-screen flex flex-col md:flex-row">
+      <body className="antialiased bg-[#fbfcf8] text-[#0f1712] min-h-screen flex flex-col md:flex-row">
         {/* ─ Desktop sidebar (fixed, 280px) ─ */}
         <Sidebar />
 

@@ -112,7 +112,7 @@ export default function FlywheelSection() {
   }, [updatePaths]);
 
   return (
-    <section className="relative overflow-hidden border-b border-white/10 bg-[#090c0a] py-20 md:py-28">
+    <section className="relative overflow-hidden border-b border-black/10 bg-[#fbfcf8] py-20 md:py-28">
       {/* Animation Styles */}
       <style jsx>{`
         @keyframes dashFlow {
@@ -130,29 +130,29 @@ export default function FlywheelSection() {
 
       {/* Subtle Background Grid */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.03]"
+        className="pointer-events-none absolute inset-0 opacity-[0.04]"
         style={{
           backgroundSize: "32px 32px",
           backgroundImage:
-            "linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)",
+            "linear-gradient(to right, #0f1712 1px, transparent 1px), linear-gradient(to bottom, #0f1712 1px, transparent 1px)",
         }}
       />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
         {/* Header */}
-        <div className="grid gap-6 border-b border-white/10 pb-8 md:grid-cols-[minmax(0,1fr)_minmax(280px,0.72fr)] md:items-end md:pb-10">
+        <div className="grid gap-6 border-b border-black/10 pb-8 md:grid-cols-[minmax(0,1fr)_minmax(280px,0.72fr)] md:items-end md:pb-10">
           <div>
             <div className="mb-3 flex items-center gap-2">
-              <span className="size-1.5 rounded-full bg-[#8bb8d8] animate-pulse" />
-              <p className="font-mono text-[10px] tracking-[0.2em] text-[#8bb8d8] uppercase">
+              <span className="size-1.5 rounded-full bg-[#1d6ea8] animate-pulse" />
+              <p className="font-mono text-[10px] tracking-[0.2em] text-[#1d6ea8] uppercase">
                 Intelligence Factory // The Operating Loop
               </p>
             </div>
-            <h2 className="max-w-2xl font-serif text-3xl md:text-5xl leading-[1.08] text-[#f1f5ec] italic">
+            <h2 className="max-w-2xl font-serif text-3xl md:text-5xl leading-[1.08] text-[#0f1712] italic">
               Human data becomes dependable robotic action.
             </h2>
           </div>
-          <p className="max-w-md font-tech text-sm leading-relaxed text-[#aab3a7] md:justify-self-end tracking-wide">
+          <p className="max-w-md font-tech text-sm leading-relaxed text-[#526054] md:justify-self-end tracking-wide">
             Every deployment makes the system more capable: demonstrations train the model, the model powers robots, and production data returns to the factory.
           </p>
         </div>
@@ -170,48 +170,48 @@ export default function FlywheelSection() {
           >
             {/* Path 1 -> 2 */}
             <g>
-              <path d={paths.path12} stroke="rgba(255,255,255,0.08)" strokeWidth="1.5" />
+              <path d={paths.path12} stroke="rgba(0,0,0,0.1)" strokeWidth="1.5" />
               <path
                 d={paths.path12}
-                stroke="#8bb8d8"
+                stroke="#1d6ea8"
                 strokeWidth={activeStep === 0 || activeStep === 1 ? "2.5" : "1.75"}
                 strokeDasharray="6 6"
                 className="flow-line-anim"
-                opacity={activeStep === 0 || activeStep === 1 ? "1" : "0.7"}
+                opacity={activeStep === 0 || activeStep === 1 ? "1" : "0.75"}
               />
-              <circle r="3" fill="#ffffff" opacity="0.95">
+              <circle r="3" fill="#1d6ea8" opacity="0.95">
                 <animateMotion dur="2.2s" repeatCount="indefinite" path={paths.path12} />
               </circle>
             </g>
 
             {/* Path 2 -> 3 */}
             <g>
-              <path d={paths.path23} stroke="rgba(255,255,255,0.08)" strokeWidth="1.5" />
+              <path d={paths.path23} stroke="rgba(0,0,0,0.1)" strokeWidth="1.5" />
               <path
                 d={paths.path23}
-                stroke="#8bb8d8"
+                stroke="#1d6ea8"
                 strokeWidth={activeStep === 1 || activeStep === 2 ? "2.5" : "1.75"}
                 strokeDasharray="6 6"
                 className="flow-line-anim"
-                opacity={activeStep === 1 || activeStep === 2 ? "1" : "0.7"}
+                opacity={activeStep === 1 || activeStep === 2 ? "1" : "0.75"}
               />
-              <circle r="3" fill="#ffffff" opacity="0.95">
+              <circle r="3" fill="#1d6ea8" opacity="0.95">
                 <animateMotion dur="2.4s" repeatCount="indefinite" path={paths.path23} />
               </circle>
             </g>
 
             {/* Path 3 -> 1 (Loop Return) */}
             <g>
-              <path d={paths.path31} stroke="rgba(255,255,255,0.08)" strokeWidth="1.5" />
+              <path d={paths.path31} stroke="rgba(0,0,0,0.1)" strokeWidth="1.5" />
               <path
                 d={paths.path31}
-                stroke="#8bb8d8"
+                stroke="#1d6ea8"
                 strokeWidth={activeStep === 2 || activeStep === 0 ? "2.5" : "1.75"}
                 strokeDasharray="6 6"
                 className="flow-line-anim"
-                opacity={activeStep === 2 || activeStep === 0 ? "1" : "0.7"}
+                opacity={activeStep === 2 || activeStep === 0 ? "1" : "0.75"}
               />
-              <circle r="3" fill="#ffffff" opacity="0.95">
+              <circle r="3" fill="#1d6ea8" opacity="0.95">
                 <animateMotion dur="2.8s" repeatCount="indefinite" path={paths.path31} />
               </circle>
             </g>
@@ -226,16 +226,16 @@ export default function FlywheelSection() {
             {/* Out Port: Right edge */}
             <div
               ref={p1OutRef}
-              className="absolute top-1/2 -translate-y-1/2 -right-2 z-20 flex size-4 items-center justify-center rounded-full border border-[#8bb8d8] bg-[#090c0a] shadow-[0_0_8px_#8bb8d8]"
+              className="absolute top-1/2 -translate-y-1/2 -right-2 z-20 flex size-4 items-center justify-center rounded-full border border-[#1d6ea8] bg-white shadow-[0_0_8px_rgba(29,110,168,0.4)]"
             >
-              <div className="size-1 rounded-full bg-white" />
+              <div className="size-1 rounded-full bg-[#1d6ea8]" />
             </div>
             {/* In Port: Bottom edge */}
             <div
               ref={p1InRef}
-              className="absolute bottom-0 left-16 translate-y-1/2 z-20 flex size-4 items-center justify-center rounded-full border border-[#8bb8d8] bg-[#090c0a] shadow-[0_0_8px_#8bb8d8]"
+              className="absolute bottom-0 left-16 translate-y-1/2 z-20 flex size-4 items-center justify-center rounded-full border border-[#1d6ea8] bg-white shadow-[0_0_8px_rgba(29,110,168,0.4)]"
             >
-              <div className="size-1 rounded-full bg-[#8bb8d8]" />
+              <div className="size-1 rounded-full bg-[#1d6ea8]" />
             </div>
 
             <MinimalCard step={steps[0]} isActive={activeStep === 0} />
@@ -250,16 +250,16 @@ export default function FlywheelSection() {
             {/* In Port: Left edge */}
             <div
               ref={p2InRef}
-              className="absolute top-1/2 -translate-y-1/2 -left-2 z-20 flex size-4 items-center justify-center rounded-full border border-[#8bb8d8] bg-[#090c0a] shadow-[0_0_8px_#8bb8d8]"
+              className="absolute top-1/2 -translate-y-1/2 -left-2 z-20 flex size-4 items-center justify-center rounded-full border border-[#1d6ea8] bg-white shadow-[0_0_8px_rgba(29,110,168,0.4)]"
             >
-              <div className="size-1 rounded-full bg-[#8bb8d8]" />
+              <div className="size-1 rounded-full bg-[#1d6ea8]" />
             </div>
             {/* Out Port: Bottom edge */}
             <div
               ref={p2OutRef}
-              className="absolute bottom-0 right-16 translate-y-1/2 z-20 flex size-4 items-center justify-center rounded-full border border-[#8bb8d8] bg-[#090c0a] shadow-[0_0_8px_#8bb8d8]"
+              className="absolute bottom-0 right-16 translate-y-1/2 z-20 flex size-4 items-center justify-center rounded-full border border-[#1d6ea8] bg-white shadow-[0_0_8px_rgba(29,110,168,0.4)]"
             >
-              <div className="size-1 rounded-full bg-white" />
+              <div className="size-1 rounded-full bg-[#1d6ea8]" />
             </div>
 
             <MinimalCard step={steps[1]} isActive={activeStep === 1} />
@@ -274,16 +274,16 @@ export default function FlywheelSection() {
             {/* In Port: Right edge */}
             <div
               ref={p3InRef}
-              className="absolute top-1/2 -translate-y-1/2 -right-2 z-20 flex size-4 items-center justify-center rounded-full border border-[#8bb8d8] bg-[#090c0a] shadow-[0_0_8px_#8bb8d8]"
+              className="absolute top-1/2 -translate-y-1/2 -right-2 z-20 flex size-4 items-center justify-center rounded-full border border-[#1d6ea8] bg-white shadow-[0_0_8px_rgba(29,110,168,0.4)]"
             >
-              <div className="size-1 rounded-full bg-[#8bb8d8]" />
+              <div className="size-1 rounded-full bg-[#1d6ea8]" />
             </div>
             {/* Out Port: Left edge */}
             <div
               ref={p3OutRef}
-              className="absolute top-1/2 -translate-y-1/2 -left-2 z-20 flex size-4 items-center justify-center rounded-full border border-[#8bb8d8] bg-[#090c0a] shadow-[0_0_8px_#8bb8d8]"
+              className="absolute top-1/2 -translate-y-1/2 -left-2 z-20 flex size-4 items-center justify-center rounded-full border border-[#1d6ea8] bg-white shadow-[0_0_8px_rgba(29,110,168,0.4)]"
             >
-              <div className="size-1 rounded-full bg-white" />
+              <div className="size-1 rounded-full bg-[#1d6ea8]" />
             </div>
 
             <MinimalCard step={steps[2]} isActive={activeStep === 2} />
@@ -297,16 +297,16 @@ export default function FlywheelSection() {
               <MinimalCard step={step} isActive={false} />
               {idx < steps.length - 1 ? (
                 <div className="flex items-center gap-3 py-2 px-4">
-                  <span className="h-4 w-px bg-[#8bb8d8]/40" />
-                  <ArrowDown className="size-3.5 text-[#8bb8d8]" />
-                  <span className="font-mono text-[9px] text-[#aab3a7] uppercase tracking-wider">
+                  <span className="h-4 w-px bg-[#1d6ea8]/40" />
+                  <ArrowDown className="size-3.5 text-[#1d6ea8]" />
+                  <span className="font-mono text-[9px] text-[#526054] uppercase tracking-wider">
                     {idx === 0 ? "Feed to model" : "Deploy to robots"}
                   </span>
                 </div>
               ) : (
-                <div className="mt-4 flex items-center gap-3 rounded-md border border-[#8bb8d8]/30 bg-[#8bb8d8]/10 p-3.5">
-                  <RefreshCw className="size-4 shrink-0 text-[#8bb8d8] animate-[spin_8s_linear_infinite]" />
-                  <p className="font-mono text-[10px] text-[#f1f5ec]">
+                <div className="mt-4 flex items-center gap-3 rounded-md border border-[#1d6ea8]/25 bg-[#1d6ea8]/5 p-3.5">
+                  <RefreshCw className="size-4 shrink-0 text-[#1d6ea8] animate-[spin_8s_linear_infinite]" />
+                  <p className="font-mono text-[10px] text-[#0f1712]">
                     Continuous Loop: Real-world edge cases stream back to training data.
                   </p>
                 </div>
@@ -336,22 +336,22 @@ function MinimalCard({
     <article
       className={`group relative overflow-hidden rounded-lg border transition-all duration-300 ${
         isActive
-          ? "border-[#8bb8d8] bg-[#111713] shadow-[0_0_24px_rgba(139,184,216,0.15)]"
-          : "border-white/15 bg-[#0d120e] hover:border-[#8bb8d8]/50 hover:bg-[#0f1510]"
+          ? "border-[#1d6ea8] bg-white shadow-[0_0_24px_rgba(29,110,168,0.12)]"
+          : "border-black/10 bg-white hover:border-[#1d6ea8]/50 hover:shadow-md"
       }`}
     >
       {/* Top Header */}
-      <div className="flex items-center justify-between border-b border-white/10 px-5 py-3.5 bg-gradient-to-r from-white/[0.02] to-transparent">
+      <div className="flex items-center justify-between border-b border-black/10 px-5 py-3.5 bg-gradient-to-r from-black/[0.02] to-transparent">
         <div className="flex items-center gap-2">
-          <span className="font-mono text-[10px] font-semibold text-[#8bb8d8]">{step.step}</span>
-          <span className="size-1 bg-white/20" />
-          <span className="font-mono text-[9px] tracking-[0.16em] text-[#aab3a7] uppercase">
+          <span className="font-mono text-[10px] font-semibold text-[#1d6ea8]">{step.step}</span>
+          <span className="size-1 bg-black/20" />
+          <span className="font-mono text-[9px] tracking-[0.16em] text-[#526054] uppercase">
             {step.eyebrow}
           </span>
         </div>
         <Icon
-          className={`size-4 text-[#8bb8d8] transition-transform duration-300 ${
-            isActive ? "scale-110 text-white" : "group-hover:scale-110"
+          className={`size-4 transition-transform duration-300 ${
+            isActive ? "scale-110 text-[#1d6ea8]" : "text-[#526054] group-hover:scale-110 group-hover:text-[#1d6ea8]"
           }`}
           strokeWidth={1.5}
         />
@@ -359,16 +359,16 @@ function MinimalCard({
 
       {/* Video preview for step 01 */}
       {step.hasVideo && (
-        <div className="relative aspect-[16/8] overflow-hidden border-b border-white/10">
+        <div className="relative aspect-[16/8] overflow-hidden border-b border-black/10">
           <VideoFeed
             src="/src-videos/optimized/Recording-Treats.mp4"
             label="Human demonstration"
             showLabel={false}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          <div className="absolute top-2.5 left-2.5 flex items-center gap-2 border border-white/25 bg-[#090c0a]/90 px-2.5 py-1 backdrop-blur-sm">
-            <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_#34d399]" />
-            <span className="font-mono text-[8px] tracking-[0.14em] text-[#f1f5ec] uppercase font-medium">
+          <div className="absolute top-2.5 left-2.5 flex items-center gap-2 border border-black/10 bg-white/90 px-2.5 py-1 backdrop-blur-sm shadow-sm">
+            <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_6px_#10b981]" />
+            <span className="font-mono text-[8px] tracking-[0.14em] text-[#0f1712] uppercase font-medium">
               Live Teleoperation
             </span>
           </div>
@@ -379,12 +379,12 @@ function MinimalCard({
       <div className="p-5">
         <h3
           className={`font-sans font-medium transition-colors duration-200 ${
-            isActive ? "text-[#8bb8d8]" : "text-[#f1f5ec] group-hover:text-white"
+            isActive ? "text-[#1d6ea8]" : "text-[#0f1712] group-hover:text-[#1d6ea8]"
           } text-base md:text-lg`}
         >
           {step.title}
         </h3>
-        <p className="mt-1.5 text-xs md:text-sm leading-relaxed text-[#aab3a7]">
+        <p className="mt-1.5 text-xs md:text-sm leading-relaxed text-[#526054]">
           {step.description}
         </p>
       </div>
