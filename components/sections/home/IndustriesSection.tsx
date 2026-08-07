@@ -28,7 +28,7 @@ export default function IndustriesSection() {
           {industries.map((item) => (
             <div
               key={item.name}
-              className="group bg-white p-6 md:p-7 flex flex-col items-start gap-4 hover:bg-[#fafbf7] transition-colors duration-300 cursor-default"
+              className="group bg-white p-6 md:p-7 flex flex-col items-center justify-center text-center gap-4 hover:bg-[#fafbf7] transition-colors duration-300 cursor-default"
             >
               {/* Icon */}
               <span
