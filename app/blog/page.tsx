@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import FeaturedPost from "@/components/sections/blog/FeaturedPost";
+import BlogHeroVideo from "@/components/sections/blog/BlogHeroVideo";
 import BlogGrid from "@/components/sections/blog/BlogGrid";
-import BlogSidebar from "@/components/sections/blog/BlogSidebar";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -11,33 +10,15 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   return (
-    <div className="page-enter bg-[#090c0a] min-h-screen flex flex-col">
-      {/* ── Top Header Bar (Matching Team & Home page header aesthetic) ── */}
-      <div className="border-b border-white/15 bg-[#050705] px-3 md:px-14 py-2.5 flex items-center justify-between">
-        <div className="flex items-center gap-2.5">
-          <span className="size-1.5 bg-[#8bb8d8] animate-pulse" />
-          <span className="font-mono text-[10px] md:text-xs tracking-wider text-[#f1f5ec] uppercase font-medium">
-            Publications // Research & Field Notes
-          </span>
-        </div>
+    <div className="page-enter bg-[#090c0a] flex-1 flex flex-col relative">
+      {/* Video flush to top, sticky behind the content */}
+      <div className="sticky top-0 z-0 w-full shrink-0">
+        <BlogHeroVideo />
       </div>
 
-      {/* Mobile: filter bar sits above posts */}
-      <div className="lg:hidden">
-        <BlogSidebar />
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-0 flex-1">
-        {/* Left: Blog posts */}
-        <div className="flex flex-col min-w-0">
-          <FeaturedPost />
-          <BlogGrid />
-        </div>
-
-        {/* Right: Sidebar — desktop only */}
-        <aside className="hidden lg:block border-l border-white/15 bg-[#050705]/50">
-          <BlogSidebar />
-        </aside>
+      {/* Blog Cards Row - sliding over the video */}
+      <div className="relative z-10 w-full flex-1 flex flex-col">
+        <BlogGrid />
       </div>
     </div>
   );

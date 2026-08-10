@@ -17,7 +17,7 @@ export default function HomePage() {
       <HeroSection />
       <ProblemSection />
       <FlywheelSection />
-      <IndustriesSection />
+     
       <HighlightsSection />
     </div>
   );

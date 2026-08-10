@@ -26,16 +26,16 @@ export default function TeamPage() {
 
       {/* ── Photo Showcase (Aspect-square on mobile to prevent side crop, tall on desktop) ── */}
       <section className="relative w-full bg-[#090c0a] border-b border-white/15">
-        <div className="relative w-full aspect-square sm:aspect-square md:aspect-auto md:h-[82vh] md:max-h-[820px] bg-black">
-          <Image
-            src="/team-photo.jpg"
-            alt="Jalaj Shukla and Yash Sinha - Intelligence Factory Founders"
-            fill
-            priority
-            className="object-cover object-[center_41%]"
-            sizes="100vw"
-          />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050705]/20 via-transparent to-transparent" />
+        <div className="relative w-full aspect-square sm:aspect-square md:aspect-auto md:h-[82vh] md:max-h-[820px] bg-[#0d120e] flex flex-col items-center justify-center grid-bg">
+          <div className="flex flex-col items-center text-center gap-4 z-10 opacity-70">
+            <span className="font-serif italic text-7xl md:text-9xl text-[#f1f5ec] leading-none">
+              f(i)
+            </span>
+            <span className="font-mono text-xs md:text-sm tracking-[0.22em] uppercase text-[#aab3a7] leading-tight">
+              INTELLIGENCE<br />FACTORY
+            </span>
+          </div>
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050705]/50 via-transparent to-transparent" />
         </div>
 
         {/* Names Bar directly beneath photo across full width */}

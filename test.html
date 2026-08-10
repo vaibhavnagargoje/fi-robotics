@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dexterous 3D Robotic Hand & Arm - High Precision Prototype</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #050706; /* Deep studio dark background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    #webgl-container {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: crosshair;
+    }
+
+    /* Minimalist HUD Overlay */
+    .hud-badge {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      font-family: monospace;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: #00f0ff;
+      background: rgba(0, 240, 255, 0.05);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      padding: 8px 14px;
+      border-radius: 4px;
+      backdrop-filter: blur(10px);
+      pointer-events: none;
+      text-transform: uppercase;
+    }
+
+    .instructions {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: monospace;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      color: rgba(241, 245, 236, 0.6);
+      background: rgba(12, 16, 14, 0.7);
+      border: 1px solid rgba(139, 184, 216, 0.2);
+      padding: 8px 18px;
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+      pointer-events: none;
+      text-transform: uppercase;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+  </style>
+
+  <!-- Three.js + OrbitControls + RoomEnvironment for Studio Reflections -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+
+  <div id="webgl-container">
+    <div class="hud-badge">Dexterous Robot Hand v4.0 // 15-DOF Kinematics</div>
+    <div class="instructions">Hover Mouse: Move Arm &bull; Click & Hold: Grip Hand &bull; Drag: Orbit Camera</div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // DEXTEROUS DYNAMICS 3D ROBOTIC HAND & ARTICULATED ARM (THREE.JS HIGH PBR)
+    // =========================================================================
+
+    let scene, camera, renderer, controls;
+    let baseGroup, shoulderJoint, upperArm, elbowJoint, forearm, wristJoint, palmGroup;
+
+    // Dexterous Fingers Data Structure (Thumb + 4 Fingers)
+    const fingers = [];
+    const fingerNames = ['thumb', 'index', 'middle', 'ring', 'pinky'];
+
+    // Materials
+    let mats = {};
+
+    // Animation & Physics Tracking
+    const mouse = new THREE.Vector2(0, 0);
+    const targetMouse = new THREE.Vector2(0, 0);
+    let isMouseDown = false;
+    let gripAmount = 0; // 0 open, 1 full grip
+    let time = 0;
+
+    // Joint Target Angles
+    let armKinematics = {
+      baseRot: 0,
+      shoulderPitch: -0.35,
+      elbowPitch: 0.85,
+      wristPitch: -0.3,
+      wristYaw: 0,
+      wristRoll: 0
+    };
+
+    function init() {
+      const container = document.getElementById('webgl-container');
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+
+      // 1. Scene & Camera Framing
+      scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x050706, 0.035);
+
+      camera = new THREE.PerspectiveCamera(40, w / h, 0.1, 100);
+      camera.position.set(0, 1.2, 9.5);
+      camera.lookAt(0, 0.8, 0);
+
+      // 2. Renderer with High-End Tone Mapping & Shadow Support
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(w, h);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.35;
+      container.appendChild(renderer.domElement);
+
+      // Orbit Controls
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.target.set(0, 0.8, 0);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+      controls.maxPolarAngle = Math.PI / 2 + 0.1;
+      controls.minDistance = 4;
+      controls.maxDistance = 14;
+
+      // 3. Create Studio Environment Lighting
+      setupLighting();
+      createEnvironmentMap();
+
+      // 4. Initialize PBR Materials
+      createMaterials();
+
+      // 5. Build High-Detail Dexterous Arm & Hand
+      buildRobotArm();
+
+      // 6. Window Events
+      window.addEventListener('resize', onWindowResize);
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('mousedown', () => isMouseDown = true);
+      window.addEventListener('mouseup', () => isMouseDown = false);
+
+      // Touch Support
+      window.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+          mouse.x = (e.touches[0].clientX / window.innerWidth) * 2 - 1;
+          mouse.y = -(e.touches[0].clientY / window.innerHeight) * 2 + 1;
+        }
+      });
+      window.addEventListener('touchstart', () => isMouseDown = true);
+      window.addEventListener('touchend', () => isMouseDown = false);
+
+      // 7. Render Loop
+      animate();
+    }
+
+    // Studio Lighting setup for photorealistic metallic highlights
+    function setupLighting() {
+      // Key Directional Light (Warm White Studio Softbox)
+      const keyLight = new THREE.DirectionalLight(0xfff8f0, 3.2);
+      keyLight.position.set(6, 9, 6);
+      keyLight.castShadow = true;
+      keyLight.shadow.mapSize.width = 2048;
+      keyLight.shadow.mapSize.height = 2048;
+      keyLight.shadow.bias = -0.00008;
+      scene.add(keyLight);
+
+      // Cyan Rim Light (High-Tech Highlight)
+      const cyanRim = new THREE.DirectionalLight(0x00f0ff, 4.0);
+      cyanRim.position.set(-7, 4, -5);
+      scene.add(cyanRim);
+
+      // Gold Fill Light (Contrast Rim)
+      const goldFill = new THREE.DirectionalLight(0xffaa00, 1.8);
+      goldFill.position.set(5, -2, -4);
+      scene.add(goldFill);
+
+      // Ambient Ground Light
+      const ambientLight = new THREE.AmbientLight(0x141d24, 1.8);
+      scene.add(ambientLight);
+    }
+
+    // Procedural Reflection Environment Map
+    function createEnvironmentMap() {
+      const pmremGenerator = new THREE.PMREMGenerator(renderer);
+      pmremGenerator.compileEquirectangularShader();
+
+      // Create a gradient studio environment sphere
+      const envScene = new THREE.Scene();
+      const envGeo = new THREE.SphereGeometry(100, 32, 32);
+      const envMat = new THREE.MeshBasicMaterial({
+        side: THREE.BackSide,
+        color: 0x223344
+      });
+      const envMesh = new THREE.Mesh(envGeo, envMat);
+      envScene.add(envMesh);
+
+      // Add studio light rings into environment scene
+      const lightRingGeo = new THREE.TorusGeometry(30, 2, 16, 64);
+      const lightRingMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+      const lightRing = new THREE.Mesh(lightRingGeo, lightRingMat);
+      lightRing.position.set(0, 40, 0);
+      lightRing.rotation.x = Math.PI / 2;
+      envScene.add(lightRing);
+
+      const generatedEnv = pmremGenerator.fromScene(envScene).texture;
+      scene.environment = generatedEnv;
+      pmremGenerator.dispose();
+    }
+
+    // High Quality Physical Materials
+    function createMaterials() {
+      // Dark Carbon-Fiber Anodized Metal
+      mats.darkMetal = new THREE.MeshStandardMaterial({
+        color: 0x12171c,
+        metalness: 0.9,
+        roughness: 0.2,
+        envMapIntensity: 1.5
+      });
+
+      // Polished Mirror Chrome
+      mats.chrome = new THREE.MeshStandardMaterial({
+        color: 0xe6eff8,
+        metalness: 0.98,
+        roughness: 0.08,
+        envMapIntensity: 2.2
+      });
+
+      // Brushed Gunmetal
+      mats.gunmetal = new THREE.MeshStandardMaterial({
+        color: 0x2a343d,
+        metalness: 0.85,
+        roughness: 0.35,
+        envMapIntensity: 1.2
+      });
+
+      // Matte Black Joints
+      mats.matteBlack = new THREE.MeshStandardMaterial({
+        color: 0x0a0d0f,
+        metalness: 0.4,
+        roughness: 0.6
+      });
+
+      // Glowing Cyan LED Strip
+      mats.cyanLed = new THREE.MeshStandardMaterial({
+        color: 0x00f0ff,
+        emissive: 0x00f0ff,
+        emissiveIntensity: 3.5,
+        roughness: 0.1
+      });
+
+      // Glowing Amber Laser/Status Sensor
+      mats.amberLed = new THREE.MeshStandardMaterial({
+        color: 0xffa500,
+        emissive: 0xffa500,
+        emissiveIntensity: 3.0,
+        roughness: 0.1
+      });
+
+      // Translucent Smoked Glass (Palm Cover)
+      mats.glass = new THREE.MeshPhysicalMaterial({
+        color: 0x00f0ff,
+        transparent: true,
+        opacity: 0.35,
+        roughness: 0.1,
+        metalness: 0.1,
+        transmission: 0.8,
+        ior: 1.5
+      });
+    }
+
+    // Helper: Rounded Cylinder / Chamfered Mesh
+    function createChamferedCylinder(rTop, rBot, height, segments, mat) {
+      const geo = new THREE.CylinderGeometry(rTop, rBot, height, segments);
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      return mesh;
+    }
+
+    // Build the Entire Robotic Arm & Hand Assembly
+    function buildRobotArm() {
+      // Base Mount Group
+      baseGroup = new THREE.Group();
+      baseGroup.position.set(0, -2.8, 0);
+      scene.add(baseGroup);
+
+      // 1. Heavy Base Pedestal
+      const pedestal = createChamferedCylinder(1.7, 2.0, 0.4, 36, mats.darkMetal);
+      baseGroup.add(pedestal);
+
+      // Pedestal LED Ring
+      const baseRing = new THREE.Mesh(
+        new THREE.TorusGeometry(1.6, 0.035, 16, 64),
+        mats.cyanLed
+      );
+      baseRing.rotation.x = Math.PI / 2;
+      baseRing.position.y = 0.21;
+      baseGroup.add(baseRing);
+
+      // Turret Rotating Housing
+      const turret = createChamferedCylinder(1.2, 1.4, 0.7, 36, mats.gunmetal);
+      turret.position.y = 0.55;
+      baseGroup.add(turret);
+
+      // 2. Shoulder Joint Clevis
+      shoulderJoint = new THREE.Group();
+      shoulderJoint.position.set(0, 0.9, 0);
+      baseGroup.add(shoulderJoint);
+
+      const shoulderAxle = createChamferedCylinder(0.65, 0.65, 1.5, 24, mats.chrome);
+      shoulderAxle.rotation.z = Math.PI / 2;
+      shoulderJoint.add(shoulderAxle);
+
+      const shoulderRingL = new THREE.Mesh(new THREE.TorusGeometry(0.66, 0.025, 16, 32), mats.cyanLed);
+      shoulderRingL.rotation.y = Math.PI / 2;
+      shoulderRingL.position.x = -0.76;
+      shoulderJoint.add(shoulderRingL);
+
+      const shoulderRingR = shoulderRingL.clone();
+      shoulderRingR.position.x = 0.76;
+      shoulderJoint.add(shoulderRingR);
+
+      // 3. Upper Arm Shaft
+      upperArm = new THREE.Group();
+      shoulderJoint.add(upperArm);
+
+      const L_UPPER = 2.8;
+      // Dual Main Carbon Beams
+      const beamL = new THREE.Mesh(new THREE.BoxGeometry(0.28, L_UPPER, 0.45), mats.darkMetal);
+      beamL.position.set(-0.48, L_UPPER / 2, 0);
+      beamL.castShadow = true;
+      upperArm.add(beamL);
+
+      const beamR = new THREE.Mesh(new THREE.BoxGeometry(0.28, L_UPPER, 0.45), mats.darkMetal);
+      beamR.position.set(0.48, L_UPPER / 2, 0);
+      beamR.castShadow = true;
+      upperArm.add(beamR);
+
+      // Central Chrome Hydraulic Cylinder
+      const hydroRod = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, L_UPPER * 0.85, 24), mats.chrome);
+      hydroRod.position.set(0, L_UPPER / 2, 0);
+      hydroRod.castShadow = true;
+      upperArm.add(hydroRod);
+
+      // 4. Elbow Joint
+      elbowJoint = new THREE.Group();
+      elbowJoint.position.set(0, L_UPPER, 0);
+      upperArm.add(elbowJoint);
+
+      const elbowCap = createChamferedCylinder(0.52, 0.52, 1.3, 24, mats.chrome);
+      elbowCap.rotation.z = Math.PI / 2;
+      elbowJoint.add(elbowCap);
+
+      const elbowGlow = new THREE.Mesh(new THREE.TorusGeometry(0.53, 0.03, 16, 32), mats.cyanLed);
+      elbowGlow.rotation.y = Math.PI / 2;
+      elbowJoint.add(elbowGlow);
+
+      // 5. Forearm Shaft
+      forearm = new THREE.Group();
+      elbowJoint.add(forearm);
+
+      const L_FORE = 2.5;
+      const foreCasing = createChamferedCylinder(0.38, 0.48, L_FORE, 24, mats.darkMetal);
+      foreCasing.position.set(0, L_FORE / 2, 0);
+      forearm.add(foreCasing);
+
+      // Forearm Tech Wire Wrap
+      const wireCurve = new THREE.CatmullRomCurve3([
+        new THREE.Vector3(0.4, 0.2, 0),
+        new THREE.Vector3(0.35, L_FORE * 0.5, 0.2),
+        new THREE.Vector3(0.3, L_FORE * 0.9, -0.1)
+      ]);
+      const wireGeo = new THREE.TubeGeometry(wireCurve, 20, 0.03, 8, false);
+      const wireMesh = new THREE.Mesh(wireGeo, mats.matteBlack);
+      forearm.add(wireMesh);
+
+      // 6. Wrist Ball Joint
+      wristJoint = new THREE.Group();
+      wristJoint.position.set(0, L_FORE, 0);
+      forearm.add(wristJoint);
+
+      const wristSphere = new THREE.Mesh(new THREE.SphereGeometry(0.4, 32, 32), mats.chrome);
+      wristSphere.castShadow = true;
+      wristJoint.add(wristSphere);
+
+      const wristClamp = createChamferedCylinder(0.43, 0.43, 0.2, 24, mats.gunmetal);
+      wristClamp.position.y = 0.2;
+      wristJoint.add(wristClamp);
+
+      // 7. Humanoid Dexterous Hand (Palm + 5 Multi-segment Fingers)
+      palmGroup = new THREE.Group();
+      palmGroup.position.set(0, 0.38, 0);
+      wristJoint.add(palmGroup);
+
+      buildDexterousHand();
+    }
+
+    // Build Dexterous 5-Finger Humanoid Mechanical Hand
+    function buildDexterousHand() {
+      // Metallic Palm Structure
+      const palmBack = new THREE.Mesh(new THREE.BoxGeometry(0.85, 0.55, 0.22), mats.darkMetal);
+      palmBack.position.set(0, 0.28, 0);
+      palmBack.castShadow = true;
+      palmGroup.add(palmBack);
+
+      // Front Glass Sensor Cover
+      const palmGlass = new THREE.Mesh(new THREE.BoxGeometry(0.75, 0.45, 0.05), mats.glass);
+      palmGlass.position.set(0, 0.28, 0.12);
+      palmGroup.add(palmGlass);
+
+      // Center Laser Sensor Emitter
+      const laserElem = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.09, 0.06, 16), mats.amberLed);
+      laserElem.rotation.x = Math.PI / 2;
+      laserElem.position.set(0, 0.28, 0.13);
+      palmGroup.add(laserElem);
+
+      const laserLight = new THREE.PointLight(0xffa500, 2.5, 2);
+      laserLight.position.set(0, 0.28, 0.2);
+      palmGroup.add(laserLight);
+
+      // Finger Configurations: [Name, X position, Y position, Z position, Scale Factor, Rotation Offset]
+      const fingerConfigs = [
+        { name: 'thumb',  x: -0.42, y: 0.15, z: 0.05, scale: 0.85, isThumb: true },
+        { name: 'index',  x: -0.32, y: 0.56, z: 0.0,  scale: 0.92, isThumb: false },
+        { name: 'middle', x: -0.10, y: 0.58, z: 0.0,  scale: 1.0,  isThumb: false },
+        { name: 'ring',   x:  0.12, y: 0.56, z: 0.0,  scale: 0.94, isThumb: false },
+        { name: 'pinky',  x:  0.33, y: 0.52, z: 0.0,  scale: 0.82, isThumb: false }
+      ];
+
+      fingerConfigs.forEach(cfg => {
+        const fGroup = buildSingleFinger(cfg);
+        palmGroup.add(fGroup.root);
+        fingers.push(fGroup);
+      });
+    }
+
+    // Construct 3-Phalanx Mechanical Articulated Finger
+    function buildSingleFinger(cfg) {
+      const root = new THREE.Group();
+      root.position.set(cfg.x, cfg.y, cfg.z);
+
+      if (cfg.isThumb) {
+        root.rotation.y = -Math.PI / 3;
+        root.rotation.z = Math.PI / 6;
+      }
+
+      const s = cfg.scale;
+
+      // Knuckle Joint Sphere (MCP Joint)
+      const mcpJoint = new THREE.Mesh(new THREE.SphereGeometry(0.09 * s, 16, 16), mats.chrome);
+      root.add(mcpJoint);
+
+      // 1. Proximal Phalanx
+      const pPhalanx = new THREE.Group();
+      root.add(pPhalanx);
+
+      const proxLen = 0.38 * s;
+      const proxMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.075 * s, 0.085 * s, proxLen, 16), mats.darkMetal);
+      proxMesh.position.y = proxLen / 2;
+      proxMesh.castShadow = true;
+      pPhalanx.add(proxMesh);
+
+      // PIP Joint Sphere
+      const pipJoint = new THREE.Mesh(new THREE.SphereGeometry(0.075 * s, 16, 16), mats.gunmetal);
+      pipJoint.position.y = proxLen;
+      pPhalanx.add(pipJoint);
+
+      // 2. Middle Phalanx
+      const mPhalanx = new THREE.Group();
+      mPhalanx.position.y = proxLen;
+      pPhalanx.add(mPhalanx);
+
+      const midLen = 0.3 * s;
+      const midMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.06 * s, 0.07 * s, midLen, 16), mats.chrome);
+      midMesh.position.y = midLen / 2;
+      midMesh.castShadow = true;
+      mPhalanx.add(midMesh);
+
+      // DIP Joint Sphere
+      const dipJoint = new THREE.Mesh(new THREE.SphereGeometry(0.06 * s, 16, 16), mats.gunmetal);
+      dipJoint.position.y = midLen;
+      mPhalanx.add(dipJoint);
+
+      // 3. Distal Phalanx (Fingertip)
+      const dPhalanx = new THREE.Group();
+      dPhalanx.position.y = midLen;
+      mPhalanx.add(dPhalanx);
+
+      const distLen = 0.25 * s;
+      const distMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.04 * s, 0.055 * s, distLen, 16), mats.darkMetal);
+      distMesh.position.y = distLen / 2;
+      distMesh.castShadow = true;
+      dPhalanx.add(distMesh);
+
+      // Rubberized Fingertip Sensor Cap
+      const tipCap = new THREE.Mesh(new THREE.SphereGeometry(0.045 * s, 16, 16), mats.cyanLed);
+      tipCap.position.y = distLen;
+      dPhalanx.add(tipCap);
+
+      return {
+        name: cfg.name,
+        root: root,
+        proximal: pPhalanx,
+        middle: mPhalanx,
+        distal: dPhalanx,
+        isThumb: cfg.isThumb
+      };
+    }
+
+    // Mouse Tracking Event
+    function onMouseMove(e) {
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+    }
+
+    function onWindowResize() {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+
+    // Animation Kinematics Loop
+    function animate() {
+      requestAnimationFrame(animate);
+      time += 0.02;
+
+      // Update Controls
+      controls.update();
+
+      // Mouse Smooth Damping
+      targetMouse.x += (mouse.x - targetMouse.x) * 0.06;
+      targetMouse.y += (mouse.y - targetMouse.y) * 0.06;
+
+      // 1. Calculate Arm Kinematics from Mouse Position
+      armKinematics.baseRot = targetMouse.x * 1.3;
+      armKinematics.shoulderPitch = -0.2 + targetMouse.y * 0.45;
+      armKinematics.elbowPitch = 0.7 - targetMouse.y * 0.55;
+      armKinematics.wristPitch = 0.1 - targetMouse.y * 0.35;
+      armKinematics.wristRoll = targetMouse.x * 0.7;
+
+      // Apply Joint Rotations smoothly
+      if (baseGroup) baseGroup.rotation.y += (armKinematics.baseRot - baseGroup.rotation.y) * 0.08;
+      if (shoulderJoint) shoulderJoint.rotation.z += (armKinematics.shoulderPitch - shoulderJoint.rotation.z) * 0.08;
+      if (elbowJoint) elbowJoint.rotation.z += (armKinematics.elbowPitch - elbowJoint.rotation.z) * 0.08;
+      if (wristJoint) {
+        wristJoint.rotation.z += (armKinematics.wristPitch - wristJoint.rotation.z) * 0.08;
+        wristJoint.rotation.y += (armKinematics.wristRoll - wristJoint.rotation.y) * 0.08;
+      }
+
+      // 2. Animate Dexterous 5-Finger Kinematics
+      const targetGrip = isMouseDown ? 1.0 : 0.0;
+      gripAmount += (targetGrip - gripAmount) * 0.12;
+
+      fingers.forEach((f, idx) => {
+        // Natural finger flexing phase offsets
+        const phaseOffset = idx * 0.15;
+        const waveFlex = Math.sin(time * 2 + phaseOffset) * 0.06;
+
+        if (f.isThumb) {
+          // Thumb gripping kinematics
+          f.proximal.rotation.x = (gripAmount * 0.8 + waveFlex);
+          f.middle.rotation.x = (gripAmount * 0.6);
+        } else {
+          // 4 Main Fingers organic curling kinematics
+          const curlFactor = gripAmount * 1.2 + waveFlex;
+          f.proximal.rotation.x = curlFactor * 0.7;
+          f.middle.rotation.x = curlFactor * 0.9;
+          f.distal.rotation.x = curlFactor * 0.5;
+        }
+      });
+
+      // Render Scene
+      renderer.render(scene, camera);
+    }
+
+    // Run Initialization
+    init();
+  </script>
+</body>
+</html>

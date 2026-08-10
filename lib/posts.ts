@@ -1,4 +1,4 @@
-﻿// FILE: lib/posts.ts
+// FILE: lib/posts.ts
 // PURPOSE: Shared post data â€” used by blog index and article pages
 
 export interface Reference {

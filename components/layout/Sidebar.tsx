@@ -42,11 +42,11 @@ export default function Sidebar() {
               <li key={href}>
                 <Link
                   href={href}
-                  className={`block py-1.5 font-sans text-sm transition-colors duration-150 ${
+                  className={`relative inline-block py-1.5 font-sans text-lg transition-colors duration-150 group ${
                     isActive
-                      ? "font-semibold text-[#f1f5ec]"
-                      : "font-normal text-[#aab3a7] hover:text-[#8bb8d8]"
-                  }`}
+                      ? "font-bold text-white after:scale-x-100"
+                      : "font-medium text-[#f1f5ec] hover:text-white after:scale-x-0 group-hover:after:scale-x-100"
+                  } after:absolute after:bottom-1 after:left-0 after:h-[2px] after:w-full after:bg-[#8bb8d8] after:origin-left after:transition-transform after:duration-300`}
                 >
                   {label}
                 </Link>
@@ -65,7 +65,7 @@ export default function Sidebar() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-sans text-xs text-[#aab3a7] hover:text-[#8bb8d8] transition-colors"
+                className="relative inline-block py-1 font-sans text-base font-medium text-[#f1f5ec] hover:text-white transition-colors group after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-[#8bb8d8] after:origin-left after:scale-x-0 group-hover:after:scale-x-100 after:transition-transform after:duration-300"
               >
                 {label}
               </a>

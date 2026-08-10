@@ -30,11 +30,11 @@ export default function MobileHeader() {
           <Link
             key={href}
             href={href}
-            className={`font-sans text-sm transition-colors ${
+            className={`relative inline-block py-1 font-sans text-sm transition-colors group ${
               pathname === href
-                ? "font-semibold text-[#f1f5ec]"
-                : "font-normal text-[#aab3a7] hover:text-[#8bb8d8]"
-            }`}
+                ? "font-bold text-white after:scale-x-100"
+                : "font-medium text-[#f1f5ec] hover:text-white after:scale-x-0 group-hover:after:scale-x-100"
+            } after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-[#8bb8d8] after:origin-left after:transition-transform after:duration-300`}
           >
             {label}
           </Link>

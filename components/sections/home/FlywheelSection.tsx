@@ -140,27 +140,12 @@ export default function FlywheelSection() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-12">
         {/* Header */}
-        <div className="grid gap-6 border-b border-white/10 pb-8 md:grid-cols-[minmax(0,1fr)_minmax(280px,0.72fr)] md:items-end md:pb-10">
-          <div>
-            <div className="mb-3 flex items-center gap-2">
-              <span className="size-1.5 rounded-full bg-[#8bb8d8] animate-pulse" />
-              <p className="font-mono text-[10px] tracking-[0.2em] text-[#8bb8d8] uppercase">
-                Intelligence Factory // The Operating Loop
-              </p>
-            </div>
-            <h2 className="max-w-2xl font-serif text-3xl md:text-5xl leading-[1.08] text-[#f1f5ec] italic">
-              Human data becomes dependable robotic action.
-            </h2>
-          </div>
-          <p className="max-w-md font-tech text-sm leading-relaxed text-[#aab3a7] md:justify-self-end tracking-wide">
-            Every deployment makes the system more capable: demonstrations train the model, the model powers robots, and production data returns to the factory.
-          </p>
-        </div>
+        
 
         {/* Desktop Circular Flowchart Layout (>= xl) */}
         <div
           ref={containerRef}
-          className="relative mt-12 hidden min-h-[580px] select-none xl:block"
+          className="relative mt-4 hidden min-h-[580px] select-none xl:block"
         >
           {/* SVG Connector Streams */}
           <svg

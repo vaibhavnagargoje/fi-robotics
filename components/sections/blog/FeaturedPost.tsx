@@ -19,9 +19,7 @@ export default function FeaturedPost() {
   return (
     <section className="bg-[#090c0a] px-3 md:px-14 pt-6 md:pt-12 pb-4 md:pb-6">
       {/* Page header */}
-      <p className="font-mono text-[10px] tracking-[0.2em] text-[#aab3a7] uppercase mb-6">
-        Publications
-      </p>
+     
 
       {/* Featured card */}
       <Link
