@@ -41,24 +41,24 @@ export default function TeamPage() {
         {/* Names Bar directly beneath photo across full width */}
         <div className="border-t border-white/15 bg-[#050705] px-4 md:px-12 py-3.5 md:py-4 grid grid-cols-2 gap-4 items-center">
           {/* Left Person: Jalaj Shukla */}
-          <div className="text-left">
+          {/* <div className="text-left">
             <p className="font-sans font-semibold text-base md:text-lg text-[#f1f5ec]">
               Jalaj Shukla
             </p>
             <p className="font-mono text-[10px] md:text-xs text-[#8bb8d8] tracking-wider uppercase mt-0.5">
               Co-founder & CTO
             </p>
-          </div>
+          </div> */}
 
           {/* Right Person: Yash Sinha */}
-          <div className="text-right">
+          {/* <div className="text-right">
             <p className="font-sans font-semibold text-base md:text-lg text-[#f1f5ec]">
               Yash Sinha
             </p>
             <p className="font-mono text-[10px] md:text-xs text-[#8bb8d8] tracking-wider uppercase mt-0.5">
               Co-founder & CEO
             </p>
-          </div>
+          </div> */}
         </div>
       </section>
 
